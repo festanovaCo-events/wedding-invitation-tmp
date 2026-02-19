@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 @Component({
   selector: 'app-wedding-countdown',
@@ -12,9 +13,10 @@ import { AnimationItem } from 'lottie-web';
 })
 export class WeddingCountdownComponent implements OnInit, OnDestroy {
   private animationItem: AnimationItem | undefined;
+  weddingInfo = WEDDING_INFO;
 
   options: AnimationOptions = {
-    path: 'assets/animations/heart_pulse.json', // Ruta al archivo JSON
+    path: WEDDING_INFO.animations.heartPulse,
     loop: true,
     autoplay: true,
   };
@@ -23,7 +25,7 @@ export class WeddingCountdownComponent implements OnInit, OnDestroy {
     this.animationItem = animationItem;
   }
 
-  targetDate = new Date('2026-06-11T12:00:00'); // cambia por tu fecha objetivo
+  targetDate = new Date(WEDDING_INFO.dates.weddingDate);
   days = 0;
   hours = 0;
   minutes = 0;

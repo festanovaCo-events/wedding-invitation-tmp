@@ -2,7 +2,7 @@
   class="parallax-container relative h-[960px] md:h-[1296px] 2xl:h-[1900px] flex items-center justify-center text-center text-white pb-[40%] md:pb-[20%]">
   <video #bgVideo muted [muted]="true" playsinline autoplay loop preload="auto"
     class="absolute inset-0 w-full h-full object-cover z-0">
-    <source src="../../../../assets/images/banner-home/video-boda.mp4" type="video/mp4" />
+    <source [src]="weddingInfo.assets.bannerVideo" type="video/mp4" />
     Tu navegador no soporta video HTML5.
   </video>
 
@@ -13,23 +13,25 @@
     <div class="flex flex-row">
       <div class="h-[1px] w-1/6 md:w-1/4 bg-white mx-auto my-0 mt-5"></div>
       <p class="text-[25px] font-light">
-        15.05.2021
+        {{ weddingInfo.dates.bannerDate }}
       </p>
       <div class="h-[1px] w-1/6 md:w-1/4 bg-white mx-auto my-0 mt-5"></div>
     </div>
 
-    <app-title-couple />
+    <app-title-couple 
+      [name_husband]="weddingInfo.couple.husbandName"
+      [name_wife]="weddingInfo.couple.wifeName" />
     <!-- Box nombre y fecha -->
 
     <!-- Box frase portada -->
     <div class="mt-[50px] w-[90%] md:w-[85%] lg:w-auto mx-auto">
-      <img src="../../../../assets/images/banner-home/comilla-apertura.svg" alt="comilla-apertura"
+      <img [src]="weddingInfo.quote.openingQuoteImage" alt="comilla-apertura"
         class="w-[30px] h-[30px] mx-auto my-2.5" />
       <p class="text-[20px] md:text-[28px] font-light">
-        Todos somos mortales,<br />
-        hasta el primer beso y la segunda copa de vino
+        {{ weddingInfo.quote.text.split('\n')[0] }}<br />
+        {{ weddingInfo.quote.text.split('\n')[1] }}
       </p>
-      <img src="../../../../assets/images/banner-home/comilla-cierre.svg" alt="comilla-cierre"
+      <img [src]="weddingInfo.quote.closingQuoteImage" alt="comilla-cierre"
         class="w-[30px] h-[30px] mx-auto my-2.5" />
     </div>
     <!-- Box frase portada -->

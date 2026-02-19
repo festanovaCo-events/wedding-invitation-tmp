@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 // Importar ngx-slick-carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Fancybox } from '@fancyapps/ui';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 @Component({
   selector: 'app-portraits',
@@ -15,36 +16,11 @@ import { Fancybox } from '@fancyapps/ui';
   styleUrl: './portraits.component.css',
 })
 export class PortraitsComponent implements OnDestroy {
-  images = [
-    {
-      thumb:
-        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg',
-      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg',
-    },
-    {
-      thumb:
-        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg',
-      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg',
-    },
-    {
-      thumb:
-        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg',
-      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg',
-    },
-    {
-      thumb:
-        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg',
-      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg',
-    },
-    {
-      thumb:
-        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg',
-      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg',
-    },
-  ];
+  weddingInfo = WEDDING_INFO;
+  images = WEDDING_INFO.assets.portraits;
 
   options: AnimationOptions = {
-    path: 'assets/animations/camera.json',
+    path: WEDDING_INFO.animations.camera,
     loop: true,
     autoplay: true,
   };

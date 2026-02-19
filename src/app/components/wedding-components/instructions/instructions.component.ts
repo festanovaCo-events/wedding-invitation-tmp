@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { LottieComponent } from 'ngx-lottie';
+import { FEATURE_FLAGS } from '../../../constants/feature-flags';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 interface CardInfo {
   title: string;
@@ -18,26 +20,15 @@ interface CardInfo {
   styleUrl: './instructions.component.css',
 })
 export class InstructionsComponent {
-  cards: CardInfo[] = [
-    {
-      title: 'Música',
-      description: 'Una orientación para<br />tu vestuario',
-      path: 'assets/animations/sounds.json',
-      label: 'Sugerir canción'
-    },
-    {
-      title: 'Vestuario',
-      description: 'Una orientación para<br />tu vestuario',
-      path: 'assets/animations/dress.json',
-      label: 'Ver más'
-    },
-    {
-      title: 'Tips y Notas',
-      description: 'Una orientación para<br />tu vestuario',
-      path: 'assets/animations/tips.json',
-      label: 'Información',
-    },
-  ];
+  weddingInfo = WEDDING_INFO;
+  
+  cards: CardInfo[] = WEDDING_INFO.sections.instructions.cards.filter(card => {
+    // Filtrar el card de Música si el feature flag está deshabilitado
+    if (card.title === 'Música') {
+      return FEATURE_FLAGS.MUSIC_CARD;
+    }
+    return true;
+  });
 
   private animationItem: AnimationItem | undefined;
 
