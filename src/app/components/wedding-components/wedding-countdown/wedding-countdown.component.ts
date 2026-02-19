@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
@@ -27,7 +23,7 @@ export class WeddingCountdownComponent implements OnInit, OnDestroy {
     this.animationItem = animationItem;
   }
 
-  targetDate = new Date('2025-07-10T12:00:00'); // cambia por tu fecha objetivo
+  targetDate = new Date('2026-06-11T12:00:00'); // cambia por tu fecha objetivo
   days = 0;
   hours = 0;
   minutes = 0;

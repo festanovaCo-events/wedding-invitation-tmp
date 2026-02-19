@@ -1,6 +1,12 @@
 <section
   class="parallax-container relative h-[960px] md:h-[1296px] 2xl:h-[1900px] flex items-center justify-center text-center text-white pb-[40%] md:pb-[20%]">
-  <div class="bg-overlay absolute inset-0"></div>
+  <video #bgVideo muted [muted]="true" playsinline autoplay loop preload="auto"
+    class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="../../../../assets/images/banner-home/video-boda.mp4" type="video/mp4" />
+    Tu navegador no soporta video HTML5.
+  </video>
+
+  <div class="bg-overlay absolute inset-0 z-[1]"></div>
 
   <div class="z-10 h-screen flex flex-col justify-center">
     <!-- Box nombre y fecha -->

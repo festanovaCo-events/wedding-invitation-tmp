@@ -17,24 +17,29 @@ import { Fancybox } from '@fancyapps/ui';
 export class PortraitsComponent implements OnDestroy {
   images = [
     {
-      thumb: 'https://lipsum.app/id/60/200x150',
-      full: 'https://lipsum.app/id/60/1600x1200',
+      thumb:
+        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg',
+      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg',
     },
     {
-      thumb: 'https://lipsum.app/id/61/200x150',
-      full: 'https://lipsum.app/id/61/1600x1200',
+      thumb:
+        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg',
+      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg',
     },
     {
-      thumb: 'https://lipsum.app/id/62/200x150',
-      full: 'https://lipsum.app/id/62/1600x1200',
+      thumb:
+        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg',
+      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg',
     },
     {
-      thumb: 'https://lipsum.app/id/63/200x150',
-      full: 'https://lipsum.app/id/63/1600x1200',
+      thumb:
+        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg',
+      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg',
     },
     {
-      thumb: 'https://lipsum.app/id/64/200x150',
-      full: 'https://lipsum.app/id/64/1600x1200',
+      thumb:
+        'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg',
+      full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg',
     },
   ];
 
@@ -78,7 +83,7 @@ export class PortraitsComponent implements OnDestroy {
 
   ngAfterViewInit() {
     // Inicializar Fancybox para las imágenes con data-fancybox="gallery"
-    Fancybox.bind('[data-fancybox="gallery"]', {
+    Fancybox.bind('.slick-slide:not(.slick-cloned) [data-fancybox="gallery"]', {
       Thumbs: {},
       // Puedes agregar más opciones aquí
     });
