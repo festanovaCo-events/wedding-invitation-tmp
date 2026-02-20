@@ -21,7 +21,12 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "robots.txt",
+                "input": "src",
+                "output": "/"
+              }
           ],
             "styles": [
               "node_modules/animate.css/animate.min.css",

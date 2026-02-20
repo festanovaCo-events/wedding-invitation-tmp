@@ -39,7 +39,7 @@ export class PortraitsComponent implements OnDestroy {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
@@ -61,7 +61,17 @@ export class PortraitsComponent implements OnDestroy {
     // Inicializar Fancybox para las imágenes con data-fancybox="gallery"
     Fancybox.bind('.slick-slide:not(.slick-cloned) [data-fancybox="gallery"]', {
       Thumbs: {},
-      // Puedes agregar más opciones aquí
+      // Deshabilitar la actualización automática de la URL
+      Hash: false,
+      on: {
+        close: () => {
+          // Limpiar el hash de la URL cuando se cierra Fancybox
+          if (window.location.hash) {
+            // Usar history.replaceState para no agregar una entrada al historial
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        },
+      },
     });
   }
 

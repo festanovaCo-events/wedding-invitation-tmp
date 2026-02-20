@@ -1,29 +1,28 @@
-<section class="confirmations w-full">
+<section id="confirmations-section" class="confirmations w-full">
     <div [class]="isSingleOption 
         ? 'flex flex-col mx-auto gap-12 justify-center items-center' 
         : 'flex flex-col md:flex-row mx-auto gap-12 md:gap-18 lg:gap-44 justify-center items-center md:items-start'">
-        <app-title-couple 
-            [name_wife]="weddingInfo.couple.wifeName" 
-            [name_husband]="weddingInfo.couple.husbandName" 
+        <app-title-couple [name_wife]="weddingInfo.couple.wifeName" [name_husband]="weddingInfo.couple.husbandName"
             classHeading1="text-navy text-[65px] md:text-[85px] flex-row gap-3"
             classSpan="text-navy-dark text-[28px] w-[30px] h-[30px] md:w-[40px] md:h-[40px] leading-[30px] md:leading-[45px]" />
-        
+
         <!-- Cuando hay una sola opción, mostrar como botón -->
         <div *ngIf="isSingleOption" class="flex justify-center items-center w-full px-4">
-            <button 
-                (click)="openModal()" 
+            <button (click)="openModal()"
                 class="bg-sky-blue hover:bg-navy font-bold rounded-[50px] text-white px-6 py-2.5 md:px-[33px] md:py-[13px] text-sm md:text-base lg:text-lg uppercase transition-all cursor-pointer shadow-md max-w-full text-center">
                 Confirmar asistencia a ceremonia
             </button>
         </div>
 
         <!-- Cuando hay múltiples opciones, mostrar como lista -->
-        <ul *ngIf="!isSingleOption" class="text-navy uppercase font-normal flex flex-col gap-5 text-center md:text-right">
+        <ul *ngIf="!isSingleOption"
+            class="text-navy uppercase font-normal flex flex-col gap-5 text-center md:text-right">
             <li (click)="openModal()" class="hover:text-navy-dark cursor-pointer">
                 Confirmar asistencia a ceremonia</li>
             <li *ngIf="FEATURE_FLAGS.SUGGEST_SONG" class="hover:text-navy-dark cursor-pointer">Sugerir canción</li>
             <li *ngIf="FEATURE_FLAGS.SCHEDULE_PARTY" class="hover:text-navy-dark cursor-pointer">Agendar Fiesta</li>
-            <li *ngIf="FEATURE_FLAGS.SCHEDULE_CEREMONY" class="hover:text-navy-dark cursor-pointer">Agendar Ceremonia</li>
+            <li *ngIf="FEATURE_FLAGS.SCHEDULE_CEREMONY" class="hover:text-navy-dark cursor-pointer">Agendar Ceremonia
+            </li>
         </ul>
     </div>
 
