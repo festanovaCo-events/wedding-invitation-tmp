@@ -67,27 +67,13 @@ export const WEDDING_INFO = {
     bannerGif: 'assets/images/banner-home/portada-boda.gif',
     backgroundImage: '/assets/images/event-scheduler/img_lineas01.svg',
     instagramBackground: 'assets/images/banner-instagram/portada-3.webp',
+    // publicId: para NgOptimizedImage (srcset automático, q_auto, f_auto) | full: lightbox Fancybox
     portraits: [
-      {
-        thumb: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg',
-        full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg'
-      },
-      {
-        thumb: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg',
-        full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg'
-      },
-      {
-        thumb: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg',
-        full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg'
-      },
-      {
-        thumb: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg',
-        full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg'
-      },
-      {
-        thumb: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg',
-        full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg'
-      }
+      { publicId: 'v1755103602/Wedding/dowktzuqunplps4ncqgn', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg' },
+      { publicId: 'v1755103602/Wedding/wjspdvkckwczd5trlb9w', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg' },
+      { publicId: 'v1755103602/Wedding/nzubkb4sl784chxg1oap', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg' },
+      { publicId: 'v1755103602/Wedding/cmyeakepkcxvjdxwxgqy', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg' },
+      { publicId: 'v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg' }
     ]
   },
 

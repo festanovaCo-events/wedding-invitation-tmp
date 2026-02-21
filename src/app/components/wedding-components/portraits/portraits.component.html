@@ -16,11 +16,16 @@
 
     <!-- Carrusel con ngx-slick-carousel -->
     <ngx-slick-carousel style="margin-bottom: 30px;" class="carousel" [config]="slideConfig">
-        <div ngxSlickItem *ngFor="let img of images" class="slide">
+        <div ngxSlickItem *ngFor="let img of images; let i = index" class="slide">
             <div class="bg-white p-[15px] pb-[100px] shadow-rounded">
                 <!-- Enlace con data-fancybox para abrir en modal -->
                 <a href="{{ img.full }}" data-fancybox="gallery" data-caption="Imagen ampliada">
-                    <img class="w-full h-[500px] object-cover" [src]="img.thumb" [alt]="'Imagen ' + img.thumb" />
+                    <img ngSrc="{{ img.publicId }}" width="800" height="500" 
+                         sizes="(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                         [alt]="'Retrato ' + (i + 1) + ' de ' + images.length"
+                         [loaderParams]="{ transform: 'c_fill' }"
+                         [priority]="i === 0"
+                         class="w-full h-[500px] object-cover" />
                 </a>
             </div>
         </div>

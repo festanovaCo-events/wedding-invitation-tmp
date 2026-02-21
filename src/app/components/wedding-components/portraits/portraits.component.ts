@@ -1,7 +1,7 @@
 import { Component, OnDestroy, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 // Importar ngx-slick-carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -12,7 +12,7 @@ import { ANIMATIONS_DATA } from '../../../data/animations.data';
 @Component({
   selector: 'app-portraits',
   standalone: true,
-  imports: [LottieComponent, CommonModule, SlickCarouselModule],
+  imports: [LottieComponent, CommonModule, SlickCarouselModule, NgOptimizedImage],
   templateUrl: './portraits.component.html',
   styleUrl: './portraits.component.css',
 })
