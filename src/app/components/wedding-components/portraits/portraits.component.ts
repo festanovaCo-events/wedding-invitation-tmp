@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Fancybox } from '@fancyapps/ui';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
+import { ANIMATIONS_DATA } from '../../../data/animations.data';
 
 @Component({
   selector: 'app-portraits',
@@ -24,7 +25,7 @@ export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
   shouldLoadAnimation = false;
 
   options: AnimationOptions = {
-    path: WEDDING_INFO.animations.camera,
+    animationData: ANIMATIONS_DATA.camera,
     loop: true,
     autoplay: true,
   };

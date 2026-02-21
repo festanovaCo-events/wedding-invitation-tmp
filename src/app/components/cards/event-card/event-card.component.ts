@@ -1,17 +1,21 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { ANIMATIONS_DATA } from '../../../data/animations.data';
+
+type AnimationKey = 'rings' | 'party';
 
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [LottieComponent],
+  imports: [CommonModule, LottieComponent],
   templateUrl: './event-card.component.html',
   styleUrl: './event-card.component.css',
 })
 export class EventCardComponent {
   @Input() titulo!: string;
-  @Input() path!: string;
+  @Input() animationKey!: AnimationKey;
   @Input() date: string = 'Sábado 15 de Mayo - 17hs';
   @Input() place: string = 'Parroquia Nuestra Señora de Lujan';
   @Input() address: string = 'Av. Pergamino 203 - Bogotá';
@@ -25,7 +29,7 @@ export class EventCardComponent {
 
   ngOnInit(): void {
     this.options = {
-      path: this.path,
+      animationData: ANIMATIONS_DATA[this.animationKey],
       loop: true,
       autoplay: true,
     };

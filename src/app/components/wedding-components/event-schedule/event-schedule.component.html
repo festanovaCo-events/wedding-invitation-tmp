@@ -3,11 +3,11 @@
     <div class="relative z-[999]">
         <div class="flex flex-wrap justify-center gap-16 lg:gap-52">
             <app-event-card [titulo]="weddingInfo.events.ceremony.title"
-                [path]="weddingInfo.events.ceremony.animationPath" [place]="weddingInfo.events.ceremony.place"
+                [animationKey]="'rings'" [place]="weddingInfo.events.ceremony.place"
                 [address]="weddingInfo.events.ceremony.address" [date]="weddingInfo.events.ceremony.date"
                 [location]="weddingInfo.events.ceremony.location" [mapsUrl]="weddingInfo.events.ceremony.mapsUrl"
                 [calendarRef]="weddingInfo.events.ceremony.calendarUrl" />
-            <app-event-card [titulo]="weddingInfo.events.party.title" [path]="weddingInfo.events.party.animationPath"
+            <app-event-card [titulo]="weddingInfo.events.party.title" [animationKey]="'party'"
                 [place]="weddingInfo.events.party.place" [address]="weddingInfo.events.party.address"
                 [date]="weddingInfo.events.party.date" [location]="weddingInfo.events.party.location"
                 [mapsUrl]="weddingInfo.events.party.mapsUrl" [calendarRef]="weddingInfo.events.party.calendarUrl" />

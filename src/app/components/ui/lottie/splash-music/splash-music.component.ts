@@ -1,11 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import player, { AnimationItem } from 'lottie-web';
-
-export function playerFactory() {
-  return player;
-}
+import { AnimationItem } from 'lottie-web';
+import { ANIMATIONS_DATA } from '../../../../data/animations.data';
 
 @Component({
   selector: 'app-splash-music',
@@ -19,7 +16,7 @@ export class SplashMusicComponent implements OnInit {
   shouldLoadAnimation = false;
 
   options: AnimationOptions = {
-    path: 'assets/animations/music.json', // Ruta al archivo JSON
+    animationData: ANIMATIONS_DATA.music,
     loop: true,
     autoplay: true,
   };

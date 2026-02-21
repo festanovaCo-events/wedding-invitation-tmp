@@ -15,7 +15,7 @@
 
                     <div class="flex justify-center items-center h-20 w-[95px]">
                         <ng-lottie class="w-[90px] h-[80px] max-w-full max-h-full"
-                            [options]="{ path: card.path, loop: true, autoplay: true }"
+                            [options]="{ animationData: getAnimationData(card.animationKey), loop: true, autoplay: true }"
                             (animationCreated)="animationCreated($event)"></ng-lottie>
                     </div>
 

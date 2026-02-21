@@ -34,7 +34,7 @@
               "@fancyapps/ui/dist/fancybox/fancybox.css",
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css",
-              "src/slick-font-override.css"
+              "src/slick-font-inline.generated.css"
             ],
             "scripts": [ 
               "node_modules/@fancyapps/ui/dist/fancybox/fancybox.umd.js",
@@ -61,7 +61,7 @@
                 "scripts": true,
                 "styles": {
                   "minify": true,
-                  "inlineCritical": false
+                  "inlineCritical": true
                 },
                 "fonts": true
               }
@@ -106,7 +106,7 @@
               "@fancyapps/ui/dist/fancybox/fancybox.css",
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css",
-              "src/slick-font-override.css"
+              "src/slick-font-inline.generated.css"
             ],
             "scripts": [ 
               "node_modules/@fancyapps/ui/dist/fancybox/fancybox.umd.js",

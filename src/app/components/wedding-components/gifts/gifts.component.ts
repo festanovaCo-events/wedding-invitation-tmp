@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
+import { ANIMATIONS_DATA } from '../../../data/animations.data';
 
 @Component({
   selector: 'app-gifts',
@@ -20,7 +21,7 @@ export class GiftsComponent implements OnInit, OnDestroy {
   shouldLoadAnimation = false;
 
   options: AnimationOptions = {
-    path: WEDDING_INFO.animations.gift,
+    animationData: ANIMATIONS_DATA.gift,
     loop: true,
     autoplay: true,
   };
