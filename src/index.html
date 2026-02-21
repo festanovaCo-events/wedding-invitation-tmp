@@ -12,6 +12,87 @@
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="bingbot" content="noindex, nofollow">
+
+  <!-- Preload para recursos críticos -->
+  <link rel="preload" href="/assets/fonts/OpenSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/assets/fonts/OpenSans-Light.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/assets/fonts/Cookie-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+  <!-- Preload de animación de música con prioridad baja para no bloquear la ruta crítica -->
+  <link rel="preload" href="/assets/animations/music.json" as="fetch" crossorigin fetchpriority="low">
+
+  <!-- Script para convertir CSS de librerías en carga asíncrona -->
+  <script>
+    (function () {
+      // Lista de CSS que deben cargarse de forma asíncrona (no críticos)
+      const asyncCSS = [
+        'animate.min.css',
+        'fancybox.css',
+        'slick.css',
+        'slick-theme.css'
+      ];
+
+      const processedLinks = new Set();
+
+      function makeCSSAsync(link) {
+        // Evitar procesar el mismo link múltiples veces
+        if (processedLinks.has(link)) {
+          return;
+        }
+
+        const href = link.getAttribute('href') || '';
+        // Si el CSS es de una librería no crítica, cargarlo de forma asíncrona
+        if (asyncCSS.some(function (css) { return href.includes(css); })) {
+          processedLinks.add(link);
+
+          // Si ya tiene media='all', cambiarlo a 'print' para carga asíncrona
+          if (link.media === 'all' || !link.media) {
+            link.media = 'print';
+            link.onload = function () {
+              this.media = 'all';
+            };
+            // Forzar recarga si ya estaba cargado
+            if (link.sheet) {
+              link.href = link.href;
+            }
+          }
+        }
+      }
+
+      function processAllLinks() {
+        const links = document.querySelectorAll('link[rel="stylesheet"]');
+        links.forEach(makeCSSAsync);
+      }
+
+      // Observar cambios en el head para detectar CSS inyectado por Angular
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          mutation.addedNodes.forEach(function (node) {
+            if (node.nodeName === 'LINK' && node.rel === 'stylesheet') {
+              makeCSSAsync(node);
+            }
+          });
+        });
+      });
+
+      // Iniciar observación del head
+      observer.observe(document.head, {
+        childList: true,
+        subtree: false
+      });
+
+      // Procesar links existentes
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', processAllLinks);
+      } else {
+        processAllLinks();
+      }
+
+      // También procesar después de un delay para capturar CSS inyectado por Angular
+      setTimeout(processAllLinks, 50);
+      setTimeout(processAllLinks, 200);
+    })();
+  </script>
 </head>
 
 <body>

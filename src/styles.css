@@ -5,6 +5,7 @@
   src: url('./assets/fonts/OpenSans-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -12,6 +13,7 @@
   src: url('./assets/fonts/OpenSans-Light.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -19,6 +21,7 @@
   src: url('./assets/fonts/Cookie-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 @theme {

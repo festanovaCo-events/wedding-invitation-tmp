@@ -7,8 +7,8 @@
                 instante que queda en la eternidad
             </p>
 
-            <div class="w-14 h-w-14 mx-auto mt-3.5">
-                <ng-lottie class="w-[90px] h-[90px] max-w-full max-h-full" [options]="options"
+            <div #lottieContainer class="w-14 h-w-14 mx-auto mt-3.5">
+                <ng-lottie *ngIf="shouldLoadAnimation" class="w-[90px] h-[90px] max-w-full max-h-full" [options]="options"
                     (animationCreated)="animationCreated($event)" />
             </div>
         </div>

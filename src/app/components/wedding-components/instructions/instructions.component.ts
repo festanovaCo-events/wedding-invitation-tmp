@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { LottieComponent } from 'ngx-lottie';
 import { FEATURE_FLAGS } from '../../../constants/feature-flags';
@@ -28,7 +28,7 @@ interface CardInfo {
   templateUrl: './instructions.component.html',
   styleUrl: './instructions.component.css',
 })
-export class InstructionsComponent {
+export class InstructionsComponent implements OnInit, OnDestroy {
   weddingInfo = WEDDING_INFO;
   
   cards: CardInfo[] = WEDDING_INFO.sections.instructions.cards.filter(card => {
@@ -44,8 +44,20 @@ export class InstructionsComponent {
 
   private animationItem: AnimationItem | undefined;
 
+  ngOnInit(): void {
+    // Las animaciones se cargan inmediatamente ya que las tarjetas están visibles
+  }
+
+  ngAfterViewInit(): void {
+    // No necesitamos IntersectionObserver para estas tarjetas visibles
+  }
+
   animationCreated(animationItem: AnimationItem): void {
     this.animationItem = animationItem;
+  }
+
+  ngOnDestroy(): void {
+    // No hay observers que limpiar
   }
 
   onCardClick(card: CardInfo) {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { CommonModule } from '@angular/common';
@@ -15,9 +15,13 @@ import { WEDDING_INFO } from '../../../constants/wedding-info';
   templateUrl: './portraits.component.html',
   styleUrl: './portraits.component.css',
 })
-export class PortraitsComponent implements OnDestroy {
+export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('lottieContainer', { static: false }) lottieContainer!: ElementRef;
+  
   weddingInfo = WEDDING_INFO;
   images = WEDDING_INFO.assets.portraits;
+  private observer: IntersectionObserver | null = null;
+  shouldLoadAnimation = false;
 
   options: AnimationOptions = {
     path: WEDDING_INFO.animations.camera,
@@ -57,6 +61,36 @@ export class PortraitsComponent implements OnDestroy {
     ],
   };
 
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.setupIntersectionObserver();
+    }, 0);
+  }
+
+  private setupIntersectionObserver(): void {
+    if (!this.lottieContainer?.nativeElement || !('IntersectionObserver' in window)) {
+      this.shouldLoadAnimation = true;
+      return;
+    }
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.shouldLoadAnimation = true;
+            this.observer?.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
+        threshold: 0.1
+      }
+    );
+
+    this.observer.observe(this.lottieContainer.nativeElement);
+  }
+
   ngAfterViewInit() {
     // Inicializar Fancybox para las imágenes con data-fancybox="gallery"
     Fancybox.bind('.slick-slide:not(.slick-cloned) [data-fancybox="gallery"]', {
@@ -80,6 +114,8 @@ export class PortraitsComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // aquí limpia si fuera necesario
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 }

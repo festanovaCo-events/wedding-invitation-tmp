@@ -92,7 +92,9 @@ export class LayoutComponent implements OnInit {
       this.playBackgroundMusic();
     } else {
       setTimeout(() => {
-        this.splashComp.pauseAnimation();
+        if (this.splashComp) {
+          this.splashComp.pauseAnimation();
+        }
       }, 300); // Pausa Lottie inmediatamente
     }
   }
@@ -121,10 +123,14 @@ export class LayoutComponent implements OnInit {
 
     if (this.isMusicPlaying) {
       this.audio.pause();
-      this.splashComp.pauseAnimation(); // pausa Lottie
+      if (this.splashComp) {
+        this.splashComp.pauseAnimation(); // pausa Lottie
+      }
     } else {
       this.audio.play();
-      this.splashComp.playAnimation(); // reanuda Lottie
+      if (this.splashComp) {
+        this.splashComp.playAnimation(); // reanuda Lottie
+      }
     }
 
     this.isMusicPlaying = !this.isMusicPlaying;
