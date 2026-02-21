@@ -29,10 +29,10 @@
   --color-forest: #4A6360;
 
   /* sage: #81948B */
-  --color-sage:  #81948B;
+  --color-sage: #81948B;
 
   /* mint: #C6D7CF */
-  --color-mint:  #C6D7CF;
+  --color-mint: #C6D7CF;
 
   /* linen: #FAF7F3 */
   --color-linen: #FAF7F3;
@@ -46,7 +46,25 @@
   /* gold: #BFA880 */
   --color-gold: #BFA880;
 
-  --shadow-rounded: 0px 0px 15px -1px rgba(0,0,0,0.4); 
+  /* navy-dark: #0e243c */
+  --color-navy-dark: #0e243c;
+
+  /* navy: #425e87 */
+  --color-navy: #425e87;
+
+  /* slate-blue: #6c86ab */
+  --color-slate-blue: #6c86ab;
+
+  /* sky-blue: #a0c0e7 */
+  --color-sky-blue: #a0c0e7;
+
+  /* baby-blue: #bfd5ec */
+  --color-baby-blue: #bfd5ec;
+
+  /* light-gray: #dee1e4 */
+  --color-light-gray: #dee1e4;
+
+  --shadow-rounded: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
 
   /* half: 50% */
   --radius-half: 50%

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 @Component({
   selector: 'app-gifts',
@@ -11,9 +12,10 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 })
 export class GiftsComponent {
   private animationItem: AnimationItem | undefined;
+  weddingInfo = WEDDING_INFO;
 
   options: AnimationOptions = {
-    path: 'assets/animations/gift.json', // Ruta al archivo JSON
+    path: WEDDING_INFO.animations.gift,
     loop: true,
     autoplay: true,
   };

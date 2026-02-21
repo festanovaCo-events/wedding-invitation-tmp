@@ -1,17 +1,17 @@
-<h5 class="text-sage font-bold text-[25px] text-center">¿Asistes a nuestra boda?</h5>
+<h5 class="text-navy font-bold text-[25px] text-center">¿Asistes a nuestra boda?</h5>
 
 <form class="mb-4 flex flex-col gap-4 mt-4 items-center justify-center" (ngSubmit)="confirmSend()">
     <div class="">
         <label class="inline-flex items-center space-x-2 mr-4">
             <input type="radio" name="respuesta" [(ngModel)]="isConfirmed" [value]="true"
-                class="form-radio text-forest" />
-            <span class="text-sage text-lg">¡Sí! Confirmo</span>
+                class="form-radio text-navy-dark" />
+            <span class="text-navy text-lg">¡Sí! Confirmo</span>
         </label>
 
         <label class="inline-flex items-center space-x-2">
             <input type="radio" name="respuesta" [(ngModel)]="isConfirmed" [value]="false"
-                class="form-radio text-forest" />
-            <span class="text-sage text-lg">No puedo :(</span>
+                class="form-radio text-navy-dark" />
+            <span class="text-navy text-lg">No puedo :(</span>
         </label>
     </div>
 
@@ -20,9 +20,9 @@
         <!-- Input solo si no se alcanzaron los cupos -->
         <div class="flex flex-col gap-1" *ngIf="listName.length < maximumQuotas">
             <input type="text" [(ngModel)]="nameCurrent" placeholder="Nombre del asistente"
-                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-sage" name="nombre" />
+                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-navy" name="nombre" />
             <button type="button" (click)="saveName()"
-                class="bg-white text-sage px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-sage hover:text-white w-full font-bold cursor-pointer">
+                class="bg-white text-navy px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-navy hover:text-white w-full font-bold cursor-pointer">
                 Guardar
             </button>
         </div>
@@ -32,9 +32,9 @@
         <p class="text-sm text-gray-600">Máximo {{ maximumQuotas }} asistentes.</p>
         <ul class="mt-4 space-y-2 text-gray-700">
             <li *ngFor="let nombre of listName; let i = index" class="flex justify-between items-center">
-                <p class="text-[28px] font-cookie text-forest font-medium capitalize">{{ nombre }}</p>
+                <p class="text-[28px] font-cookie text-navy-dark font-medium capitalize">{{ nombre }}</p>
                 <button type="button" (click)="deleteName(i)"
-                    class="text-forest text-sm hover:underline cursor-pointer">
+                    class="text-navy-dark text-sm hover:underline cursor-pointer">
                     Eliminar
                 </button>
             </li>
@@ -43,7 +43,7 @@
         <!-- Botón enviar cuando hay al menos uno guardado -->
         <div *ngIf="listName.length > 0" class="mt-4">
             <button type="submit"
-                class="bg-gold text-white px-4 py-2 hover:bg-sage cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
+                class="bg-sky-blue text-white px-4 py-2 hover:bg-navy cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
                 Enviar
             </button>
         </div>

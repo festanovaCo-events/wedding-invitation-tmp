@@ -2,7 +2,9 @@
     .belt-img::before {
         content: "";
         position: absolute;
-        background-image: url("../../../../assets/images/event-scheduler/img_cinta01.svg");
+        background-color: var(--color-navy);
+        -webkit-mask-image: url("../../../../assets/images/event-scheduler/img_cinta01.svg");
+        mask-image: url("../../../../assets/images/event-scheduler/img_cinta01.svg");
         background-size: contain;
         /* o cover */
         background-repeat: no-repeat;
@@ -16,7 +18,9 @@
     .belt-img::after {
         content: "";
         position: absolute;
-        background-image: url("../../../../assets/images/event-scheduler/img_cinta02.svg");
+        background-color: var(--color-navy);
+        -webkit-mask-image: url("../../../../assets/images/event-scheduler/img_cinta02.svg");
+        mask-image: url("../../../../assets/images/event-scheduler/img_cinta02.svg");
         background-size: contain;
         background-repeat: no-repeat;
         background-position: left;

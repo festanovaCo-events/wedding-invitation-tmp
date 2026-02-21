@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 @Component({
   selector: 'app-banner-instagram',
@@ -10,8 +11,10 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie';
   styleUrl: './banner-instagram.component.css'
 })
 export class BannerInstagramComponent {
+  weddingInfo = WEDDING_INFO;
+  
    options: AnimationOptions = {
-      path: 'assets/animations/instagram.json', // Ruta al archivo JSON
+      path: WEDDING_INFO.animations.instagram,
       loop: true,
       autoplay: true,
     };

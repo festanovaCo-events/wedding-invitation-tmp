@@ -1,8 +1,10 @@
 <section class="bg-sand pt-[30px] pb-2.5">
     <div>
         <div class="flex flex-col justify-center items-center">
-            <h2 class="font-cookie text-forest text-center px-[15px] text-[40px] md:text-6xl leading-[60px]">Retratos de Nuestro Amor</h2>
-            <p class="px-[15px] text-center text-base md:text-xl font-normal text-sage">Un minuto, un segundo, un instante que queda en la eternidad
+            <h2 class="font-cookie text-navy-dark text-center px-[15px] text-[40px] md:text-6xl leading-[60px]">Retratos
+                de Nuestro Amor</h2>
+            <p class="px-[15px] text-center text-base md:text-xl font-normal text-navy">Un minuto, un segundo, un
+                instante que queda en la eternidad
             </p>
 
             <div class="w-14 h-w-14 mx-auto mt-3.5">
@@ -18,7 +20,7 @@
             <div class="bg-white p-[15px] pb-[100px] shadow-rounded">
                 <!-- Enlace con data-fancybox para abrir en modal -->
                 <a href="{{ img.full }}" data-fancybox="gallery" data-caption="Imagen ampliada">
-                    <img [src]="img.thumb" [alt]="'Imagen ' + img.thumb" />
+                    <img class="w-full h-[500px] object-cover" [src]="img.thumb" [alt]="'Imagen ' + img.thumb" />
                 </a>
             </div>
         </div>

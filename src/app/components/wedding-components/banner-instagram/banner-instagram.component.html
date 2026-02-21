@@ -1,10 +1,10 @@
 <section class="instagram">
     <div class="flex flex-col text-center justify-center items-center z-[999] relative">
         <h2 class="font-cookie text-white text-[40px] md:text-6xl leading-10 md:leading-[60px] mb-0 px-10">
-            Compartimos este día junto a vos
+            {{ weddingInfo.sections.instagram.title }}
         </h2>
         <p class="text-white text-base md:text-xl font-normal px-[15px] mt-5 md:mt-0">
-            Compartí tus fotos y videos de ese hermoso día
+            {{ weddingInfo.sections.instagram.description }}
         </p>
 
         <div class="flex justify-center items-center h-28 w-[105px] my-3">
@@ -12,10 +12,14 @@
                 (animationCreated)="animationCreated($event)"></ng-lottie>
         </div>
 
-        <a href="#" class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10">#Jorge&Yina</a>
+        <a [href]="'https://www.instagram.com/explore/tags/' + weddingInfo.sections.instagram.hashtag.replace('#', '')"
+            target="_blank" rel="noopener noreferrer"
+            class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10">{{
+            weddingInfo.sections.instagram.hashtag }}</a>
 
-        <a class="w-auto bg-white text-center hover:text-white hover:bg-sage
-                     text-sage uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
-                     transition-all shadow-md font-bold cursor-pointer">Ver en Instagram</a>
+        <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-navy
+                     text-navy uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+                     transition-all shadow-md font-bold cursor-pointer">{{ weddingInfo.sections.instagram.buttonText
+            }}</a>
     </div>
 </section>

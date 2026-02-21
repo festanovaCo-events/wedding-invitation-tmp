@@ -1,7 +1,6 @@
 @layer utilities {
   .instructions {
-    background: url(../../../../assets/images/instructions/img_ondas03.svg)
-      center top no-repeat var(--color-sand);
+    background: url(../../../../assets/images/instructions/img_ondas03.svg) center top no-repeat var(--color-sand);
     padding-top: 14%;
     position: relative;
     padding-bottom: 35%;
@@ -31,7 +30,7 @@
       padding-bottom: 25%;
     }
   }
-  
+
   @media only screen and (min-width: 1024px) {
     .instructions {
       padding-bottom: 19%;

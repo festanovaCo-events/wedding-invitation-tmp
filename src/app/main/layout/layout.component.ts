@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { LoaderHeartComponent } from '../../components/common/loader-heart/loader-heart.component';
 import { SplashMusicComponent } from '../../components/ui/lottie/splash-music/splash-music.component';
 import { FooterComponent } from "../../components/common/footer/footer.component";
+import { WEDDING_INFO } from '../../constants/wedding-info';
 
 @Component({
   standalone: true,
@@ -38,6 +39,7 @@ export class LayoutComponent implements OnInit {
   showWelcomeModal = false;
   showContent = false;
   bounce = false;
+  weddingInfo = WEDDING_INFO;
 
   private audio: HTMLAudioElement | null = null; // Agregado
   private isMusicPlaying = false;
@@ -105,9 +107,9 @@ export class LayoutComponent implements OnInit {
 
   playBackgroundMusic() {
     if (!this.audio) {
-      this.audio = new Audio('assets/music/EdSheeran-Perfect(Lyrics).mp3');
-      this.audio.loop = true;
-      this.audio.volume = 0.3; // Ajusta el volumen según sea necesario
+      this.audio = new Audio(this.weddingInfo.music.url);
+      this.audio.loop = this.weddingInfo.music.loop;
+      this.audio.volume = this.weddingInfo.music.volume;
     }
 
     this.audio.play();
