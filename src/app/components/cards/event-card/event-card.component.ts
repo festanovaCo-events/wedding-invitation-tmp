@@ -19,6 +19,7 @@ export class EventCardComponent {
     'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+de+Jorge+y+Yina+(Ceremonia)&dates=20260912T220000Z/20260912T230000Z&details=¡Acompáñanos+a+celebrar+este+momento+especial!&location=Parroquia+Cristo+Sacerdote+-+Los+Alpes,+Tv.+73,+Los+Alpes,+Cartagena+de+Indias,+Provincia+de+Cartagena,+Bolívar&sf=true&output=xml';
   @Input() location: string =
     'Parroquia+Cristo+Sacerdote+-+Los+Alpes,+Cartagena+de+Indias,+Bolívar';
+  @Input() mapsUrl: string = '';
   options!: AnimationOptions;
   animationItem?: AnimationItem;
 
