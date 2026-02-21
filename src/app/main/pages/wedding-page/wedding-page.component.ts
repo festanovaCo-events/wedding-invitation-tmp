@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { BannerHomeComponent } from "../../../components/wedding-components/banner-home/banner-home.component";
 import { WeddingCountdownComponent } from "../../../components/wedding-components/wedding-countdown/wedding-countdown.component";
 import { EventScheduleComponent } from "../../../components/wedding-components/event-schedule/event-schedule.component";
@@ -9,6 +10,7 @@ import { GiftsComponent } from "../../../components/wedding-components/gifts/gif
 import { BannerInstagramComponent } from "../../../components/wedding-components/banner-instagram/banner-instagram.component";
 import { ConfirmationsComponent } from "../../../components/wedding-components/confirmations/confirmations.component";
 import { ModalComponent } from "../../../components/common/modal/modal.component";
+import { ModalFlowService } from "../../../services/modal-flow.service";
 
 @Component({
   selector: 'app-wedding-page',
@@ -16,29 +18,24 @@ import { ModalComponent } from "../../../components/common/modal/modal.component
   imports: [CommonModule, BannerHomeComponent, WeddingCountdownComponent, EventScheduleComponent, PortraitsComponent, InstructionsComponent, GiftsComponent, BannerInstagramComponent, ConfirmationsComponent, ModalComponent],
   templateUrl: './wedding-page.component.html',
 })
-export class WeddingPageComponent implements OnInit, AfterViewInit {
+export class WeddingPageComponent implements OnInit, OnDestroy {
   showConfirmationGuide = false;
   private readonly STORAGE_KEY = 'confirmation_guide_shown';
+  private subscription?: Subscription;
+
+  constructor(private modalFlowService: ModalFlowService) {}
 
   ngOnInit(): void {
-    // Verificar si ya se mostró el modal anteriormente
-    const guideShown = localStorage.getItem(this.STORAGE_KEY);
-    
-    // Esperar un poco después de que se cierre el modal de bienvenida
-    // Usamos un timeout para que aparezca después del modal de bienvenida
-    setTimeout(() => {
+    this.subscription = this.modalFlowService.welcomeModalAccepted$.subscribe(() => {
+      const guideShown = localStorage.getItem(this.STORAGE_KEY);
       if (!guideShown) {
         this.showConfirmationGuide = true;
       }
-    }, 1500); // Esperar 1.5 segundos después de que se cierre el modal de bienvenida
+    });
   }
 
-  ngAfterViewInit(): void {
-    // Si el modal ya se mostró antes, no hacer nada
-    const guideShown = localStorage.getItem(this.STORAGE_KEY);
-    if (guideShown) {
-      return;
-    }
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   scrollToConfirmations(): void {

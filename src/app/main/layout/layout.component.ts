@@ -18,6 +18,7 @@ import { LoaderHeartComponent } from '../../components/common/loader-heart/loade
 import { SplashMusicComponent } from '../../components/ui/lottie/splash-music/splash-music.component';
 import { FooterComponent } from "../../components/common/footer/footer.component";
 import { WEDDING_INFO } from '../../constants/wedding-info';
+import { ModalFlowService } from '../../services/modal-flow.service';
 
 @Component({
   standalone: true,
@@ -36,7 +37,7 @@ export class LayoutComponent implements OnInit {
   @ViewChild(SplashMusicComponent) splashComp!: SplashMusicComponent;
 
   isLoading = true;
-  showWelcomeModal = false;
+  modalDismissed = false;
   showContent = false;
   bounce = false;
   weddingInfo = WEDDING_INFO;
@@ -46,7 +47,11 @@ export class LayoutComponent implements OnInit {
   private minTime = 2000; // 2 segundos
   private startTime = 0;
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private modalFlowService: ModalFlowService
+  ) {}
 
   ngOnInit(): void {
     // Primera carga: mostrar loader al entrar
@@ -54,8 +59,7 @@ export class LayoutComponent implements OnInit {
     setTimeout(() => {
       this.isLoading = false;
       this.showContent = true;
-      this.showWelcomeModal = true;
-      this.disableScroll(); // Bloquea scroll cuando se abre el modal
+      this.disableScroll(); // Bloquea scroll (modal visible, loader oculto)
     }, this.minTime);
 
     // Luego escucha navegación
@@ -85,8 +89,9 @@ export class LayoutComponent implements OnInit {
   }
 
   onAccept(withMusic: boolean) {
-    this.showWelcomeModal = false;
+    this.modalDismissed = true;
     this.enableScroll(); // Restaura scroll
+    this.modalFlowService.emitWelcomeModalAccepted(); // Abre el modal de confirmación enseguida
 
     if (withMusic) {
       this.playBackgroundMusic();
