@@ -14,8 +14,8 @@
         </div>
     </div>
 
-    <!-- Carrusel con ngx-slick-carousel -->
-    <ngx-slick-carousel style="margin-bottom: 30px;" class="carousel" [config]="slideConfig">
+    <!-- Carrusel: se muestra cuando jQuery y Slick están cargados -->
+    <ngx-slick-carousel *ngIf="carouselReady" style="margin-bottom: 30px;" class="carousel" [config]="slideConfig">
         <div ngxSlickItem *ngFor="let img of images; let i = index" class="slide">
             <div class="bg-white p-[15px] pb-[100px] shadow-rounded">
                 <!-- Enlace con data-fancybox para abrir en modal -->

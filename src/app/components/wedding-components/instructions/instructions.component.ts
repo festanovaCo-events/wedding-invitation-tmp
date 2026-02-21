@@ -4,17 +4,23 @@ import { AnimationItem } from 'lottie-web';
 import { LottieComponent } from 'ngx-lottie';
 import { FEATURE_FLAGS } from '../../../constants/feature-flags';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-import { ANIMATIONS_DATA } from '../../../data/animations.data';
+import dress from 'assets/animations/dress.json';
+import sounds from 'assets/animations/sounds.json';
+import tips from 'assets/animations/tips.json';
 import { CircularModalComponent } from '../../common/circular-modal/circular-modal.component';
 import { ContentDressCodeModalComponent } from '../../contents/content-dress-code-modal/content-dress-code-modal.component';
 import { ContentTipsModalComponent } from '../../contents/content-tips-modal/content-tips-modal.component';
+
+type InstructionsAnimationKey = 'sounds' | 'dress' | 'tips';
 
 interface CardInfo {
   title: string;
   description: string;
   label: string;
-  animationKey: keyof typeof ANIMATIONS_DATA;
+  animationKey: InstructionsAnimationKey;
 }
+
+const INSTRUCTIONS_ANIMATIONS: Record<InstructionsAnimationKey, object> = { dress, sounds, tips };
 
 @Component({
   selector: 'app-instructions',
@@ -34,7 +40,7 @@ export class InstructionsComponent implements OnInit, OnDestroy {
   
   cards: CardInfo[] = WEDDING_INFO.sections.instructions.cards.map(card => ({
     ...card,
-    animationKey: (card.path?.includes('sounds') ? 'sounds' : card.path?.includes('dress') ? 'dress' : 'tips') as keyof typeof ANIMATIONS_DATA,
+    animationKey: (card.path?.includes('sounds') ? 'sounds' : card.path?.includes('dress') ? 'dress' : 'tips') as InstructionsAnimationKey,
   })).filter(card => {
     // Filtrar el card de Música si el feature flag está deshabilitado
     if (card.title === 'Música') {
@@ -73,8 +79,8 @@ export class InstructionsComponent implements OnInit, OnDestroy {
     // Para "Música" no hacemos nada, el botón puede tener otra funcionalidad
   }
 
-  getAnimationData(key: keyof typeof ANIMATIONS_DATA) {
-    return ANIMATIONS_DATA[key];
+  getAnimationData(key: InstructionsAnimationKey) {
+    return INSTRUCTIONS_ANIMATIONS[key];
   }
 
   closeDressCodeModal() {

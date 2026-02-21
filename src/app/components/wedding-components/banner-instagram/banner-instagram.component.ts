@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-import { ANIMATIONS_DATA } from '../../../data/animations.data';
+import instagram from 'assets/animations/instagram.json';
 
 @Component({
   selector: 'app-banner-instagram',
@@ -21,7 +21,7 @@ export class BannerInstagramComponent implements OnInit, OnDestroy {
   shouldLoadAnimation = false;
   
   options: AnimationOptions = {
-    animationData: ANIMATIONS_DATA.instagram,
+    animationData: instagram,
     loop: true,
     autoplay: true,
   };

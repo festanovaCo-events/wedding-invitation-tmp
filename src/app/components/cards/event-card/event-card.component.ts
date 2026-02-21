@@ -2,9 +2,12 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
-import { ANIMATIONS_DATA } from '../../../data/animations.data';
+import rings from 'assets/animations/rings.json';
+import party from 'assets/animations/party.json';
 
 type AnimationKey = 'rings' | 'party';
+
+const EVENT_CARD_ANIMATIONS: Record<AnimationKey, object> = { rings, party };
 
 @Component({
   selector: 'app-event-card',
@@ -29,7 +32,7 @@ export class EventCardComponent {
 
   ngOnInit(): void {
     this.options = {
-      animationData: ANIMATIONS_DATA[this.animationKey],
+      animationData: EVENT_CARD_ANIMATIONS[this.animationKey],
       loop: true,
       autoplay: true,
     };

@@ -145,10 +145,10 @@ export class LayoutComponent implements OnInit {
     const el = this.modalContent?.nativeElement;
     if (!el) return;
 
-    this.renderer.removeClass(el, 'animate__pulse');
-    this.renderer.removeClass(el, 'animate__slideInDown');
+    this.renderer.removeClass(el, 'app-pulse');
+    this.renderer.removeClass(el, 'app-slide-in-down');
     // forzar reflow para que la animación se reinicie
     void el.offsetWidth;
-    this.renderer.addClass(el, 'animate__pulse');
+    this.renderer.addClass(el, 'app-pulse');
   }
 }

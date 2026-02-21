@@ -3,11 +3,11 @@ import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 
-// Importar ngx-slick-carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Fancybox } from '@fancyapps/ui';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-import { ANIMATIONS_DATA } from '../../../data/animations.data';
+import camera from 'assets/animations/camera.json';
+import { ScriptLoaderService } from '../../../services/script-loader.service';
 
 @Component({
   selector: 'app-portraits',
@@ -18,14 +18,15 @@ import { ANIMATIONS_DATA } from '../../../data/animations.data';
 })
 export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('lottieContainer', { static: false }) lottieContainer!: ElementRef;
-  
+
   weddingInfo = WEDDING_INFO;
   images = WEDDING_INFO.assets.portraits;
   private observer: IntersectionObserver | null = null;
   shouldLoadAnimation = false;
+  carouselReady = false;
 
   options: AnimationOptions = {
-    animationData: ANIMATIONS_DATA.camera,
+    animationData: camera,
     loop: true,
     autoplay: true,
   };
@@ -62,10 +63,30 @@ export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
     ],
   };
 
+  constructor(private scriptLoader: ScriptLoaderService) {}
+
   ngOnInit(): void {
+    this.scriptLoader.loadSlickCarouselDeps().then(() => {
+      this.carouselReady = true;
+      setTimeout(() => this.bindFancybox(), 0);
+    });
     setTimeout(() => {
       this.setupIntersectionObserver();
     }, 0);
+  }
+
+  private bindFancybox(): void {
+    Fancybox.bind('.slick-slide:not(.slick-cloned) [data-fancybox="gallery"]', {
+      Thumbs: {},
+      Hash: false,
+      on: {
+        close: () => {
+          if (window.location.hash) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        },
+      },
+    });
   }
 
   private setupIntersectionObserver(): void {
@@ -93,21 +114,7 @@ export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Inicializar Fancybox para las imágenes con data-fancybox="gallery"
-    Fancybox.bind('.slick-slide:not(.slick-cloned) [data-fancybox="gallery"]', {
-      Thumbs: {},
-      // Deshabilitar la actualización automática de la URL
-      Hash: false,
-      on: {
-        close: () => {
-          // Limpiar el hash de la URL cuando se cierra Fancybox
-          if (window.location.hash) {
-            // Usar history.replaceState para no agregar una entrada al historial
-            window.history.replaceState(null, '', window.location.pathname + window.location.search);
-          }
-        },
-      },
-    });
+    // Fancybox se enlaza en bindFancybox() tras cargar scripts
   }
 
   animationCreated(animationItem: AnimationItem): void {
