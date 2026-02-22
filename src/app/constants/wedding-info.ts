@@ -13,8 +13,8 @@ export const WEDDING_INFO = {
 
   // Fechas
   dates: {
-    bannerDate: '15.05.2021', // Fecha mostrada en el banner
-    weddingDate: '2026-06-11T12:00:00', // Fecha objetivo para el countdown
+    bannerDate: '12.09.2026', // Fecha mostrada en el banner
+    weddingDate: '2026-09-12T16:00:00', // Fecha objetivo para el countdown
     ceremonyDate: 'Sábado 12 de Septiembre - 16:00',
     partyDate: 'Sábado 12 de Septiembre - 19:30',
     ceremonyDateTimeISO: '20260912T210000Z', // Para Google Calendar
@@ -25,7 +25,7 @@ export const WEDDING_INFO = {
 
   // Cita/Frase
   quote: {
-    text: 'Todos somos mortales,\nhasta el primer beso y la segunda copa de vino',
+    text: 'Por encima de todo,\nvistanse de amor, que es el vinculo perfecto.',
     openingQuoteImage: 'assets/images/banner-home/comilla-apertura.svg',
     closingQuoteImage: 'assets/images/banner-home/comilla-cierre.svg'
   },
@@ -56,7 +56,7 @@ export const WEDDING_INFO = {
 
   // Música
   music: {
-    url: 'assets/music/EdSheeran-Perfect(Lyrics).mp3',
+    url: 'assets/music/sound.mp3',
     volume: 0.3,
     loop: true
   },
@@ -65,14 +65,17 @@ export const WEDDING_INFO = {
   assets: {
     bannerVideo: 'assets/images/banner-home/video-boda.mp4',
     backgroundImage: '/assets/images/event-scheduler/img_lineas01.svg',
-    instagramBackground: 'assets/images/banner-instagram/portada-3.webp',
+    instagramBackground: 'assets/images/banner-instagram/banner.jpeg',
     // publicId: para NgOptimizedImage (srcset automático, q_auto, f_auto) | full: lightbox Fancybox
     portraits: [
       { publicId: 'v1755103602/Wedding/dowktzuqunplps4ncqgn', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg' },
-      { publicId: 'v1755103602/Wedding/wjspdvkckwczd5trlb9w', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg' },
+      //{ publicId: 'v1755103602/Wedding/wjspdvkckwczd5trlb9w', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg' },
       { publicId: 'v1755103602/Wedding/nzubkb4sl784chxg1oap', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg' },
       { publicId: 'v1755103602/Wedding/cmyeakepkcxvjdxwxgqy', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg' },
-      { publicId: 'v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg' }
+      { publicId: 'v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg' },
+      { publicId: 'v1771719895/Wedding/magobjvl3jzto7a2nrfy', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1771719895/Wedding/magobjvl3jzto7a2nrfy.jpg' },
+      { publicId: 'v1771719895/Wedding/m6aqykjdkfnpsewxjtni', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1771719895/Wedding/m6aqykjdkfnpsewxjtni.jpg' },
+      { publicId: 'v1771719895/Wedding/c7hgqggkkdinttg4ns0b', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1771719895/Wedding/c7hgqggkkdinttg4ns0b.jpg' }
     ]
   },
 
@@ -103,6 +106,16 @@ export const WEDDING_INFO = {
       buttonText: 'Ver en Instagram',
       hashtag: '#Jorge&Yina',
       url: 'https://www.instagram.com' // URL de Instagram - actualizar con la URL real
+    },
+    modals: {
+      dressCode: {
+        title: 'Elegante formal',
+        description: 'Queremos que cada uno de ustedes se sienta especial y luzca espectacular en nuestro dia tan especial.'
+      },
+      tipsAndNotes: {
+        title: 'Tips y Notas',
+        description: 'Se reserva el color blanco (en todas sus tonalidades) para el vestido de novia. No olvides confirmar tu asistencia.'
+      }
     },
     instructions: {
       cards: [
