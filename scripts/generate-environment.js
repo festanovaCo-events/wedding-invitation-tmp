@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 /**
- * Genera environment.prod.ts desde variables de entorno de Vercel
+ * Genera archivos de entorno desde variables de entorno de Vercel
  * 
- * Este script lee las variables de entorno y genera el archivo environment.prod.ts
- * antes del build. Si las variables no están definidas, usa valores por defecto.
+ * Este script lee las variables de entorno y genera los archivos:
+ * - environment.ts (archivo base requerido por TypeScript)
+ * - environment.prod.ts (configuración de producción)
+ * 
+ * Se ejecuta antes del build (prebuild hook). Si las variables no están definidas, usa valores por defecto.
  * 
  * Variables de entorno esperadas (configurar en Vercel):
  * - NG_APP_API_BASE_URL: URL base del API de producción (estándar recomendado)
@@ -14,7 +17,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const OUTPUT_FILE = path.join(__dirname, '../src/environments/environment.prod.ts');
+const ENV_BASE_FILE = path.join(__dirname, '../src/environments/environment.ts');
+const ENV_PROD_FILE = path.join(__dirname, '../src/environments/environment.prod.ts');
 
 /**
  * CONFIGURACIÓN DE VARIABLES DE ENTORNO
@@ -56,12 +60,33 @@ ENV_CONFIG.forEach(config => {
     envValues[config.prop] = getEnvVar(config);
 });
 
-// Generar el contenido del archivo environment.prod.ts
+// Generar el contenido de los archivos
 const properties = Object.entries(envValues)
     .map(([key, value]) => `  ${key}: '${value}'`)
     .join(',\n');
 
-const environmentContent = `/**
+// Contenido para environment.ts (archivo base - usado como fallback)
+const environmentBaseContent = `/**
+ * Variables de entorno base
+ * 
+ * Este archivo es generado automáticamente por scripts/generate-environment.js
+ * durante el proceso de build usando variables de entorno de Vercel.
+ * 
+ * Este es el archivo BASE que se importa en el código.
+ * Angular lo reemplaza automáticamente según la configuración:
+ * - Development: se reemplaza por 'environment.development.ts'
+ * - Production: se reemplaza por 'environment.prod.ts'
+ * 
+ * NO edites este archivo manualmente - será sobrescrito en cada build.
+ */
+export const environment = {
+  production: true,
+${properties}
+};
+`;
+
+// Contenido para environment.prod.ts (producción específico)
+const environmentProdContent = `/**
  * Variables de entorno para producción
  * 
  * Este archivo es generado automáticamente por scripts/generate-environment.js
@@ -77,15 +102,18 @@ ${properties}
 `;
 
 // Crear el directorio si no existe
-const outputDir = path.dirname(OUTPUT_FILE);
+const outputDir = path.dirname(ENV_BASE_FILE);
 if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
 }
 
-// Escribir el archivo
-fs.writeFileSync(OUTPUT_FILE, environmentContent, 'utf8');
+// Escribir ambos archivos
+fs.writeFileSync(ENV_BASE_FILE, environmentBaseContent, 'utf8');
+fs.writeFileSync(ENV_PROD_FILE, environmentProdContent, 'utf8');
 
-console.log('✓ environment.prod.ts generado desde variables de entorno');
+console.log('✓ Archivos de entorno generados desde variables de entorno:');
+console.log('  - environment.ts (archivo base)');
+console.log('  - environment.prod.ts (producción)');
 Object.entries(envValues).forEach(([key, value]) => {
     console.log(`  - ${key}: ${value}`);
 });
