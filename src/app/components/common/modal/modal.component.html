@@ -1,8 +1,8 @@
-<div class="fixed inset-0 bg-opacity-50 flex items-center justify-center z-[9999] bg-navy-dark/70 backdrop-blur-sm p-2"
+<div class="fixed inset-0 bg-opacity-50 flex items-center justify-center z-[9999] bg-navy-dark/70 backdrop-blur-sm p-4"
     *ngIf="show">
     <div
-        class="bg-sand rounded-xl shadow-lg p-6 max-w-md w-full relative overflow-x-scroll md:overflow-hidden max-h-[70%]">
-        <button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" (click)="onClose()">
+        class="bg-sand rounded-xl shadow-lg p-6 md:p-8 max-w-md w-full relative overflow-x-scroll md:overflow-hidden max-h-[85vh]">
+        <button class="absolute top-3 right-3 md:top-4 md:right-4 text-gray-500 hover:text-gray-700 text-xl md:text-2xl font-bold leading-none w-8 h-8 md:w-10 md:h-10 flex items-center justify-center" (click)="onClose()" aria-label="Cerrar" type="button">
             &times;
         </button>
         <ng-content></ng-content>

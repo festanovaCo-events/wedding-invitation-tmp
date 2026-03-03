@@ -42,9 +42,9 @@ export class LayoutComponent implements OnInit {
   bounce = false;
   weddingInfo = WEDDING_INFO;
 
-  private audio: HTMLAudioElement | null = null; // Agregado
+  private audio: HTMLAudioElement | null = null;
   private isMusicPlaying = false;
-  private minTime = 2000; // 2 segundos
+  private minTime = 2000;
   private startTime = 0;
 
   constructor(
@@ -54,15 +54,23 @@ export class LayoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Primera carga: mostrar loader al entrar
     this.startTime = Date.now();
+    
+    const maxLoadTime = 5000;
+    setTimeout(() => {
+      if (this.isLoading) {
+        this.isLoading = false;
+        this.showContent = true;
+        this.enableScroll();
+      }
+    }, maxLoadTime);
+
     setTimeout(() => {
       this.isLoading = false;
       this.showContent = true;
-      this.disableScroll(); // Bloquea scroll (modal visible, loader oculto)
+      this.disableScroll();
     }, this.minTime);
 
-    // Luego escucha navegación
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.startTime = Date.now();
@@ -90,8 +98,8 @@ export class LayoutComponent implements OnInit {
 
   onAccept(withMusic: boolean) {
     this.modalDismissed = true;
-    this.enableScroll(); // Restaura scroll
-    this.modalFlowService.emitWelcomeModalAccepted(); // Abre el modal de confirmación enseguida
+    this.enableScroll();
+    this.modalFlowService.emitWelcomeModalAccepted();
 
     if (withMusic) {
       this.playBackgroundMusic();
@@ -100,7 +108,7 @@ export class LayoutComponent implements OnInit {
         if (this.splashComp) {
           this.splashComp.pauseAnimation();
         }
-      }, 300); // Pausa Lottie inmediatamente
+      }, 300);
     }
   }
 
@@ -129,12 +137,12 @@ export class LayoutComponent implements OnInit {
     if (this.isMusicPlaying) {
       this.audio.pause();
       if (this.splashComp) {
-        this.splashComp.pauseAnimation(); // pausa Lottie
+        this.splashComp.pauseAnimation();
       }
     } else {
       this.audio.play();
       if (this.splashComp) {
-        this.splashComp.playAnimation(); // reanuda Lottie
+        this.splashComp.playAnimation();
       }
     }
 
@@ -147,7 +155,6 @@ export class LayoutComponent implements OnInit {
 
     this.renderer.removeClass(el, 'app-pulse');
     this.renderer.removeClass(el, 'app-slide-in-down');
-    // forzar reflow para que la animación se reinicie
     void el.offsetWidth;
     this.renderer.addClass(el, 'app-pulse');
   }

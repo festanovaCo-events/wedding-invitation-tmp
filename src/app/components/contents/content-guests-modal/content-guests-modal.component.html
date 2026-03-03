@@ -1,0 +1,49 @@
+<!-- Mensaje de bienvenida con el nombre del anfitrión -->
+<div *ngIf="hostName" class="mb-4 text-center">
+    <p class="text-navy text-xl md:text-2xl lg:text-3xl font-cookie mb-2">
+        ¡Bienvenido {{ hostName }}!
+    </p>
+    <p class="text-navy text-sm md:text-base">
+        Ingresa tus acompañantes
+    </p>
+</div>
+
+<form class="mb-4 flex flex-col gap-4 items-center justify-center" (ngSubmit)="confirmSend()">
+    <!-- Input solo si no se alcanzaron los cupos -->
+    <div class="w-full flex flex-col gap-1" *ngIf="listName.length < maximumQuotas">
+        <input type="text" [(ngModel)]="nameCurrent" placeholder="Nombre del acompañante"
+            class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-navy" name="nombre" />
+        <button type="button" (click)="saveName()"
+            class="bg-white text-navy px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-navy hover:text-white w-full font-bold cursor-pointer">
+            Guardar
+        </button>
+    </div>
+
+    <!-- Lista de nombres -->
+    <div class="w-full">
+        <p class="text-sm text-gray-600 mt-4">Lista de acompañantes ({{ listName.length }}/{{ maximumQuotas }}):</p>
+        <p class="text-sm text-gray-600">Máximo {{ maximumQuotas }} acompañantes.</p>
+        <ul class="mt-4 space-y-2 text-gray-700">
+            <li *ngFor="let nombre of listName; let i = index" class="flex justify-between items-center">
+                <p class="text-[28px] font-cookie text-navy-dark font-medium capitalize">{{ nombre }}</p>
+                <button type="button" (click)="deleteName(i)"
+                    class="text-navy-dark text-sm hover:underline cursor-pointer">
+                    Eliminar
+                </button>
+            </li>
+        </ul>
+
+        <!-- Botón enviar cuando hay al menos uno guardado -->
+        <div *ngIf="listName.length > 0" class="mt-4">
+            <button type="submit"
+                class="bg-sky-blue text-white px-4 py-2 hover:bg-navy cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
+                Enviar
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Mensaje si ya se envió -->
+<div *ngIf="registrationSent" class="text-green-700 text-sm mt-4 text-center">
+    Registro enviado correctamente.
+</div>
