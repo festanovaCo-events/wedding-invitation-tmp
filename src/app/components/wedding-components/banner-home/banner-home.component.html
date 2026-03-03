@@ -1,38 +1,40 @@
 <section
   class="parallax-container relative h-[960px] md:h-[1296px] 2xl:h-[1900px] flex items-center justify-center text-center text-white pb-[40%] md:pb-[20%]">
   <video #bgVideo muted [muted]="true" playsinline autoplay loop preload="metadata"
-    class="absolute inset-0 w-full h-full object-cover z-0">
+    class="absolute inset-0 w-full h-full object-cover z-0" aria-hidden="true" role="presentation"
+    aria-label="Video decorativo de fondo sin audio. Este video es puramente visual y no contiene información esencial.">
     <source [src]="weddingInfo.assets.bannerVideo" type="video/mp4" />
-    Tu navegador no soporta video HTML5.
+    <p class="sr-only">
+      Tu navegador no soporta la reproducción de video HTML5. Este video es decorativo, no contiene audio,
+      y no afecta la funcionalidad ni la accesibilidad del sitio. El contenido principal está disponible
+      en el resto de la página.
+    </p>
   </video>
 
-  <div class="bg-overlay absolute inset-0 z-[1]"></div>
+  <div class="bg-overlay absolute inset-0 z-1"></div>
 
   <div class="z-10 h-screen flex flex-col justify-center">
     <!-- Box nombre y fecha -->
     <div class="flex flex-row">
-      <div class="h-[1px] w-1/6 md:w-1/4 bg-white mx-auto my-0 mt-5"></div>
-      <p class="text-[25px] font-light">
+      <div class="h-px w-1/6 md:w-1/4 bg-white mx-auto my-0 mt-5"></div>
+      <span class="text-white text-[25px] font-light drop-shadow-lg">
         {{ weddingInfo.dates.bannerDate }}
-      </p>
-      <div class="h-[1px] w-1/6 md:w-1/4 bg-white mx-auto my-0 mt-5"></div>
+      </span>
+      <div class="h-px w-1/6 md:w-1/4 bg-white mx-auto my-0 mt-5"></div>
     </div>
 
-    <app-title-couple 
-      [name_husband]="weddingInfo.couple.husbandName"
-      [name_wife]="weddingInfo.couple.wifeName" />
+    <app-title-couple [name_husband]="weddingInfo.couple.husbandName" [name_wife]="weddingInfo.couple.wifeName" />
     <!-- Box nombre y fecha -->
 
     <!-- Box frase portada -->
     <div class="mt-[50px] w-[90%] md:w-[85%] lg:w-auto mx-auto">
       <img [src]="weddingInfo.quote.openingQuoteImage" alt="comilla-apertura"
         class="w-[30px] h-[30px] mx-auto my-2.5" />
-      <p class="text-[20px] md:text-[28px] font-light">
+      <p class="text-white text-[20px] md:text-[28px] font-light drop-shadow-lg">
         {{ weddingInfo.quote.text.split('\n')[0] }}<br />
         {{ weddingInfo.quote.text.split('\n')[1] }}
       </p>
-      <img [src]="weddingInfo.quote.closingQuoteImage" alt="comilla-cierre"
-        class="w-[30px] h-[30px] mx-auto my-2.5" />
+      <img [src]="weddingInfo.quote.closingQuoteImage" alt="comilla-cierre" class="w-[30px] h-[30px] mx-auto my-2.5" />
     </div>
     <!-- Box frase portada -->
 

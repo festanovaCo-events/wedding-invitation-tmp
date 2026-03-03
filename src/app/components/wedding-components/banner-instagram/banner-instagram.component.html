@@ -1,9 +1,10 @@
 <section class="instagram">
-    <div class="flex flex-col text-center justify-center items-center z-[999] relative">
-        <h2 class="font-cookie text-white text-[40px] md:text-6xl leading-10 md:leading-[60px] mb-0 px-10">
+    <div class="flex flex-col text-center justify-center items-center z-999 relative">
+        <h2
+            class="font-cookie text-white text-[40px] md:text-6xl leading-10 md:leading-[60px] mb-0 px-10 drop-shadow-lg">
             {{ weddingInfo.sections.instagram.title }}
         </h2>
-        <p class="text-white text-base md:text-xl font-normal px-[15px] mt-5 md:mt-0">
+        <p class="text-white text-base md:text-xl font-normal px-[15px] mt-5 md:mt-0 drop-shadow-lg">
             {{ weddingInfo.sections.instagram.description }}
         </p>
 
@@ -14,7 +15,7 @@
 
         <a [href]="'https://www.instagram.com/explore/tags/' + weddingInfo.sections.instagram.hashtag.replace('#', '')"
             target="_blank" rel="noopener noreferrer"
-            class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10">{{
+            class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10 drop-shadow-lg">{{
             weddingInfo.sections.instagram.hashtag }}</a>
 
         <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-navy
