@@ -6,11 +6,9 @@
  * antes del build. Si las variables no están definidas, usa valores por defecto.
  * 
  * Variables de entorno esperadas (configurar en Vercel):
- * - NG_APP_API_BASE_URL: URL base del API de producción (recomendado)
- * - API_BASE_URL: Alternativa sin prefijo
- * - apiBaseUrl: Alternativa en camelCase (como está configurado actualmente)
+ * - NG_APP_API_BASE_URL: URL base del API de producción (estándar recomendado)
  * 
- * El script busca en este orden y usa el primero que encuentre.
+ * El prefijo NG_APP_ es el estándar para variables de entorno en Angular/Vercel.
  */
 
 const fs = require('fs');
@@ -31,12 +29,13 @@ const OUTPUT_FILE = path.join(__dirname, '../src/environments/environment.prod.t
 const ENV_CONFIG = [
     {
         prop: 'apiBaseUrl',
-        envVars: ['apiBaseUrl'],
+        envVars: ['NG_APP_API_BASE_URL'],
         defaultValue: 'https://api.example.com'
     },
-    // Agrega más variables aquí:
-    // { prop: 'apiKey', envVars: ['NG_APP_API_KEY', 'API_KEY'], defaultValue: '' },
+    // Agrega más variables aquí siguiendo el estándar NG_APP_:
+    // { prop: 'apiKey', envVars: ['NG_APP_API_KEY'], defaultValue: '' },
     // { prop: 'analyticsId', envVars: ['NG_APP_ANALYTICS_ID'], defaultValue: '' },
+    // { prop: 'sentryDsn', envVars: ['NG_APP_SENTRY_DSN'], defaultValue: '' },
 ];
 
 /**
