@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "prebuild": "node scripts/generate-fonts-inline.js",
+    "prebuild": "node scripts/generate-fonts-inline.js && node scripts/generate-environment.js",
     "prestart": "node scripts/generate-fonts-inline.js",
     "predeploy": "npx http-server dist/wedding-invitation-tmp/browser -o -p 8080",
     "build": "ng build --configuration production",
