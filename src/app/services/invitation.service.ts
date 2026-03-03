@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { environment } from 'environments/environment';
 import { FEATURE_FLAGS } from '../constants/feature-flags';
 import { API_ROUTES } from '../constants/api-routes';
 import { 
