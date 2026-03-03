@@ -14,6 +14,10 @@ export const FEATURE_FLAGS = {
   // Opción de agendar ceremonia en confirmaciones
   SCHEDULE_CEREMONY: false,
   
+  // Usar datos mockeados para el servicio de invitación
+  // true = usar datos mockeados, false = consumir servicio real
+  USE_MOCK_INVITATION_DATA: false,
+  
   // Splash de música al inicio (comentado por ahora)
   // SPLASH_MUSIC: true,
 } as const;
