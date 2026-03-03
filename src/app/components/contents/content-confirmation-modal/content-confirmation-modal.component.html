@@ -39,7 +39,7 @@
     <div class="flex flex-col gap-4 items-center justify-center">
         <button 
             (click)="confirmDecline()"
-            class="bg-sky-blue hover:bg-navy text-white px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs shadow-md">
+            class="bg-navy hover:bg-navy-dark text-white px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs shadow-md">
             Sí, confirmo que no asistiré
         </button>
         
@@ -104,7 +104,7 @@
             <!-- Botón enviar cuando hay al menos el anfitrión guardado -->
             <div *ngIf="listName.length > 0" class="mt-4">
                 <button type="submit"
-                    class="bg-sky-blue text-white px-4 py-2 hover:bg-navy cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
+                    class="bg-navy text-white px-4 py-2 hover:bg-navy-dark cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
                     Enviar
                 </button>
             </div>
