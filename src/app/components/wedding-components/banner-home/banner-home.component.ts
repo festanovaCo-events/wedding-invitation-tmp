@@ -1,12 +1,9 @@
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { Component } from '@angular/core';
-import player, { AnimationItem } from 'lottie-web';
+import { AnimationItem } from 'lottie-web';
 import { TitleCoupleComponent } from "../../ui/title-couple/title-couple.component";
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-
-export function playerFactory() {
-  return player;
-}
+import arrowContinue from 'assets/animations/arrow_continue.json';
 @Component({
   selector: 'app-banner-home',
   standalone: true,
@@ -19,7 +16,7 @@ export class BannerHomeComponent {
   weddingInfo = WEDDING_INFO;
 
   options: AnimationOptions = {
-    path: WEDDING_INFO.animations.arrowContinue,
+    animationData: arrowContinue,
     loop: true,
     autoplay: true,
   };

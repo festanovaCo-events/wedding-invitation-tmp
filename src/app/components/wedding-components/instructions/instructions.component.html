@@ -15,7 +15,7 @@
 
                     <div class="flex justify-center items-center h-20 w-[95px]">
                         <ng-lottie class="w-[90px] h-[80px] max-w-full max-h-full"
-                            [options]="{ path: card.path, loop: true, autoplay: true }"
+                            [options]="{ animationData: getAnimationData(card.animationKey), loop: true, autoplay: true }"
                             (animationCreated)="animationCreated($event)"></ng-lottie>
                     </div>
 
@@ -32,7 +32,7 @@
     </div>
 
     <!-- Modal de Vestuario -->
-    <app-circular-modal [show]="showDressCodeModal" title="Dress Code" (close)="closeDressCodeModal()">
+    <app-circular-modal [show]="showDressCodeModal" [title]="weddingInfo.sections.modals.dressCode.title" (close)="closeDressCodeModal()">
         <div icon class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
             <img src="assets/images/instructions/vestuario.svg" alt="Vestuario" class="w-full h-full object-contain" />
         </div>
@@ -40,7 +40,7 @@
     </app-circular-modal>
 
     <!-- Modal de Tips y Notas -->
-    <app-circular-modal [show]="showTipsModal" title="Tips y Notas" (close)="closeTipsModal()">
+    <app-circular-modal [show]="showTipsModal" [title]="weddingInfo.sections.modals.tipsAndNotes.title" (close)="closeTipsModal()">
         <div icon class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
             <img src="assets/images/instructions/tips.svg" alt="Tips y Notas" class="w-full h-full object-contain" />
         </div>

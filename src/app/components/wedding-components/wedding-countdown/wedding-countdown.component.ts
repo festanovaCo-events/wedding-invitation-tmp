@@ -3,6 +3,7 @@ import { interval, Subscription } from 'rxjs';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { AnimationItem } from 'lottie-web';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
+import heartPulse from 'assets/animations/heart_pulse.json';
 
 @Component({
   selector: 'app-wedding-countdown',
@@ -16,7 +17,7 @@ export class WeddingCountdownComponent implements OnInit, OnDestroy {
   weddingInfo = WEDDING_INFO;
 
   options: AnimationOptions = {
-    path: WEDDING_INFO.animations.heartPulse,
+    animationData: heartPulse,
     loop: true,
     autoplay: true,
   };

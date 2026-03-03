@@ -1,25 +1,7 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('./assets/fonts/OpenSans-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans Light';
-  src: url('./assets/fonts/OpenSans-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Cookie';
-  src: url('./assets/fonts/Cookie-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Fuentes inline: se cargan desde fonts-inline.generated.css (prebuild) */
+@import "./fonts-inline.generated.css";
 
 @theme {
   --font-light: 'Open Sans Light', sans-serif;
@@ -72,4 +54,40 @@
 
 :root {
   font-family: "Open Sans", "sans-serif";
+}
+
+/* Animaciones propias (reemplazo de animate.css) */
+.app-animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes app-slide-in-down {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.app-slide-in-down {
+  animation-name: app-slide-in-down;
+}
+
+@keyframes app-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.app-pulse {
+  animation-name: app-pulse;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
 }

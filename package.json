@@ -4,7 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
+    "prebuild": "node scripts/generate-fonts-inline.js",
+    "prestart": "node scripts/generate-fonts-inline.js",
+    "predeploy": "npx http-server dist/wedding-invitation-tmp/browser -o -p 8080",
     "build": "ng build --configuration production",
+    "optimize-video": "bash scripts/optimize-video.sh",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -28,7 +32,6 @@
     "@tailwindcss/postcss": "^4.2.0",
     "@types/jquery": "^3.5.33",
     "@types/slick-carousel": "^1.6.40",
-    "animate.css": "^4.1.1",
     "jquery": "^3.7.1",
     "lottie-web": "^5.13.0",
     "ngx-lottie": "^12.0.0",
