@@ -1,55 +1,37 @@
-<!-- Loader -->
+<!-- Loader: solo durante la carga -->
 <app-loader-heart *ngIf="isLoading"></app-loader-heart>
 
-<!-- Contenido principal (siempre renderizado, pero oculto visualmente si está cargando) -->
-<div
-  [class.invisible]="isLoading"
-  [class.pointer-events-none]="isLoading"
-  [class.opacity-0]="isLoading"
-  class="transition-opacity duration-300 ease-in-out"
->
-  <app-splash-music (iconClicked)="toggleMusic()" />
-  <router-outlet></router-outlet>
-  <app-footer />
-</div>
-
-<!-- Modal de bienvenida -->
-<div
-  *ngIf="showWelcomeModal"
-  class="fixed inset-0 bg-forest/70 backdrop-blur-sm flex items-center justify-center z-[9999]"
-  (click)="triggerBounce()"
->
-  <div
-    class="text-center p-4 animate__animated animate__slideInDown"
-    #modalContent
-    (click)="$event.stopPropagation()"
-  >
+<!-- Modal de bienvenida: aparece cuando termina el loader, desaparece al aceptar -->
+<div *ngIf="!isLoading && !modalDismissed"
+  class="fixed inset-0 bg-navy-dark/70 backdrop-blur-sm flex items-center justify-center z-9999"
+  (click)="triggerBounce()">
+  <div class="text-center p-4 app-animated app-slide-in-down" #modalContent (click)="$event.stopPropagation()">
     <div class="flex flex-col mb-[25px]">
-      <h1
-        class="text-[38px] leading-10 md:text-[55px] md:leading-[50px] mb-4 text-white w-full"
-      >
-        Bienvenidos a la invitación de<br />Jorge y Yina
+      <h1 class="text-[38px] leading-10 md:text-[55px] md:leading-[50px] mb-4 text-white w-full">
+        Bienvenidos a la invitación de<br />{{ weddingInfo.couple.husbandName }} y {{ weddingInfo.couple.wifeName }}
       </h1>
-      <span class="text-[15px] md:text-[22px] text-gold font-light">
+      <span class="text-[15px] md:text-[22px] text-white font-light">
         La música de fondo es parte de la experiencia
       </span>
     </div>
 
-    <div
-      class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-1 w-full"
-    >
-      <button
-        (click)="onAccept(true)"
-        class="bg-gold hover:bg-sage font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto"
-      >
+    <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-1 w-full">
+      <button (click)="onAccept(true)"
+        class="bg-navy hover:bg-navy-dark font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto">
         INGRESAR CON MÚSICA
       </button>
-      <button
-        (click)="onAccept(false)"
-        class="bg-gold hover:bg-sage font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto"
-      >
+      <button (click)="onAccept(false)"
+        class="bg-navy hover:bg-navy-dark font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto">
         INGRESAR SIN MÚSICA
       </button>
     </div>
   </div>
+</div>
+
+<!-- Contenido principal: visible cuando termina el loader (el modal lo cubre hasta que aceptes) -->
+<div [class.invisible]="isLoading" [class.pointer-events-none]="isLoading" [class.opacity-0]="isLoading"
+  class="transition-opacity duration-300 ease-in-out">
+  <app-splash-music (iconClicked)="toggleMusic()" />
+  <router-outlet></router-outlet>
+  <app-footer />
 </div>

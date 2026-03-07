@@ -1,24 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { Component } from '@angular/core';
-import player, { AnimationItem } from 'lottie-web';
-
-export function playerFactory() {
-  return player;
-}
+import { AnimationItem } from 'lottie-web';
+import heart from 'assets/animations/heart.json';
 
 @Component({
   selector: 'app-loader-heart',
   standalone: true,
   imports: [CommonModule, LottieComponent],
   templateUrl: './loader-heart.component.html',
-  styleUrls: ['./loader-heart.component.css'], // opcional
+  styleUrls: ['./loader-heart.component.css'],
 })
 export class LoaderHeartComponent {
   private animationItem: AnimationItem | undefined;
 
   options: AnimationOptions = {
-    path: 'assets/animations/heart.json', // Ruta al archivo JSON
+    animationData: heart,
     loop: true,
     autoplay: true,
   };

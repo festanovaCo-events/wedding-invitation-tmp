@@ -6,34 +6,36 @@
       </div>
     </div>
 
-    <h3 class="text-white text-[40px] bg-sage text-center belt-img relative inline-block leading-[1.2] font-cookie">
+    <h3
+      class="text-white text-[35px] md:text-[40px] bg-navy text-center belt-img relative inline-block leading-[1.2] font-cookie">
       {{ titulo }}
     </h3>
   </div>
 
   <div class="flex flex-col justify-center items-center gap-2">
-    <h6 class="text-sage font-bold text-[25px]">Día</h6>
-    <p class="text-sage font-normal text-base md:text-xl">{{ date }}</p>
+    <h4 class="text-navy font-bold text-[22px] md:text-[25px]">Día</h4>
+    <p class="text-navy font-normal text-base md:text-base lg:text-xl px-4 text-center">{{ date }}</p>
 
     <a [href]="calendarRef" target="_blank" rel="noopener noreferrer"
-      class="mt-4 bg-white text-sage text-center font-bold rounded-[50px] text-[15px] py-[13px] px-[30px]
-      shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.40)] transition-all hover:bg-sage hover:text-white w-full leading-[15px] inline-block cursor-pointer">
+      class="mt-4 bg-white text-navy text-center font-bold rounded-[50px] text-[14px] md:text-[15px] py-[11px] md:py-[13px] px-[28px] md:px-[30px]
+      shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.40)] transition-all hover:bg-navy hover:text-white leading-[15px] inline-block cursor-pointer">
       Agendar
     </a>
   </div>
 
   <div class="flex flex-col justify-center items-center gap-2">
-    <h6 class="text-sage font-bold text-[25px]">Lugar</h6>
-    <p class="text-sage font-normal text-base md:text-xl">{{ place }}</p>
+    <h4 class="text-navy font-bold text-[22px] md:text-[25px]">Lugar</h4>
+    <p class="text-navy font-normal text-base md:text-base lg:text-xl px-4 text-center">{{ place }}</p>
   </div>
 
   <div class="flex flex-col justify-center items-center gap-2">
-    <h6 class="text-sage font-bold text-[25px]">Dirección</h6>
-    <p class="text-sage font-normal text-base md:text-xl">{{ address }}</p>
+    <h4 class="text-navy font-bold text-[22px] md:text-[25px]">Dirección</h4>
+    <p class="text-navy font-normal text-base md:text-base lg:text-xl px-4 text-center">{{ address }}</p>
 
-    <a href="https://www.google.com/maps/search/?api=1&query={{ location }}" target="_blank" rel="noopener noreferrer"
-      class="mt-4 bg-white text-sage text-center font-bold rounded-[50px] text-[15px] py-[13px] px-[30px]
-      shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.40)] transition-all hover:bg-sage hover:text-white w-full leading-[15px] inline-block cursor-pointer">
+    <a [href]="mapsUrl || 'https://www.google.com/maps/search/?api=1&query=' + location" target="_blank"
+      rel="noopener noreferrer"
+      class="mt-4 bg-white text-navy text-center font-bold rounded-[50px] text-[14px] md:text-[15px] py-[11px] md:py-[13px] px-[28px] md:px-[30px]
+      shadow-[0px_0px_5px_-1px_rgba(0,0,0,0.40)] transition-all hover:bg-navy hover:text-white leading-[15px] inline-block cursor-pointer">
       ¿Cómo llegar?
     </a>
   </div>

@@ -1,57 +1,118 @@
-<h5 class="text-sage font-bold text-[25px] text-center">¿Asistes a nuestra boda?</h5>
+<!-- Paso 1: Confirmar asistencia -->
+<div *ngIf="currentStep === 'confirmation'" class="step-content">
+    <h5 class="text-navy font-bold text-[25px] md:text-[28px] text-center mb-6 mt-2">¿Asistes a nuestra boda?</h5>
 
-<form class="mb-4 flex flex-col gap-4 mt-4 items-center justify-center" (ngSubmit)="confirmSend()">
-    <div class="">
-        <label class="inline-flex items-center space-x-2 mr-4">
-            <input type="radio" name="respuesta" [(ngModel)]="isConfirmed" [value]="true"
-                class="form-radio text-forest" />
-            <span class="text-sage text-lg">¡Sí! Confirmo</span>
-        </label>
+    <div class="mb-4 flex flex-col gap-5 mt-6 items-center justify-center">
+        <div class="">
+            <label class="inline-flex items-center space-x-2 mr-4 cursor-pointer">
+                <input type="radio" name="respuesta" [value]="true"
+                    (change)="isConfirmed = true; onConfirmChange()"
+                    [checked]="isConfirmed === true"
+                    class="form-radio text-navy-dark" />
+                <span class="text-navy text-lg">¡Sí! Confirmo</span>
+            </label>
 
-        <label class="inline-flex items-center space-x-2">
-            <input type="radio" name="respuesta" [(ngModel)]="isConfirmed" [value]="false"
-                class="form-radio text-forest" />
-            <span class="text-sage text-lg">No puedo :(</span>
-        </label>
+            <label class="inline-flex items-center space-x-2 cursor-pointer">
+                <input type="radio" name="respuesta" [value]="false"
+                    (change)="isConfirmed = false; onConfirmChange()"
+                    [checked]="isConfirmed === false"
+                    class="form-radio text-navy-dark" />
+                <span class="text-navy text-lg">No puedo :(</span>
+            </label>
+        </div>
+    </div>
+</div>
+
+<!-- Paso intermedio: Confirmar que no puede asistir -->
+<div *ngIf="currentStep === 'decline-confirmation'" class="step-content">
+    <h5 class="text-navy font-bold text-[25px] md:text-[28px] text-center mb-6 mt-2">¿Estás seguro de no asistir?</h5>
+    
+    <div class="mb-8 text-center">
+        <p class="text-navy text-base md:text-lg mb-2">
+            Al confirmar que no puedes asistir, ya no podrás modificar esta decisión después.
+        </p>
+        <p class="text-navy-dark text-sm md:text-base font-semibold">
+            ¿Deseas continuar?
+        </p>
     </div>
 
+    <div class="flex flex-col gap-4 items-center justify-center">
+        <button 
+            (click)="confirmDecline()"
+            class="bg-navy hover:bg-navy-dark text-white px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs shadow-md">
+            Sí, confirmo que no asistiré
+        </button>
+        
+        <button 
+            (click)="cancelDecline()"
+            class="bg-white hover:bg-navy hover:text-white text-navy px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs border border-navy">
+            Cancelar
+        </button>
+    </div>
+</div>
 
-    <div class="w-full" *ngIf="isConfirmed && !registrationSent">
-        <!-- Input solo si no se alcanzaron los cupos -->
-        <div class="flex flex-col gap-1" *ngIf="listName.length < maximumQuotas">
-            <input type="text" [(ngModel)]="nameCurrent" placeholder="Nombre del asistente"
-                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-sage" name="nombre" />
+<!-- Paso 2: Animación de carga -->
+<div *ngIf="currentStep === 'loading'" class="step-content flex flex-col items-center justify-center py-12">
+    <div class="loading-spinner mb-6"></div>
+    <p class="text-navy text-lg md:text-xl font-cookie">Cargando...</p>
+</div>
+
+<!-- Paso 3: Ingresar acompañantes -->
+<div *ngIf="currentStep === 'guests'" class="step-content">
+    <!-- Mensaje de bienvenida con el nombre del anfitrión -->
+    <div *ngIf="hostName" class="mb-4 text-center">
+        <p class="text-navy text-xl md:text-2xl lg:text-3xl font-cookie mb-2">
+            ¡Bienvenido {{ hostName }}!
+        </p>
+        <p class="text-navy text-sm md:text-base">
+            Ingresa tus acompañantes
+        </p>
+    </div>
+
+    <form class="mb-4 flex flex-col gap-4 items-center justify-center" (ngSubmit)="confirmSend()">
+        <!-- Input solo si no se alcanzaron los cupos (considerando que el anfitrión ocupa un cupo) -->
+        <div class="w-full flex flex-col gap-1" *ngIf="canAddMoreGuests">
+            <input type="text" [(ngModel)]="nameCurrent" placeholder="Nombre del acompañante"
+                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-navy" name="nombre" />
             <button type="button" (click)="saveName()"
-                class="bg-white text-sage px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-sage hover:text-white w-full font-bold cursor-pointer">
+                class="bg-white text-navy px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-navy hover:text-white w-full font-bold cursor-pointer">
                 Guardar
             </button>
         </div>
 
         <!-- Lista de nombres -->
-        <p class="text-sm text-gray-600 mt-4">Lista de asistentes ({{ listName.length }}/{{ maximumQuotas }}):</p>
-        <p class="text-sm text-gray-600">Máximo {{ maximumQuotas }} asistentes.</p>
-        <ul class="mt-4 space-y-2 text-gray-700">
-            <li *ngFor="let nombre of listName; let i = index" class="flex justify-between items-center">
-                <p class="text-[28px] font-cookie text-forest font-medium capitalize">{{ nombre }}</p>
-                <button type="button" (click)="deleteName(i)"
-                    class="text-forest text-sm hover:underline cursor-pointer">
-                    Eliminar
+        <div class="w-full">
+            <p class="text-sm text-gray-600 mt-4">Lista de acompañantes ({{ listName.length }}/{{ maximumQuotas }}):</p>
+            <p class="text-sm text-gray-600">Máximo {{ maximumQuotas }} acompañantes.</p>
+            <ul class="mt-4 space-y-2 text-gray-700">
+                <li *ngFor="let nombre of listName; let i = index" class="flex justify-between items-center">
+                    <div class="flex items-center gap-2">
+                        <p class="text-[28px] font-cookie text-navy-dark font-medium capitalize">{{ nombre }}</p>
+                        <!-- Mostrar badge "Asignado" si es el anfitrión -->
+                        <span *ngIf="nombre === hostName" class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                            Asignado
+                        </span>
+                    </div>
+                    <!-- Solo mostrar botón eliminar si NO es el anfitrión -->
+                    <button *ngIf="nombre !== hostName" type="button" (click)="deleteName(i)"
+                        class="text-navy-dark text-sm hover:underline cursor-pointer">
+                        Eliminar
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Botón enviar cuando hay al menos el anfitrión guardado -->
+            <div *ngIf="listName.length > 0" class="mt-4">
+                <button type="submit"
+                    class="bg-navy text-white px-4 py-2 hover:bg-navy-dark cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
+                    Enviar
                 </button>
-            </li>
-        </ul>
-
-        <!-- Botón enviar cuando hay al menos uno guardado -->
-        <div *ngIf="listName.length > 0" class="mt-4">
-            <button type="submit"
-                class="bg-gold text-white px-4 py-2 hover:bg-sage cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
-                Enviar
-            </button>
+            </div>
         </div>
+    </form>
+
+    <!-- Mensaje si ya se envió -->
+    <div *ngIf="registrationSent" class="text-green-700 text-sm mt-4 text-center">
+        Registro enviado correctamente.
     </div>
-</form>
-
-
-<!-- Mensaje si ya se envió -->
-<div *ngIf="registrationSent" class="text-green-700 text-sm mt-4">
-    Registro enviado correctamente.
 </div>
