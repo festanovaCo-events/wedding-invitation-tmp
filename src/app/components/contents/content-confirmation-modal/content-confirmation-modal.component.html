@@ -1,6 +1,6 @@
 <!-- Paso 1: Confirmar asistencia -->
 <div *ngIf="currentStep === 'confirmation'" class="step-content">
-    <h5 class="text-forest font-bold text-[25px] md:text-[28px] text-center mb-6 mt-2">¿Asistes a nuestra boda?</h5>
+    <h5 class="text-sage font-bold text-[25px] text-center">¿Asistes a nuestra boda?</h5>
 
     <div class="mb-4 flex flex-col gap-5 mt-6 items-center justify-center">
         <div class="">
@@ -8,16 +8,16 @@
                 <input type="radio" name="respuesta" [value]="true"
                     (change)="isConfirmed = true; onConfirmChange()"
                     [checked]="isConfirmed === true"
-                    class="form-radio text-sage" />
-                <span class="text-forest text-lg">¡Sí! Confirmo</span>
+                    class="form-radio text-forest" />
+                <span class="text-sage text-lg">¡Sí! Confirmo</span>
             </label>
 
             <label class="inline-flex items-center space-x-2 cursor-pointer">
                 <input type="radio" name="respuesta" [value]="false"
                     (change)="isConfirmed = false; onConfirmChange()"
                     [checked]="isConfirmed === false"
-                    class="form-radio text-sage" />
-                <span class="text-forest text-lg">No puedo :(</span>
+                    class="form-radio text-forest" />
+                <span class="text-sage text-lg">No puedo :(</span>
             </label>
         </div>
     </div>
@@ -73,9 +73,9 @@
         <!-- Input solo si no se alcanzaron los cupos (considerando que el anfitrión ocupa un cupo) -->
         <div class="w-full flex flex-col gap-1" *ngIf="canAddMoreGuests">
             <input type="text" [(ngModel)]="nameCurrent" placeholder="Nombre del acompañante"
-                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-forest" name="nombre" />
+                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-sage" name="nombre" />
             <button type="button" (click)="saveName()"
-                class="bg-white text-forest px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-forest hover:text-white w-full font-bold cursor-pointer">
+                class="bg-white text-sage px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-sage hover:text-white w-full font-bold cursor-pointer">
                 Guardar
             </button>
         </div>
