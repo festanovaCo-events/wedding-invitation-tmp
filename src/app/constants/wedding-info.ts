@@ -66,7 +66,7 @@ export const WEDDING_INFO = {
     bannerVideo: '',
     bannerImage: 'assets/images/banner-home/portada-boda.webp',
     backgroundImage: '/assets/images/event-scheduler/img_lineas01.svg',
-    instagramBackground: 'assets/images/banner-instagram/portada-3.webp',
+    instagramBackground: 'assets/images/banner-instagram/banner.jpeg',
     // publicId: para NgOptimizedImage (srcset automático, q_auto, f_auto) | full: lightbox Fancybox
     portraits: [
       { publicId: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', full: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80' },

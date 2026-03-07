@@ -29,12 +29,6 @@
   /* gold: #BFA880 */
   --color-gold: #BFA880;
 
-  /* navy-dark: #0e243c */
-  --color-navy-dark: #0e243c;
-
-  /* navy: #425e87 */
-  --color-navy: #425e87;
-
   --shadow-rounded: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
 
   /* half: 50% */
@@ -56,6 +50,7 @@
     transform: translate3d(0, -100%, 0);
     visibility: visible;
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
@@ -66,10 +61,12 @@
 }
 
 @keyframes app-pulse {
+
   0%,
   100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
@@ -87,7 +84,7 @@
   right: 20px !important;
 }
 
-#toast-container > div {
+#toast-container>div {
   border-radius: 12px !important;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
   padding: 16px 20px !important;
@@ -95,34 +92,34 @@
   max-width: 400px !important;
   font-family: 'Cookie', cursive !important;
   font-size: 20px !important;
-  color: #425e87 !important;
+  color: #4A6360 !important;
   background-color: #ffffff !important;
-  border-left: 4px solid #10b981 !important;
+  border-left: 4px solid #4A6360 !important;
   opacity: 1 !important;
 }
 
-#toast-container > .toast-success {
+#toast-container>.toast-success {
   background-color: #ffffff !important;
-  border-left: 4px solid #10b981 !important;
-  color: #425e87 !important;
+  border-left: 4px solid #4A6360 !important;
+  color: #4A6360 !important;
 }
 
-#toast-container > .toast-success .toast-title {
+#toast-container>.toast-success .toast-title {
   font-family: 'Cookie', cursive !important;
   font-size: 24px !important;
   font-weight: 600 !important;
-  color: #425e87 !important;
+  color: #4A6360 !important;
   margin-bottom: 8px !important;
 }
 
-#toast-container > .toast-success .toast-message {
+#toast-container>.toast-success .toast-message {
   font-family: 'Cookie', cursive !important;
   font-size: 20px !important;
-  color: #425e87 !important;
+  color: #4A6360 !important;
   line-height: 1.5 !important;
 }
 
-#toast-container > div .toast-close-button {
+#toast-container>div .toast-close-button {
   color: #6b7280 !important;
   font-size: 20px !important;
   font-weight: bold !important;
@@ -130,13 +127,13 @@
   text-shadow: none !important;
 }
 
-#toast-container > div .toast-close-button:hover {
-  color: #425e87 !important;
+#toast-container>div .toast-close-button:hover {
+  color: #4A6360 !important;
   opacity: 1 !important;
 }
 
-#toast-container > div .toast-progress {
-  background-color: #10b981 !important;
+#toast-container>div .toast-progress {
+  background-color: #4A6360 !important;
   opacity: 0.3 !important;
 }
 
@@ -146,18 +143,19 @@
     transform: translateX(100%);
     opacity: 0;
   }
+
   to {
     transform: translateX(0);
     opacity: 1;
   }
 }
 
-#toast-container > div {
+#toast-container>div {
   animation: toastSlideIn 0.4s ease-out !important;
 }
 
 /* Icono de éxito personalizado */
-#toast-container > .toast-success::before {
+#toast-container>.toast-success::before {
   content: '✓';
   position: absolute;
   left: 16px;
@@ -165,7 +163,7 @@
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
-  background-color: #10b981;
+  background-color: #4A6360;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -176,34 +174,34 @@
   font-family: sans-serif;
 }
 
-#toast-container > .toast-success {
+#toast-container>.toast-success {
   padding-left: 50px !important;
 }
 
 /* Estilos para toast de información (cuando no puede asistir) */
-#toast-container > .toast-info {
+#toast-container>.toast-info {
   background-color: #ffffff !important;
-  border-left: 4px solid #3b82f6 !important;
-  color: #425e87 !important;
+  border-left: 4px solid #81948B !important;
+  color: #4A6360 !important;
   padding-left: 50px !important;
 }
 
-#toast-container > .toast-info .toast-title {
+#toast-container>.toast-info .toast-title {
   font-family: 'Cookie', cursive !important;
   font-size: 24px !important;
   font-weight: 600 !important;
-  color: #425e87 !important;
+  color: #4A6360 !important;
   margin-bottom: 8px !important;
 }
 
-#toast-container > .toast-info .toast-message {
+#toast-container>.toast-info .toast-message {
   font-family: 'Cookie', cursive !important;
   font-size: 20px !important;
-  color: #425e87 !important;
+  color: #4A6360 !important;
   line-height: 1.5 !important;
 }
 
-#toast-container > .toast-info::before {
+#toast-container>.toast-info::before {
   content: 'ℹ';
   position: absolute;
   left: 16px;
@@ -211,7 +209,7 @@
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
-  background-color: #3b82f6;
+  background-color: #81948B;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -222,8 +220,8 @@
   font-family: sans-serif;
 }
 
-#toast-container > .toast-info .toast-progress {
-  background-color: #3b82f6 !important;
+#toast-container>.toast-info .toast-progress {
+  background-color: #81948B !important;
   opacity: 0.3 !important;
 }
 
@@ -234,7 +232,7 @@
     left: 10px !important;
   }
 
-  #toast-container > div {
+  #toast-container>div {
     min-width: auto !important;
     max-width: none !important;
     width: calc(100% - 20px) !important;
