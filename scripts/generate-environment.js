@@ -19,6 +19,7 @@ const path = require('path');
 
 const ENV_BASE_FILE = path.join(__dirname, '../src/environments/environment.ts');
 const ENV_PROD_FILE = path.join(__dirname, '../src/environments/environment.prod.ts');
+const ENV_DEV_FILE = path.join(__dirname, '../src/environments/environment.development.ts');
 
 /**
  * CONFIGURACIÓN DE VARIABLES DE ENTORNO
@@ -101,19 +102,37 @@ ${properties}
 };
 `;
 
+// Contenido para environment.development.ts (desarrollo específico)
+const environmentDevContent = `/**
+ * Variables de entorno para desarrollo
+ * 
+ * Este archivo es generado automáticamente por scripts/generate-environment.js
+ * durante el proceso de build usando variables de entorno de Vercel.
+ * 
+ * NO edites este archivo manualmente - será sobrescrito en cada build.
+ * Para cambiar los valores, configura las variables de entorno en Vercel.
+ */
+export const environment = {
+  production: false,
+${properties}
+};
+`;
+
 // Crear el directorio si no existe
 const outputDir = path.dirname(ENV_BASE_FILE);
 if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
 }
 
-// Escribir ambos archivos
+// Escribir todos los archivos
 fs.writeFileSync(ENV_BASE_FILE, environmentBaseContent, 'utf8');
 fs.writeFileSync(ENV_PROD_FILE, environmentProdContent, 'utf8');
+fs.writeFileSync(ENV_DEV_FILE, environmentDevContent, 'utf8');
 
 console.log('✓ Archivos de entorno generados desde variables de entorno:');
 console.log('  - environment.ts (archivo base)');
 console.log('  - environment.prod.ts (producción)');
+console.log('  - environment.development.ts (desarrollo)');
 Object.entries(envValues).forEach(([key, value]) => {
     console.log(`  - ${key}: ${value}`);
 });
