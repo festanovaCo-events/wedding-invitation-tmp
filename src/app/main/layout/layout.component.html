@@ -10,18 +10,18 @@
       <h1 class="text-[38px] leading-10 md:text-[55px] md:leading-[50px] mb-4 text-white w-full">
         Bienvenidos a la invitación de<br />{{ weddingInfo.couple.husbandName }} y {{ weddingInfo.couple.wifeName }}
       </h1>
-      <span class="text-[15px] md:text-[22px] text-white font-light">
+      <span class="text-[15px] md:text-[22px] text-gold font-light">
         La música de fondo es parte de la experiencia
       </span>
     </div>
 
     <div class="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-1 w-full">
       <button (click)="onAccept(true)"
-        class="bg-forest hover:bg-sage font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto">
+        class="bg-gold hover:bg-sage font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto">
         INGRESAR CON MÚSICA
       </button>
       <button (click)="onAccept(false)"
-        class="bg-forest hover:bg-sage font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto">
+        class="bg-gold hover:bg-sage font-bold rounded-[50px] text-white px-[33px] outline-none py-[8px] text-base transition-all cursor-pointer w-auto">
         INGRESAR SIN MÚSICA
       </button>
     </div>
