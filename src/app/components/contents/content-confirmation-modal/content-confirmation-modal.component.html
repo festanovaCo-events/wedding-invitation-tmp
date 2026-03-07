@@ -87,7 +87,7 @@
             <ul class="mt-4 space-y-2 text-gray-700">
                 <li *ngFor="let nombre of listName; let i = index" class="flex justify-between items-center">
                     <div class="flex items-center gap-2">
-                        <p class="text-[28px] font-cookie text-sage font-medium capitalize">{{ nombre }}</p>
+                        <p class="text-[28px] font-cookie text-forest font-medium capitalize">{{ nombre }}</p>
                         <!-- Mostrar badge "Asignado" si es el anfitrión -->
                         <span *ngIf="nombre === hostName" class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">
                             Asignado
@@ -95,7 +95,7 @@
                     </div>
                     <!-- Solo mostrar botón eliminar si NO es el anfitrión -->
                     <button *ngIf="nombre !== hostName" type="button" (click)="deleteName(i)"
-                        class="text-sage text-sm hover:underline cursor-pointer">
+                        class="text-forest text-sm hover:underline cursor-pointer">
                         Eliminar
                     </button>
                 </li>
@@ -104,7 +104,7 @@
             <!-- Botón enviar cuando hay al menos el anfitrión guardado -->
             <div *ngIf="listName.length > 0" class="mt-4">
                 <button type="submit"
-                    class="bg-forest text-white px-4 py-2 hover:bg-sage cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
+                    class="bg-gold text-white px-4 py-2 hover:bg-sage cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
                     Enviar
                 </button>
             </div>

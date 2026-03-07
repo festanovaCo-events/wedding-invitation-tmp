@@ -19,13 +19,11 @@
                             (animationCreated)="animationCreated($event)"></ng-lottie>
                     </div>
 
-                    <p class="text-forest mb-0 font-normal text-center" [innerHTML]="card.description"></p>
+                    <p class="text-sage mb-0 font-normal text-center" [innerHTML]="card.description"></p>
 
-                    <button (click)="onCardClick(card)" class="w-[85%] bg-white text-center hover:text-white hover:bg-forest
-                         text-forest uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
-                         transition-all shadow-md font-bold cursor-pointer outline-none">
-                        {{ card.label }}
-                    </button>
+                    <a class="w-[85%] bg-white text-center hover:text-white hover:bg-sage
+                         text-sage uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+                         transition-all shadow-md font-bold cursor-pointer">{{ card.label }}</a>
                 </div>
             </div>
         </div>
