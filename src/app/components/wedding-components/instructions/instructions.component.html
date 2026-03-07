@@ -1,5 +1,5 @@
 <section class="instructions">
-    <div class="flex flex-col items-center justify-center relative z-[999]">
+    <div class="flex flex-col items-center justify-center relative z-999">
         <div class="flex flex-col justify-center items-center text-center">
             <h2 class="text-forest text-[40px] md:text-6xl leading-[60px] mb-0 font-cookie">Fiesta</h2>
             <p class="text-sage text-base md:text-xl font-normal px-[15px]">Hagamos juntos una fiesta épica. Aquí algunos detalles a tener
@@ -7,22 +7,24 @@
         </div>
 
         <div class="w-full flex flex-wrap justify-center gap-6 mt-20">
-            <div class="flex-grow basis-[280px] max-w-[340px] px-4" *ngFor="let card of cards">
+            <div class="grow basis-[280px] max-w-[340px] px-4" *ngFor="let card of cards">
                 <div
                     class="w-full py-10 px-[25px] bg-linen rounded-[20px] min-h-[400px] flex flex-col justify-between items-center">
                     <h3 class="text-gold font-bold text-[1.75rem]">{{ card.title }}</h3>
 
                     <div class="flex justify-center items-center h-20 w-[95px]">
                         <ng-lottie class="w-[90px] h-[80px] max-w-full max-h-full"
-                            [options]="{ path: card.path, loop: true, autoplay: true }"
+                            [options]="{ animationData: getAnimationData(card.animationKey), loop: true, autoplay: true }"
                             (animationCreated)="animationCreated($event)"></ng-lottie>
                     </div>
 
                     <p class="text-sage mb-0 font-normal text-center" [innerHTML]="card.description"></p>
 
-                    <a class="w-[85%] bg-white text-center hover:text-white hover:bg-sage
-                     text-sage uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
-                     transition-all shadow-md font-bold cursor-pointer">{{ card.label }}</a>
+                    <button (click)="onCardClick(card)" class="w-[85%] bg-white text-center hover:text-white hover:bg-sage
+                         text-sage uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+                         transition-all shadow-md font-bold cursor-pointer outline-none">
+                        {{ card.label }}
+                    </button>
                 </div>
             </div>
         </div>
