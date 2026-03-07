@@ -1,7 +1,8 @@
 <section
-  class="parallax-container relative h-[960px] md:h-[1296px] 2xl:h-[1900px] flex items-center justify-center text-center text-white pb-[40%] md:pb-[20%]">
-  <video #bgVideo muted [muted]="true" playsinline autoplay loop preload="metadata"
-    class="absolute inset-0 w-full h-full object-cover z-0" aria-hidden="true" role="presentation"
+  class="parallax-container relative h-[960px] md:h-[1296px] 2xl:h-[1900px] flex items-center justify-center text-center text-white pb-[40%] md:pb-[20%]"
+  [ngStyle]="{'background-image': weddingInfo.assets.bannerImage ? 'url(' + weddingInfo.assets.bannerImage + ')' : 'none'}">
+  <video #bgVideo *ngIf="weddingInfo.assets.bannerVideo" muted [muted]="true" playsinline autoplay loop
+    preload="metadata" class="absolute inset-0 w-full h-full object-cover z-0" aria-hidden="true" role="presentation"
     aria-label="Video decorativo de fondo sin audio. Este video es puramente visual y no contiene información esencial.">
     <source [src]="weddingInfo.assets.bannerVideo" type="video/mp4" />
     <p class="sr-only">
