@@ -1,25 +1,8 @@
 @import "tailwindcss";
+@import "ngx-toastr/toastr";
 
-@font-face {
-  font-family: 'Open Sans';
-  src: url('./assets/fonts/OpenSans-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Open Sans Light';
-  src: url('./assets/fonts/OpenSans-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Cookie';
-  src: url('./assets/fonts/Cookie-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+/* Fuentes inline: se cargan desde fonts-inline.generated.css (prebuild) */
+@import "./fonts-inline.generated.css";
 
 @theme {
   --font-light: 'Open Sans Light', sans-serif;
@@ -72,4 +55,200 @@
 
 :root {
   font-family: "Open Sans", "sans-serif";
+}
+
+/* Animaciones propias (reemplazo de animate.css) */
+.app-animated {
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+@keyframes app-slide-in-down {
+  from {
+    transform: translate3d(0, -100%, 0);
+    visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.app-slide-in-down {
+  animation-name: app-slide-in-down;
+}
+
+@keyframes app-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.app-pulse {
+  animation-name: app-pulse;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+/* Personalización de Toastr para el proyecto */
+#toast-container {
+  top: 20px !important;
+  right: 20px !important;
+}
+
+#toast-container > div {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+  padding: 16px 20px !important;
+  min-width: 300px !important;
+  max-width: 400px !important;
+  font-family: 'Cookie', cursive !important;
+  font-size: 20px !important;
+  color: #425e87 !important;
+  background-color: #ffffff !important;
+  border-left: 4px solid #10b981 !important;
+  opacity: 1 !important;
+}
+
+#toast-container > .toast-success {
+  background-color: #ffffff !important;
+  border-left: 4px solid #10b981 !important;
+  color: #425e87 !important;
+}
+
+#toast-container > .toast-success .toast-title {
+  font-family: 'Cookie', cursive !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: #425e87 !important;
+  margin-bottom: 8px !important;
+}
+
+#toast-container > .toast-success .toast-message {
+  font-family: 'Cookie', cursive !important;
+  font-size: 20px !important;
+  color: #425e87 !important;
+  line-height: 1.5 !important;
+}
+
+#toast-container > div .toast-close-button {
+  color: #6b7280 !important;
+  font-size: 20px !important;
+  font-weight: bold !important;
+  opacity: 0.7 !important;
+  text-shadow: none !important;
+}
+
+#toast-container > div .toast-close-button:hover {
+  color: #425e87 !important;
+  opacity: 1 !important;
+}
+
+#toast-container > div .toast-progress {
+  background-color: #10b981 !important;
+  opacity: 0.3 !important;
+}
+
+/* Animación personalizada para el toast */
+@keyframes toastSlideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+#toast-container > div {
+  animation: toastSlideIn 0.4s ease-out !important;
+}
+
+/* Icono de éxito personalizado */
+#toast-container > .toast-success::before {
+  content: '✓';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: #10b981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+#toast-container > .toast-success {
+  padding-left: 50px !important;
+}
+
+/* Estilos para toast de información (cuando no puede asistir) */
+#toast-container > .toast-info {
+  background-color: #ffffff !important;
+  border-left: 4px solid #3b82f6 !important;
+  color: #425e87 !important;
+  padding-left: 50px !important;
+}
+
+#toast-container > .toast-info .toast-title {
+  font-family: 'Cookie', cursive !important;
+  font-size: 24px !important;
+  font-weight: 600 !important;
+  color: #425e87 !important;
+  margin-bottom: 8px !important;
+}
+
+#toast-container > .toast-info .toast-message {
+  font-family: 'Cookie', cursive !important;
+  font-size: 20px !important;
+  color: #425e87 !important;
+  line-height: 1.5 !important;
+}
+
+#toast-container > .toast-info::before {
+  content: 'ℹ';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+#toast-container > .toast-info .toast-progress {
+  background-color: #3b82f6 !important;
+  opacity: 0.3 !important;
+}
+
+@media (max-width: 640px) {
+  #toast-container {
+    top: 10px !important;
+    right: 10px !important;
+    left: 10px !important;
+  }
+
+  #toast-container > div {
+    min-width: auto !important;
+    max-width: none !important;
+    width: calc(100% - 20px) !important;
+  }
 }

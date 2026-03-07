@@ -2,7 +2,7 @@
     .instagram {
         padding-top: 16%;
         padding-bottom: 16%;
-        background: url(../../../../assets/images/banner-instagram/portada-3.webp) center center fixed;
+        background: url(../../../../assets/images/banner-instagram/banner.jpeg) center center fixed;
         position: relative;
         background-size: cover;
     }
@@ -11,16 +11,17 @@
         background-image: url(../../../../assets/images/banner-instagram/img_ondas05.svg);
         position: absolute;
         content: '';
-        background-color: rgba(74, 79, 96, 0.65);
+        background-color: rgba(74, 79, 96, 0.60);
         background-size: contain !important;
         background-repeat: no-repeat;
         background-position: top center;
         height: 100%;
         width: 100%;
         top: -1px;
+        z-index: 1;
     }
 
-    section.instagram:after {
+    .instagram::after {
         background-image: url(../../../../assets/images/banner-instagram/img_ondas06.svg);
         position: absolute;
         content: '';

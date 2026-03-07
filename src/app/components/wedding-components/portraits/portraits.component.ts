@@ -1,45 +1,32 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
-// Importar ngx-slick-carousel
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Fancybox } from '@fancyapps/ui';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
+import camera from 'assets/animations/camera.json';
+import { ScriptLoaderService } from '../../../services/script-loader.service';
 
 @Component({
   selector: 'app-portraits',
   standalone: true,
-  imports: [LottieComponent, CommonModule, SlickCarouselModule],
+  imports: [LottieComponent, CommonModule, SlickCarouselModule, NgOptimizedImage],
   templateUrl: './portraits.component.html',
   styleUrl: './portraits.component.css',
 })
-export class PortraitsComponent implements OnDestroy {
-  images = [
-    {
-      thumb: 'https://lipsum.app/id/60/200x150',
-      full: 'https://lipsum.app/id/60/1600x1200',
-    },
-    {
-      thumb: 'https://lipsum.app/id/61/200x150',
-      full: 'https://lipsum.app/id/61/1600x1200',
-    },
-    {
-      thumb: 'https://lipsum.app/id/62/200x150',
-      full: 'https://lipsum.app/id/62/1600x1200',
-    },
-    {
-      thumb: 'https://lipsum.app/id/63/200x150',
-      full: 'https://lipsum.app/id/63/1600x1200',
-    },
-    {
-      thumb: 'https://lipsum.app/id/64/200x150',
-      full: 'https://lipsum.app/id/64/1600x1200',
-    },
-  ];
+export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('lottieContainer', { static: false }) lottieContainer!: ElementRef;
+
+  weddingInfo = WEDDING_INFO;
+  images = WEDDING_INFO.assets.portraits;
+  private observer: IntersectionObserver | null = null;
+  shouldLoadAnimation = false;
+  carouselReady = false;
 
   options: AnimationOptions = {
-    path: 'assets/animations/camera.json',
+    animationData: camera,
     loop: true,
     autoplay: true,
   };
@@ -58,7 +45,7 @@ export class PortraitsComponent implements OnDestroy {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
         },
       },
       {
@@ -76,12 +63,58 @@ export class PortraitsComponent implements OnDestroy {
     ],
   };
 
-  ngAfterViewInit() {
-    // Inicializar Fancybox para las imágenes con data-fancybox="gallery"
-    Fancybox.bind('[data-fancybox="gallery"]', {
-      Thumbs: {},
-      // Puedes agregar más opciones aquí
+  constructor(private scriptLoader: ScriptLoaderService) {}
+
+  ngOnInit(): void {
+    this.scriptLoader.loadSlickCarouselDeps().then(() => {
+      this.carouselReady = true;
+      setTimeout(() => this.bindFancybox(), 0);
     });
+    setTimeout(() => {
+      this.setupIntersectionObserver();
+    }, 0);
+  }
+
+  private bindFancybox(): void {
+    Fancybox.bind('.slick-slide:not(.slick-cloned) [data-fancybox="gallery"]', {
+      Thumbs: {},
+      Hash: false,
+      on: {
+        close: () => {
+          if (window.location.hash) {
+            window.history.replaceState(null, '', window.location.pathname + window.location.search);
+          }
+        },
+      },
+    });
+  }
+
+  private setupIntersectionObserver(): void {
+    if (!this.lottieContainer?.nativeElement || !('IntersectionObserver' in window)) {
+      this.shouldLoadAnimation = true;
+      return;
+    }
+
+    this.observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.shouldLoadAnimation = true;
+            this.observer?.disconnect();
+          }
+        });
+      },
+      {
+        rootMargin: '50px',
+        threshold: 0.1
+      }
+    );
+
+    this.observer.observe(this.lottieContainer.nativeElement);
+  }
+
+  ngAfterViewInit() {
+    // Fancybox se enlaza en bindFancybox() tras cargar scripts
   }
 
   animationCreated(animationItem: AnimationItem): void {
@@ -89,6 +122,8 @@ export class PortraitsComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    // aquí limpia si fuera necesario
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 }
