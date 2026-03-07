@@ -46,10 +46,7 @@
   /* gold: #BFA880 */
   --color-gold: #BFA880;
 
-  /* forest-dark: versión más oscura de forest para hover y modales */
-  --color-forest-dark: #3a4f4c;
-
-  --shadow-rounded: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
+  --shadow-rounded: 0px 0px 15px -1px rgba(0,0,0,0.4);
 
   /* half: 50% */
   --radius-half: 50%
