@@ -1,0 +1,22 @@
+<div class="flex flex-col items-center justify-center gap-4 px-4 w-full">
+    <div
+        class="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-green-100 mb-2 animate-pulse">
+        <svg class="w-10 h-10 md:w-12 md:h-12 text-green-600" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+    </div>
+    <h2 class="text-forest font-bold text-xl md:text-2xl lg:text-3xl text-center font-cookie">
+        ¡Ya confirmaste tu asistencia!
+    </h2>
+    <p class="text-forest text-sm md:text-base lg:text-lg text-center max-w-md">
+        Estamos emocionados de celebrar contigo este día especial.
+    </p>
+    <div *ngIf="invitationData" class="mt-2 text-center">
+        <p class="text-forest text-sm md:text-base lg:text-lg">
+            <span class="font-semibold">{{ invitationData.data.invitation.seats_reserved }}</span>
+            {{ invitationData.data.invitation.seats_reserved === 1 ? 'acompañante confirmado' : 'acompañantes
+            confirmados' }}
+        </p>
+    </div>
+</div>

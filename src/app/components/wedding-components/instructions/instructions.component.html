@@ -1,28 +1,27 @@
 <section class="instructions">
-    <div class="flex flex-col items-center justify-center relative z-[999]">
+    <div class="flex flex-col items-center justify-center relative z-999">
         <div class="flex flex-col justify-center items-center text-center">
-            <h2 class="text-navy-dark text-[40px] md:text-6xl leading-[60px] mb-0 font-cookie">Fiesta</h2>
-            <p class="text-navy text-base md:text-xl font-normal px-[15px]">Hagamos juntos una fiesta épica. Aquí
-                algunos detalles a tener
+            <h2 class="text-forest text-[40px] md:text-6xl leading-[60px] mb-0 font-cookie">Fiesta</h2>
+            <p class="text-sage text-base md:text-xl font-normal px-[15px]">Hagamos juntos una fiesta épica. Aquí algunos detalles a tener
                 en cuenta.</p>
         </div>
 
         <div class="w-full flex flex-wrap justify-center gap-6 mt-20">
-            <div class="flex-grow basis-[280px] max-w-[340px] px-4" *ngFor="let card of cards">
+            <div class="grow basis-[280px] max-w-[340px] px-4" *ngFor="let card of cards">
                 <div
                     class="w-full py-10 px-[25px] bg-linen rounded-[20px] min-h-[400px] flex flex-col justify-between items-center">
-                    <h3 class="text-sky-blue font-bold text-[1.75rem]">{{ card.title }}</h3>
+                    <h3 class="text-gold font-bold text-[1.75rem]">{{ card.title }}</h3>
 
                     <div class="flex justify-center items-center h-20 w-[95px]">
                         <ng-lottie class="w-[90px] h-[80px] max-w-full max-h-full"
-                            [options]="{ path: card.path, loop: true, autoplay: true }"
+                            [options]="{ animationData: getAnimationData(card.animationKey), loop: true, autoplay: true }"
                             (animationCreated)="animationCreated($event)"></ng-lottie>
                     </div>
 
-                    <p class="text-navy mb-0 font-normal text-center" [innerHTML]="card.description"></p>
+                    <p class="text-sage mb-0 font-normal text-center" [innerHTML]="card.description"></p>
 
-                    <button (click)="onCardClick(card)" class="w-[85%] bg-white text-center hover:text-white hover:bg-navy
-                         text-navy uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+                    <button (click)="onCardClick(card)" class="w-[85%] bg-white text-center hover:text-white hover:bg-sage
+                         text-sage uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
                          transition-all shadow-md font-bold cursor-pointer outline-none">
                         {{ card.label }}
                     </button>
@@ -32,7 +31,8 @@
     </div>
 
     <!-- Modal de Vestuario -->
-    <app-circular-modal [show]="showDressCodeModal" title="Dress Code" (close)="closeDressCodeModal()">
+    <app-circular-modal [show]="showDressCodeModal" [title]="weddingInfo.sections.modals.dressCode.title"
+        (close)="closeDressCodeModal()">
         <div icon class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
             <img src="assets/images/instructions/vestuario.svg" alt="Vestuario" class="w-full h-full object-contain" />
         </div>
@@ -40,7 +40,8 @@
     </app-circular-modal>
 
     <!-- Modal de Tips y Notas -->
-    <app-circular-modal [show]="showTipsModal" title="Tips y Notas" (close)="closeTipsModal()">
+    <app-circular-modal [show]="showTipsModal" [title]="weddingInfo.sections.modals.tipsAndNotes.title"
+        (close)="closeTipsModal()">
         <div icon class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
             <img src="assets/images/instructions/tips.svg" alt="Tips y Notas" class="w-full h-full object-contain" />
         </div>

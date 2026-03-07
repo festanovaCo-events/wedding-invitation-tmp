@@ -1,24 +1,25 @@
-<section class="instagram">
-    <div class="flex flex-col text-center justify-center items-center z-[999] relative">
-        <h2 class="font-cookie text-white text-[40px] md:text-6xl leading-10 md:leading-[60px] mb-0 px-10">
+<section class="instagram" [ngStyle]="{'background-image': 'url(' + weddingInfo.assets.instagramBackground + ')'}">
+    <div class="flex flex-col text-center justify-center items-center z-999 relative">
+        <h2
+            class="font-cookie text-white text-[40px] md:text-6xl leading-10 md:leading-[60px] mb-0 px-10 drop-shadow-lg">
             {{ weddingInfo.sections.instagram.title }}
         </h2>
-        <p class="text-white text-base md:text-xl font-normal px-[15px] mt-5 md:mt-0">
+        <p class="text-white text-base md:text-xl font-normal px-[15px] mt-5 md:mt-0 drop-shadow-lg">
             {{ weddingInfo.sections.instagram.description }}
         </p>
 
-        <div class="flex justify-center items-center h-28 w-[105px] my-3">
-            <ng-lottie class="w-[100px] h-[100px] max-w-full max-h-full" [options]="options"
+        <div #lottieContainer class="flex justify-center items-center h-28 w-[105px] my-3">
+            <ng-lottie *ngIf="shouldLoadAnimation" class="w-[100px] h-[100px] max-w-full max-h-full" [options]="options"
                 (animationCreated)="animationCreated($event)"></ng-lottie>
         </div>
 
         <a [href]="'https://www.instagram.com/explore/tags/' + weddingInfo.sections.instagram.hashtag.replace('#', '')"
             target="_blank" rel="noopener noreferrer"
-            class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10">{{
+            class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10 drop-shadow-lg">{{
             weddingInfo.sections.instagram.hashtag }}</a>
 
-        <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-navy
-                     text-navy uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+        <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-sage
+                     text-sage uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
                      transition-all shadow-md font-bold cursor-pointer">{{ weddingInfo.sections.instagram.buttonText
             }}</a>
     </div>

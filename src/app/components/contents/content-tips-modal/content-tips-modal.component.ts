@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 @Component({
   selector: 'app-content-tips-modal',
@@ -9,6 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './content-tips-modal.component.css',
 })
 export class ContentTipsModalComponent {
-  // Aquí puedes agregar el contenido de tips y notas
-  tipsContent = 'Contenido Tips y Notas';
+  tipsContent = WEDDING_INFO.sections.modals.tipsAndNotes.description;
 }

@@ -18,6 +18,7 @@ import { LoaderHeartComponent } from '../../components/common/loader-heart/loade
 import { SplashMusicComponent } from '../../components/ui/lottie/splash-music/splash-music.component';
 import { FooterComponent } from "../../components/common/footer/footer.component";
 import { WEDDING_INFO } from '../../constants/wedding-info';
+import { ModalFlowService } from '../../services/modal-flow.service';
 
 @Component({
   standalone: true,
@@ -36,29 +37,40 @@ export class LayoutComponent implements OnInit {
   @ViewChild(SplashMusicComponent) splashComp!: SplashMusicComponent;
 
   isLoading = true;
-  showWelcomeModal = false;
+  modalDismissed = false;
   showContent = false;
   bounce = false;
   weddingInfo = WEDDING_INFO;
 
-  private audio: HTMLAudioElement | null = null; // Agregado
+  private audio: HTMLAudioElement | null = null;
   private isMusicPlaying = false;
-  private minTime = 2000; // 2 segundos
+  private minTime = 2000;
   private startTime = 0;
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    private modalFlowService: ModalFlowService
+  ) {}
 
   ngOnInit(): void {
-    // Primera carga: mostrar loader al entrar
     this.startTime = Date.now();
+    
+    const maxLoadTime = 5000;
+    setTimeout(() => {
+      if (this.isLoading) {
+        this.isLoading = false;
+        this.showContent = true;
+        this.enableScroll();
+      }
+    }, maxLoadTime);
+
     setTimeout(() => {
       this.isLoading = false;
       this.showContent = true;
-      this.showWelcomeModal = true;
-      this.disableScroll(); // Bloquea scroll cuando se abre el modal
+      this.disableScroll();
     }, this.minTime);
 
-    // Luego escucha navegación
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.startTime = Date.now();
@@ -85,15 +97,18 @@ export class LayoutComponent implements OnInit {
   }
 
   onAccept(withMusic: boolean) {
-    this.showWelcomeModal = false;
-    this.enableScroll(); // Restaura scroll
+    this.modalDismissed = true;
+    this.enableScroll();
+    this.modalFlowService.emitWelcomeModalAccepted();
 
     if (withMusic) {
       this.playBackgroundMusic();
     } else {
       setTimeout(() => {
-        this.splashComp.pauseAnimation();
-      }, 300); // Pausa Lottie inmediatamente
+        if (this.splashComp) {
+          this.splashComp.pauseAnimation();
+        }
+      }, 300);
     }
   }
 
@@ -121,10 +136,14 @@ export class LayoutComponent implements OnInit {
 
     if (this.isMusicPlaying) {
       this.audio.pause();
-      this.splashComp.pauseAnimation(); // pausa Lottie
+      if (this.splashComp) {
+        this.splashComp.pauseAnimation();
+      }
     } else {
       this.audio.play();
-      this.splashComp.playAnimation(); // reanuda Lottie
+      if (this.splashComp) {
+        this.splashComp.playAnimation();
+      }
     }
 
     this.isMusicPlaying = !this.isMusicPlaying;
@@ -134,10 +153,9 @@ export class LayoutComponent implements OnInit {
     const el = this.modalContent?.nativeElement;
     if (!el) return;
 
-    this.renderer.removeClass(el, 'animate__pulse');
-    this.renderer.removeClass(el, 'animate__slideInDown');
-    // forzar reflow para que la animación se reinicie
+    this.renderer.removeClass(el, 'app-pulse');
+    this.renderer.removeClass(el, 'app-slide-in-down');
     void el.offsetWidth;
-    this.renderer.addClass(el, 'animate__pulse');
+    this.renderer.addClass(el, 'app-pulse');
   }
 }

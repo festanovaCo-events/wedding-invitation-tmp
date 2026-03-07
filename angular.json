@@ -26,28 +26,35 @@
                 "glob": "robots.txt",
                 "input": "src",
                 "output": "/"
+              },
+              {
+                "glob": "jquery.min.js",
+                "input": "node_modules/jquery/dist",
+                "output": "/vendor"
+              },
+              {
+                "glob": "slick.min.js",
+                "input": "node_modules/slick-carousel/slick",
+                "output": "/vendor"
               }
-          ],
+            ],
             "styles": [
-              "node_modules/animate.css/animate.min.css",
               "src/styles.css",
+              
               "@fancyapps/ui/dist/fancybox/fancybox.css",
               "node_modules/slick-carousel/slick/slick.css",
-              "node_modules/slick-carousel/slick/slick-theme.css"
+              "node_modules/slick-carousel/slick/slick-theme.css",
+              "src/slick-font-inline.generated.css"
             ],
-            "scripts": [ 
-              "node_modules/@fancyapps/ui/dist/fancybox/fancybox.umd.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -55,12 +62,32 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": true
+              },
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -92,21 +119,19 @@
               "src/assets"
         ],
             "styles": [
-              "node_modules/animate.css/animate.min.css",
               "src/styles.css",
+              
               "@fancyapps/ui/dist/fancybox/fancybox.css",
               "node_modules/slick-carousel/slick/slick.css",
-              "node_modules/slick-carousel/slick/slick-theme.css"
+              "node_modules/slick-carousel/slick/slick-theme.css",
+              "src/slick-font-inline.generated.css"
             ],
-            "scripts": [ 
-              "node_modules/@fancyapps/ui/dist/fancybox/fancybox.umd.js",
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
-            ]
+            "scripts": []
           }
         }
       }
     }
+    
   },
   "cli": {
     "analytics": false

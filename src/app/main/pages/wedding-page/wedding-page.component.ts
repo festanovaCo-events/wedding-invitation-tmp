@@ -1,44 +1,76 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { BannerHomeComponent } from "../../../components/wedding-components/banner-home/banner-home.component";
 import { WeddingCountdownComponent } from "../../../components/wedding-components/wedding-countdown/wedding-countdown.component";
 import { EventScheduleComponent } from "../../../components/wedding-components/event-schedule/event-schedule.component";
-import { PortraitsComponent } from "../../../components/wedding-components/portraits/portraits.component";
+import { PortraitsWrapperComponent } from "../../../components/wedding-components/portraits/portraits-wrapper.component";
 import { InstructionsComponent } from "../../../components/wedding-components/instructions/instructions.component";
 import { GiftsComponent } from "../../../components/wedding-components/gifts/gifts.component";
 import { BannerInstagramComponent } from "../../../components/wedding-components/banner-instagram/banner-instagram.component";
 import { ConfirmationsComponent } from "../../../components/wedding-components/confirmations/confirmations.component";
 import { ModalComponent } from "../../../components/common/modal/modal.component";
+import { ModalFlowService } from "../../../services/modal-flow.service";
+import { InvitationService } from "../../../services/invitation.service";
+import { InvitationStateService } from "../../../services/invitation-state.service";
 
 @Component({
   selector: 'app-wedding-page',
   standalone: true,
-  imports: [CommonModule, BannerHomeComponent, WeddingCountdownComponent, EventScheduleComponent, PortraitsComponent, InstructionsComponent, GiftsComponent, BannerInstagramComponent, ConfirmationsComponent, ModalComponent],
+  imports: [CommonModule, BannerHomeComponent, WeddingCountdownComponent, EventScheduleComponent, PortraitsWrapperComponent, InstructionsComponent, GiftsComponent, BannerInstagramComponent, ConfirmationsComponent, ModalComponent],
   templateUrl: './wedding-page.component.html',
 })
-export class WeddingPageComponent implements OnInit, AfterViewInit {
+export class WeddingPageComponent implements OnInit, OnDestroy {
   showConfirmationGuide = false;
   private readonly STORAGE_KEY = 'confirmation_guide_shown';
+  private subscription?: Subscription;
+  private routeSubscription?: Subscription;
+
+  constructor(
+    private modalFlowService: ModalFlowService,
+    private invitationService: InvitationService,
+    private invitationStateService: InvitationStateService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    // Verificar si ya se mostró el modal anteriormente
-    const guideShown = localStorage.getItem(this.STORAGE_KEY);
-    
-    // Esperar un poco después de que se cierre el modal de bienvenida
-    // Usamos un timeout para que aparezca después del modal de bienvenida
-    setTimeout(() => {
+    this.loadInvitationData();
+
+    this.subscription = this.modalFlowService.welcomeModalAccepted$.subscribe(() => {
+      const guideShown = localStorage.getItem(this.STORAGE_KEY);
       if (!guideShown) {
         this.showConfirmationGuide = true;
       }
-    }, 1500); // Esperar 1.5 segundos después de que se cierre el modal de bienvenida
+    });
   }
 
-  ngAfterViewInit(): void {
-    // Si el modal ya se mostró antes, no hacer nada
-    const guideShown = localStorage.getItem(this.STORAGE_KEY);
-    if (guideShown) {
-      return;
-    }
+  private loadInvitationData(): void {
+    this.routeSubscription = this.route.queryParams.subscribe(params => {
+      const invitation_token = params['token'];
+
+      if (invitation_token) {
+        this.invitationStateService.setLoading(true);
+        this.invitationStateService.setError(null);
+
+        this.invitationService.getInvitationInfo(invitation_token).subscribe({
+          next: (response) => {
+            this.invitationStateService.setInvitationData(response);
+            this.invitationStateService.setLoading(false);
+          },
+          error: (error) => {
+            console.error('Error al cargar datos de invitación:', error);
+            this.invitationStateService.setError('Error al cargar los datos de la invitación');
+            this.invitationStateService.setLoading(false);
+          }
+        });
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
   }
 
   scrollToConfirmations(): void {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
 
 @Component({
   selector: 'app-content-dress-code-modal',
@@ -9,6 +10,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './content-dress-code-modal.component.css',
 })
 export class ContentDressCodeModalComponent {
-  // Aquí puedes agregar el contenido del dress code
-  dressCodeContent = 'Contenido Dress Code';
+  dressCodeContent = WEDDING_INFO.sections.modals.dressCode.description;
 }
