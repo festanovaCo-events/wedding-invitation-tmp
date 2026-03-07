@@ -17,13 +17,13 @@
 .loading-spinner {
   width: 60px;
   height: 60px;
-  border: 4px solid #a0c0e7;
-  /* sky-blue */
-  border-top: 4px solid #425e87;
-  /* navy */
+  border: 4px solid #C6D7CF;
+  /* mint */
+  border-top: 4px solid #4A6360;
+  /* forest */
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  box-shadow: 0 0 10px rgba(66, 94, 135, 0.2);
+  box-shadow: 0 0 10px rgba(74, 99, 96, 0.2);
 }
 
 @keyframes spin {

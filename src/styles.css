@@ -29,10 +29,10 @@
   --color-forest: #4A6360;
 
   /* sage: #81948B */
-  --color-sage:  #81948B;
+  --color-sage: #81948B;
 
   /* mint: #C6D7CF */
-  --color-mint:  #C6D7CF;
+  --color-mint: #C6D7CF;
 
   /* linen: #FAF7F3 */
   --color-linen: #FAF7F3;
@@ -46,7 +46,10 @@
   /* gold: #BFA880 */
   --color-gold: #BFA880;
 
-  --shadow-rounded: 0px 0px 15px -1px rgba(0,0,0,0.4); 
+  /* forest-dark: versión más oscura de forest para hover y modales */
+  --color-forest-dark: #3a4f4c;
+
+  --shadow-rounded: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
 
   /* half: 50% */
   --radius-half: 50%
