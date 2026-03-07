@@ -3,7 +3,7 @@
         ? 'flex flex-col mx-auto gap-12 justify-center items-center' 
         : 'flex flex-col md:flex-row mx-auto gap-12 md:gap-18 lg:gap-44 justify-center items-center md:items-start'">
         <app-title-couple [name_wife]="weddingInfo.couple.wifeName" [name_husband]="weddingInfo.couple.husbandName"
-            classHeading1="text-sage text-[65px] md:text-[85px] flex-row gap-3"
+            classHeading1="text-forest text-[65px] md:text-[85px] flex-row gap-3"
             classSpan="text-forest text-[28px] w-[30px] h-[30px] md:w-[40px] md:h-[40px] leading-[30px] md:leading-[45px]" />
 
         <!-- Mensaje cuando ya está confirmado -->
@@ -26,12 +26,12 @@
 
         <!-- Cuando hay múltiples opciones, mostrar como lista -->
         <ul *ngIf="!isSingleOption && !isConfirmed && !isDeclined && !error"
-            class="text-sage uppercase font-normal flex flex-col gap-5 text-center md:text-right">
-            <li (click)="openModal()" class="hover:text-forest cursor-pointer">
+            class="text-forest uppercase font-normal flex flex-col gap-5 text-center md:text-right">
+            <li (click)="openModal()" class="hover:text-sage cursor-pointer">
                 Confirmar asistencia a ceremonia</li>
-            <li *ngIf="FEATURE_FLAGS.SUGGEST_SONG" class="hover:text-forest cursor-pointer">Sugerir canción</li>
-            <li *ngIf="FEATURE_FLAGS.SCHEDULE_PARTY" class="hover:text-forest cursor-pointer">Agendar Fiesta</li>
-            <li *ngIf="FEATURE_FLAGS.SCHEDULE_CEREMONY" class="hover:text-forest cursor-pointer">Agendar Ceremonia
+            <li *ngIf="FEATURE_FLAGS.SUGGEST_SONG" class="hover:text-sage cursor-pointer">Sugerir canción</li>
+            <li *ngIf="FEATURE_FLAGS.SCHEDULE_PARTY" class="hover:text-sage cursor-pointer">Agendar Fiesta</li>
+            <li *ngIf="FEATURE_FLAGS.SCHEDULE_CEREMONY" class="hover:text-sage cursor-pointer">Agendar Ceremonia
             </li>
         </ul>
     </div>
