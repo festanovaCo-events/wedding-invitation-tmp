@@ -1,5 +1,6 @@
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { TitleCoupleComponent } from "../../ui/title-couple/title-couple.component";
 import { WEDDING_INFO } from '../../../constants/wedding-info';
@@ -7,7 +8,7 @@ import arrowContinue from 'assets/animations/arrow_continue.json';
 @Component({
   selector: 'app-banner-home',
   standalone: true,
-  imports: [LottieComponent, TitleCoupleComponent],
+  imports: [CommonModule, LottieComponent, TitleCoupleComponent],
   templateUrl: './banner-home.component.html',
   styleUrl: './banner-home.component.css'
 })

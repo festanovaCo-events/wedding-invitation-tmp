@@ -1,4 +1,4 @@
-<section class="instagram">
+<section class="instagram" [ngStyle]="{'background-image': 'url(' + weddingInfo.assets.instagramBackground + ')'}">
     <div class="flex flex-col text-center justify-center items-center z-999 relative">
         <h2
             class="font-cookie text-white text-[40px] md:text-6xl leading-10 md:leading-[60px] mb-0 px-10 drop-shadow-lg">
@@ -18,8 +18,8 @@
             class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10 drop-shadow-lg">{{
             weddingInfo.sections.instagram.hashtag }}</a>
 
-        <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-navy
-                     text-navy uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+        <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-forest
+                     text-forest uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
                      transition-all shadow-md font-bold cursor-pointer">{{ weddingInfo.sections.instagram.buttonText
             }}</a>
     </div>

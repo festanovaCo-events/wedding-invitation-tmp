@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideCloudinaryLoader } from '@angular/common';
+import { IMAGE_LOADER, ImageLoaderConfig } from '@angular/common';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideCacheableAnimationLoader,
@@ -12,6 +12,21 @@ import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 
 const CLOUDINARY_CLOUD = 'dwx09pwkr';
+
+// Loader personalizado que maneja tanto Cloudinary como URLs externas (Unsplash)
+function customImageLoader(config: ImageLoaderConfig): string {
+  const src = config.src;
+  
+  // Si es una URL completa (http:// o https://), devolverla tal cual
+  if (src.startsWith('http://') || src.startsWith('https://')) {
+    return src;
+  }
+  
+  // Si no, usar Cloudinary
+  const params = config.loaderParams as { transform?: string } || {};
+  const transform = params.transform || 'c_fill';
+  return `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/${transform}/${src}`;
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -26,7 +41,10 @@ export const appConfig: ApplicationConfig = {
     }),
     provideCacheableAnimationLoader(),
     provideRouter(routes),
-    provideCloudinaryLoader(`https://res.cloudinary.com/${CLOUDINARY_CLOUD}`),
+    {
+      provide: IMAGE_LOADER,
+      useValue: customImageLoader,
+    },
     provideToastr({
       timeOut: 5000,
       positionClass: 'toast-top-right',

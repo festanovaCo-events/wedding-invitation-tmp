@@ -56,26 +56,26 @@ export const WEDDING_INFO = {
 
   // Música
   music: {
-    url: 'assets/music/sound.mp3',
+    url: 'assets/music/EdSheeran-Perfect(Lyrics).mp3',
     volume: 0.3,
     loop: true
   },
 
   // Assets de video e imágenes
   assets: {
-    bannerVideo: 'assets/images/banner-home/video-boda.mp4',
+    bannerVideo: '',
+    bannerImage: 'assets/images/banner-home/portada-boda.webp',
     backgroundImage: '/assets/images/event-scheduler/img_lineas01.svg',
     instagramBackground: 'assets/images/banner-instagram/banner.jpeg',
     // publicId: para NgOptimizedImage (srcset automático, q_auto, f_auto) | full: lightbox Fancybox
     portraits: [
-      { publicId: 'v1755103602/Wedding/dowktzuqunplps4ncqgn', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/dowktzuqunplps4ncqgn.jpg' },
-      //{ publicId: 'v1755103602/Wedding/wjspdvkckwczd5trlb9w', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/wjspdvkckwczd5trlb9w.jpg' },
-      { publicId: 'v1755103602/Wedding/nzubkb4sl784chxg1oap', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/nzubkb4sl784chxg1oap.jpg' },
-      { publicId: 'v1755103602/Wedding/cmyeakepkcxvjdxwxgqy', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/cmyeakepkcxvjdxwxgqy.jpg' },
-      { publicId: 'v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1755103602/Wedding/omzkk5dk8tmbeyo3yhzq.jpg' },
-      { publicId: 'v1771719895/Wedding/magobjvl3jzto7a2nrfy', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1771719895/Wedding/magobjvl3jzto7a2nrfy.jpg' },
-      { publicId: 'v1771719895/Wedding/m6aqykjdkfnpsewxjtni', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1771719895/Wedding/m6aqykjdkfnpsewxjtni.jpg' },
-      { publicId: 'v1771719895/Wedding/c7hgqggkkdinttg4ns0b', full: 'https://res.cloudinary.com/dwx09pwkr/image/upload/w_1200,f_auto,q_auto/v1771719895/Wedding/c7hgqggkkdinttg4ns0b.jpg' }
+      { publicId: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', full: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80' },
+      { publicId: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80', full: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1200&q=80' },
+      { publicId: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80', full: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1200&q=80' },
+      { publicId: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80', full: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80' },
+      { publicId: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80', full: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80' },
+      { publicId: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', full: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80' },
+      { publicId: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800&q=80', full: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80' }
     ]
   },
 

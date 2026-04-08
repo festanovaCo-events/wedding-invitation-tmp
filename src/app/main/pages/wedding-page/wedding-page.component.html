@@ -11,20 +11,20 @@
 <app-modal [show]="showConfirmationGuide" (close)="closeGuide()">
     <div class="flex flex-col items-center justify-center p-4 md:p-6 text-center">
         <div class="mb-3">
-            <svg class="w-12 h-12 md:w-14 md:h-14 mx-auto text-navy" fill="none" stroke="currentColor"
+            <svg class="w-12 h-12 md:w-14 md:h-14 mx-auto text-forest" fill="none" stroke="currentColor"
                 viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
         </div>
-        <h2 class="text-navy font-bold text-lg md:text-xl mb-2">
+        <h2 class="text-forest font-bold text-lg md:text-xl mb-2">
             ¡No olvides confirmar!
         </h2>
-        <p class="text-navy text-xs md:text-sm mb-4">
+        <p class="text-forest text-xs md:text-sm mb-4">
             Desplázate hacia abajo para encontrar el botón de confirmación.
         </p>
         <button (click)="scrollToConfirmations()"
-            class="bg-navy hover:bg-navy-dark font-bold rounded-[50px] text-white px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm transition-all cursor-pointer shadow-md">
+            class="bg-forest hover:bg-sage font-bold rounded-[50px] text-white px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm transition-all cursor-pointer shadow-md">
             Ir a confirmar
         </button>
     </div>
