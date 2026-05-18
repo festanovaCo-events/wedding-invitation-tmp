@@ -6,18 +6,24 @@ import { ToastrService } from 'ngx-toastr';
 import { InvitationStateService } from '../../../services/invitation-state.service';
 import { InvitationService } from '../../../services/invitation.service';
 import { InvitationInfoResponse } from '../../../interfaces/invitation.interface';
+import { ConfirmAlertComponent } from '../../common/confirm-alert/confirm-alert.component';
 
 @Component({
   selector: 'app-content-confirmation-modal',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ConfirmAlertComponent],
   templateUrl: './content-confirmation-modal.component.html',
   styleUrl: './content-confirmation-modal.component.css',
 })
 export class ContentConfirmationModalComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter<void>();
   
-  currentStep: 'confirmation' | 'loading' | 'guests' | 'decline-confirmation' = 'confirmation';
+  currentStep:
+    | 'confirmation'
+    | 'loading'
+    | 'guests'
+    | 'decline-confirmation'
+    | 'partial-quotas-confirmation' = 'confirmation';
   isConfirmed: boolean | null = null;
   
   nameCurrent: string = '';
@@ -174,13 +180,23 @@ export class ContentConfirmationModalComponent implements OnInit, OnDestroy {
 
   confirmSend() {
     if (this.listName.length < this.maximumQuotas) {
-      const confirmacion = confirm(
-        `Solo estás registrando ${this.listName.length} de ${this.maximumQuotas} cupos. ¿Estás seguro? No podrás modificar esto después.`
-      );
-      if (!confirmacion) return;
+      this.currentStep = 'partial-quotas-confirmation';
+      return;
     }
 
     this.send();
+  }
+
+  confirmPartialSend() {
+    this.send();
+  }
+
+  cancelPartialSend() {
+    this.currentStep = 'guests';
+  }
+
+  get partialQuotasMessage(): string {
+    return `Solo estás registrando ${this.listName.length} de ${this.maximumQuotas} cupos.`;
   }
 
   send() {
