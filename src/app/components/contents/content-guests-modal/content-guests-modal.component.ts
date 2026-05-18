@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { InvitationStateService } from '../../../services/invitation-state.service';
 import { InvitationInfoResponse } from '../../../interfaces/invitation.interface';
+import { ConfirmAlertComponent } from '../../common/confirm-alert/confirm-alert.component';
 
 @Component({
   selector: 'app-content-guests-modal',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ConfirmAlertComponent],
   templateUrl: './content-guests-modal.component.html',
   styleUrl: './content-guests-modal.component.css',
 })
@@ -20,6 +21,7 @@ export class ContentGuestsModalComponent implements OnInit, OnDestroy {
   maximumQuotas: number = 7;
   registrationSent: boolean = false;
   hostName: string = '';
+  showPartialQuotasConfirm = false;
   private subscription?: Subscription;
 
   constructor(private invitationStateService: InvitationStateService) {}
@@ -60,13 +62,24 @@ export class ContentGuestsModalComponent implements OnInit, OnDestroy {
 
   confirmSend() {
     if (this.listName.length < this.maximumQuotas) {
-      const confirmacion = confirm(
-        `Solo estás registrando ${this.listName.length} de ${this.maximumQuotas} cupos. ¿Estás seguro? No podrás modificar esto después.`
-      );
-      if (!confirmacion) return;
+      this.showPartialQuotasConfirm = true;
+      return;
     }
 
     this.send();
+  }
+
+  confirmPartialSend() {
+    this.showPartialQuotasConfirm = false;
+    this.send();
+  }
+
+  cancelPartialSend() {
+    this.showPartialQuotasConfirm = false;
+  }
+
+  get partialQuotasMessage(): string {
+    return `Solo estás registrando ${this.listName.length} de ${this.maximumQuotas} cupos.`;
   }
 
   send() {

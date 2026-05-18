@@ -10,6 +10,7 @@ import { ErrorStatusComponent } from './error-status/error-status.component';
 import { FEATURE_FLAGS as FLAGS } from '../../../constants/feature-flags';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
 import { InvitationStateService } from '../../../services/invitation-state.service';
+import { ModalFlowService } from '../../../services/modal-flow.service';
 import { InvitationInfoResponse } from '../../../interfaces/invitation.interface';
 
 @Component({
@@ -39,7 +40,10 @@ export class ConfirmationsComponent implements OnInit, OnDestroy {
   error: string | null = null;
   private subscriptions: Subscription[] = [];
 
-  constructor(private invitationStateService: InvitationStateService) {}
+  constructor(
+    private invitationStateService: InvitationStateService,
+    private modalFlowService: ModalFlowService
+  ) {}
 
   ngOnInit(): void {
     const dataSubscription = this.invitationStateService.getInvitationData$().subscribe(data => {
@@ -58,6 +62,11 @@ export class ConfirmationsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(errorSubscription);
 
     this.error = this.invitationStateService.getError();
+
+    const openModalSubscription = this.modalFlowService.openConfirmationModal$.subscribe(() => {
+      this.openModal();
+    });
+    this.subscriptions.push(openModalSubscription);
   }
 
   ngOnDestroy(): void {
