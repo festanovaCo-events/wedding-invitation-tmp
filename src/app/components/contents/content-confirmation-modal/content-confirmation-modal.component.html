@@ -24,32 +24,26 @@
 </div>
 
 <!-- Paso intermedio: Confirmar que no puede asistir -->
-<div *ngIf="currentStep === 'decline-confirmation'" class="step-content">
-    <h5 class="text-navy font-bold text-[25px] md:text-[28px] text-center mb-6 mt-2">¿Estás seguro de no asistir?</h5>
-    
-    <div class="mb-8 text-center">
-        <p class="text-navy text-base md:text-lg mb-2">
-            Al confirmar que no puedes asistir, ya no podrás modificar esta decisión después.
-        </p>
-        <p class="text-navy-dark text-sm md:text-base font-semibold">
-            ¿Deseas continuar?
-        </p>
-    </div>
+<app-confirm-alert
+    *ngIf="currentStep === 'decline-confirmation'"
+    title="¿Estás seguro de no asistir?"
+    message="Al confirmar que no puedes asistir, ya no podrás modificar esta decisión después."
+    secondaryMessage="¿Deseas continuar?"
+    confirmLabel="Sí, confirmo que no asistiré"
+    cancelLabel="Cancelar"
+    (confirm)="confirmDecline()"
+    (cancel)="cancelDecline()" />
 
-    <div class="flex flex-col gap-4 items-center justify-center">
-        <button 
-            (click)="confirmDecline()"
-            class="bg-navy hover:bg-navy-dark text-white px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs shadow-md">
-            Sí, confirmo que no asistiré
-        </button>
-        
-        <button 
-            (click)="cancelDecline()"
-            class="bg-white hover:bg-navy hover:text-white text-navy px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs border border-navy">
-            Cancelar
-        </button>
-    </div>
-</div>
+<!-- Paso intermedio: Confirmar registro con cupos sin usar -->
+<app-confirm-alert
+    *ngIf="currentStep === 'partial-quotas-confirmation'"
+    title="¿Confirmar registro?"
+    [message]="partialQuotasMessage"
+    secondaryMessage="No podrás modificar esto después. ¿Deseas continuar?"
+    confirmLabel="Sí, confirmar"
+    cancelLabel="Cancelar"
+    (confirm)="confirmPartialSend()"
+    (cancel)="cancelPartialSend()" />
 
 <!-- Paso 2: Animación de carga -->
 <div *ngIf="currentStep === 'loading'" class="step-content flex flex-col items-center justify-center py-12">
