@@ -18,14 +18,20 @@
             </svg>
         </div>
         <h2 class="text-forest font-bold text-lg md:text-xl mb-2">
-            ¡No olvides confirmar!
+            ¡No olvides confirmar tu asistencia!
         </h2>
-        <p class="text-forest text-xs md:text-sm mb-4">
-            Desplázate hacia abajo para encontrar el botón de confirmación.
+        <p class="text-forest text-xs md:text-sm mb-5">
+            Tu confirmación nos ayuda a organizar todo. Solo te tomará un momento.
         </p>
-        <button (click)="scrollToConfirmations()"
-            class="bg-forest hover:bg-sage font-bold rounded-[50px] text-white px-5 py-2 md:px-6 md:py-2.5 text-xs md:text-sm transition-all cursor-pointer shadow-md">
-            Ir a confirmar
-        </button>
+        <div class="flex flex-col gap-3 w-full max-w-xs mx-auto">
+            <button (click)="openConfirmation()"
+                class="bg-forest hover:bg-sage font-bold rounded-[50px] text-white px-5 py-2.5 md:px-6 md:py-3 text-sm md:text-base transition-all cursor-pointer shadow-md">
+                Confirmar asistencia
+            </button>
+            <button type="button" (click)="closeGuide()"
+                class="text-forest hover:text-sage text-xs md:text-sm font-semibold transition-colors cursor-pointer">
+                Más tarde
+            </button>
+        </div>
     </div>
 </app-modal>
