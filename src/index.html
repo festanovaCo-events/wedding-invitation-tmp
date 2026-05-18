@@ -6,7 +6,9 @@
   <title>Boda de Jorge & Yina - Invitación Digital | 12 de Septiembre 2026</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
   <!-- Meta Tags - No indexar en buscadores -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
@@ -93,10 +95,19 @@
 
 <body>
   <!-- Splash crítico: visible inmediatamente, se oculta cuando Angular bootstrapea -->
-  <div id="app-splash" style="position:fixed;inset:0;background:#6c86ab;display:flex;align-items:center;justify-content:center;z-index:9999">
-    <div style="width:60px;height:60px;border:4px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:app-splash-spin 1s linear infinite"></div>
+  <div id="app-splash"
+    style="position:fixed;inset:0;background:#6c86ab;display:flex;align-items:center;justify-content:center;z-index:9999">
+    <div
+      style="width:60px;height:60px;border:4px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:app-splash-spin 1s linear infinite">
+    </div>
   </div>
-  <style>@keyframes app-splash-spin{to{transform:rotate(360deg)}}</style>
+  <style>
+    @keyframes app-splash-spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
   <app-root></app-root>
 </body>
 

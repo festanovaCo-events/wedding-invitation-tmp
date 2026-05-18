@@ -16,12 +16,15 @@
             "outputPath": "dist/wedding-invitation-tmp",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
               {
                 "glob": "robots.txt",
                 "input": "src",
@@ -40,7 +43,7 @@
             ],
             "styles": [
               "src/styles.css",
-              
+
               "@fancyapps/ui/dist/fancybox/fancybox.css",
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css",
@@ -110,17 +113,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/assets"
-        ],
+            "assets": ["src/assets"],
             "styles": [
               "src/styles.css",
-              
+
               "@fancyapps/ui/dist/fancybox/fancybox.css",
               "node_modules/slick-carousel/slick/slick.css",
               "node_modules/slick-carousel/slick/slick-theme.css",
@@ -131,7 +129,6 @@
         }
       }
     }
-    
   },
   "cli": {
     "analytics": false
