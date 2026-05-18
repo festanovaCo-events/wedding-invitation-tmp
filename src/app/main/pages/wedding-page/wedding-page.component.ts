@@ -73,12 +73,9 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
     this.routeSubscription?.unsubscribe();
   }
 
-  scrollToConfirmations(): void {
-    const element = document.getElementById('confirmations-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      this.closeGuide();
-    }
+  openConfirmation(): void {
+    this.closeGuide();
+    this.modalFlowService.requestOpenConfirmationModal();
   }
 
   closeGuide(): void {
