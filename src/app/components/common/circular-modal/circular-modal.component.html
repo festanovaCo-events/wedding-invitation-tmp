@@ -1,10 +1,10 @@
-<div class="fixed inset-0 bg-forest/70 backdrop-blur-sm flex items-center justify-center z-[9999] modal-backdrop"
+<div class="fixed inset-0 bg-primary/70 backdrop-blur-sm flex items-center justify-center z-[9999] modal-backdrop"
     *ngIf="show" (click)="onBackdropClick($event)">
-    <div class="bg-sand rounded-3xl md:rounded-full shadow-2xl p-6 md:p-12 max-w-[90vw] w-[90vw] max-h-[90vh] h-auto md:w-[600px] md:h-[600px] relative flex flex-col items-center justify-start pt-12 md:pt-16 overflow-visible app-animated app-zoom-in"
+    <div class="bg-surface-alt rounded-3xl md:rounded-full shadow-2xl p-6 md:p-12 max-w-[90vw] w-[90vw] max-h-[90vh] h-auto md:w-[600px] md:h-[600px] relative flex flex-col items-center justify-start pt-12 md:pt-16 overflow-visible app-animated app-zoom-in"
         [class.app-zoom-in]="show" (click)="$event.stopPropagation()">
         <!-- Close button -->
         <button
-            class="absolute top-4 right-4 md:top-5 md:right-5 w-10 h-10 md:w-12 md:h-12 rounded-full bg-forest hover:bg-sage active:bg-sage flex items-center justify-center text-white font-bold transition-colors z-[100] shadow-lg"
+            class="absolute top-4 right-4 md:top-5 md:right-5 w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary hover:bg-primary-soft active:bg-primary-soft flex items-center justify-center text-white font-bold transition-colors z-[100] shadow-lg"
             (click)="onClose()" aria-label="Cerrar" type="button">
             <span class="text-2xl md:text-3xl leading-none font-bold">&times;</span>
         </button>
@@ -18,7 +18,7 @@
         </div>
 
         <!-- Title -->
-        <h3 class="text-gray-800 font-bold text-xl md:text-3xl mb-4 md:mb-8 text-center px-4">{{ title }}</h3>
+        <h3 class="text-heading font-bold text-xl md:text-3xl mb-4 md:mb-8 text-center px-4">{{ title }}</h3>
 
         <!-- Content -->
         <div

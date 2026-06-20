@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { ACTIVE_THEME } from './themes/active-theme';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -20,10 +21,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('wedding-invitation-tmp');
   });
 
-  it('should render title', () => {
+  it('should apply the active theme to the document root', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, wedding-invitation-tmp');
+
+    expect(document.documentElement.style.getPropertyValue('--theme-primary')).toBe(ACTIVE_THEME.palette.primary);
+    expect(document.documentElement.dataset['theme']).toBe(ACTIVE_THEME.name);
   });
 });

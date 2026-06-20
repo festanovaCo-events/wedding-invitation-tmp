@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
       }
       @if (loading && !loaded) {
         <div class="flex justify-center items-center min-h-[200px] absolute inset-x-0 pointer-events-none">
-          <div class="w-10 h-10 border-2 border-forest border-t-transparent rounded-full animate-spin"></div>
+          <div class="w-10 h-10 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
         </div>
       }
     </section>

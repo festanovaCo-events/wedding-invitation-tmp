@@ -1,13 +1,13 @@
 @layer utilities {
   .instructions {
-    background: url(../../../../assets/images/instructions/img_ondas03.svg) center top no-repeat var(--color-sand);
+    background: var(--theme-instructions-waves-top) center top no-repeat var(--theme-surface-alt);
     padding-top: 14%;
     position: relative;
     padding-bottom: 35%;
   }
 
   .instructions::after {
-    background-image: url(../../../../assets/images/instructions/img_ondas04.svg);
+    background-image: var(--theme-instructions-waves-bottom);
     position: absolute;
     content: "";
     background-repeat: no-repeat;

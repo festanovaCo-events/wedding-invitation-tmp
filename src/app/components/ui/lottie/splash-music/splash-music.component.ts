@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { AnimationItem } from 'lottie-web';
-import music from 'assets/animations/music.json';
+import { ACTIVE_THEME } from '../../../../themes/active-theme';
 
 @Component({
   selector: 'app-splash-music',
@@ -16,7 +16,7 @@ export class SplashMusicComponent implements OnInit {
   shouldLoadAnimation = false;
 
   options: AnimationOptions = {
-    animationData: music,
+    animationData: ACTIVE_THEME.animations.music,
     loop: true,
     autoplay: true,
   };

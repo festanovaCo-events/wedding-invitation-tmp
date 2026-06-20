@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { TitleCoupleComponent } from "../../ui/title-couple/title-couple.component";
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-import arrowContinue from 'assets/animations/arrow_continue.json';
+import { ACTIVE_THEME } from '../../../themes/active-theme';
 @Component({
   selector: 'app-banner-home',
   standalone: true,
@@ -17,7 +17,7 @@ export class BannerHomeComponent {
   weddingInfo = WEDDING_INFO;
 
   options: AnimationOptions = {
-    animationData: arrowContinue,
+    animationData: ACTIVE_THEME.animations.arrowContinue,
     loop: true,
     autoplay: true,
   };

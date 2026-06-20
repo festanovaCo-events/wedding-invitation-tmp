@@ -49,12 +49,55 @@
   /* gold-dark: #8B6F4A - versión más oscura para mejor contraste */
   --color-gold-dark: #8B6F4A;
 
+  --color-primary: var(--theme-primary);
+  --color-primary-dark: var(--theme-primary-dark);
+  --color-primary-soft: var(--theme-primary-soft);
+  --color-primary-light: var(--theme-primary-light);
+  --color-couple-separator: var(--theme-couple-separator-text);
+  --color-card-heading: var(--theme-card-heading);
+  --color-accent: var(--theme-accent);
+  --color-heading: var(--theme-heading);
+  --color-theme-text: var(--theme-text);
+  --color-surface: var(--theme-surface);
+  --color-surface-alt: var(--theme-surface-alt);
+  --color-muted: var(--theme-muted);
+  --color-theme-border: var(--theme-border);
+  --color-theme-success: var(--theme-success);
+  --color-theme-info: var(--theme-info);
+
   --shadow-rounded: 0px 0px 15px -1px rgba(0, 0, 0, 0.4);
 
   /* half: 50% */
-  --radius-half: 50%
+  --radius-half: 50%;
 }
 
 :root {
   font-family: "Open Sans", "sans-serif";
+  --theme-primary: #425e87;
+  --theme-primary-dark: #0e243c;
+  --theme-primary-soft: #6c86ab;
+  --theme-primary-light: #a0c0e7;
+  --theme-couple-separator-text: #ffffff;
+  --theme-card-heading: #425e87;
+  --theme-accent: #BFA880;
+  --theme-heading: #0e243c;
+  --theme-text: #425e87;
+  --theme-surface: #FAF7F3;
+  --theme-surface-alt: #EFEDE7;
+  --theme-muted: #868686;
+  --theme-overlay: rgba(74, 79, 96, 0.60);
+  --theme-success: #10b981;
+  --theme-info: #3b82f6;
+  --theme-border: #CCC;
+  --theme-banner-home-waves: url("assets/generated/active/images/banner-home/img_ondas01.svg");
+  --theme-banner-instagram-bg: url("assets/images/banner-instagram/banner.jpeg");
+  --theme-banner-instagram-top-waves: url("assets/generated/active/images/banner-instagram/img_ondas05.svg");
+  --theme-banner-instagram-bottom-waves: url("assets/generated/active/images/banner-instagram/img_ondas06.svg");
+  --theme-event-card-belt-left: url("assets/generated/active/images/event-scheduler/img_cinta01.svg");
+  --theme-event-card-belt-right: url("assets/generated/active/images/event-scheduler/img_cinta02.svg");
+  --theme-countdown-circle: url("assets/generated/active/images/event-scheduler/img_circuloContador01.svg");
+  --theme-event-schedule-waves: url("assets/generated/active/images/event-scheduler/img_ondas02.svg");
+  --theme-event-schedule-lines: url("assets/generated/active/images/event-scheduler/img_lineas01.svg");
+  --theme-instructions-waves-top: url("assets/generated/active/images/instructions/img_ondas03.svg");
+  --theme-instructions-waves-bottom: url("assets/generated/active/images/instructions/img_ondas04.svg");
 }

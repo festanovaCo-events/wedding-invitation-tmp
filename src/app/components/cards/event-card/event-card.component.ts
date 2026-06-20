@@ -2,12 +2,14 @@ import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AnimationItem } from 'lottie-web';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
-import rings from 'assets/animations/rings.json';
-import party from 'assets/animations/party.json';
+import { ACTIVE_THEME } from '../../../themes/active-theme';
 
 type AnimationKey = 'rings' | 'party';
 
-const EVENT_CARD_ANIMATIONS: Record<AnimationKey, object> = { rings, party };
+const EVENT_CARD_ANIMATIONS: Record<AnimationKey, object> = {
+  rings: ACTIVE_THEME.animations.rings,
+  party: ACTIVE_THEME.animations.party,
+};
 
 @Component({
   selector: 'app-event-card',

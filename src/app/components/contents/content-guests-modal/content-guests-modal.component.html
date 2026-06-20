@@ -11,10 +11,10 @@
 <ng-container *ngIf="!showPartialQuotasConfirm">
     <!-- Mensaje de bienvenida con el nombre del anfitrión -->
     <div *ngIf="hostName" class="mb-4 text-center">
-        <p class="text-forest text-xl md:text-2xl lg:text-3xl font-cookie mb-2">
+        <p class="text-heading text-xl md:text-2xl lg:text-3xl font-cookie mb-2">
             ¡Bienvenido {{ hostName }}!
         </p>
-        <p class="text-forest text-sm md:text-base">
+        <p class="text-theme-text text-sm md:text-base">
             Ingresa tus acompañantes
         </p>
     </div>
@@ -23,9 +23,9 @@
         <!-- Input solo si no se alcanzaron los cupos -->
         <div class="w-full flex flex-col gap-1" *ngIf="listName.length < maximumQuotas">
             <input type="text" [(ngModel)]="nameCurrent" placeholder="Nombre del acompañante"
-                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-forest" name="nombre" />
+                class="border border-gray-300 rounded p-2 w-full mb-2 outline-none text-theme-text" name="nombre" />
             <button type="button" (click)="saveName()"
-                class="bg-white text-forest px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-forest hover:text-white w-full font-bold cursor-pointer">
+                class="bg-white text-theme-text px-4 py-2 rounded-[50px] outline-none transition-all hover:bg-primary hover:text-white w-full font-bold cursor-pointer">
                 Guardar
             </button>
         </div>
@@ -36,9 +36,9 @@
             <p class="text-sm text-gray-600">Máximo {{ maximumQuotas }} acompañantes.</p>
             <ul class="mt-4 space-y-2 text-gray-700">
                 <li *ngFor="let nombre of listName; let i = index" class="flex justify-between items-center">
-                    <p class="text-[28px] font-cookie text-sage font-medium capitalize">{{ nombre }}</p>
+                    <p class="text-[28px] font-cookie text-theme-text font-medium capitalize">{{ nombre }}</p>
                     <button type="button" (click)="deleteName(i)"
-                        class="text-sage text-sm hover:underline cursor-pointer">
+                        class="text-primary-soft text-sm hover:underline cursor-pointer">
                         Eliminar
                     </button>
                 </li>
@@ -47,7 +47,7 @@
             <!-- Botón enviar cuando hay al menos uno guardado -->
             <div *ngIf="listName.length > 0" class="mt-4">
                 <button type="submit"
-                    class="bg-forest text-white px-4 py-2 hover:bg-sage cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
+                    class="bg-primary text-white px-4 py-2 hover:bg-primary-soft cursor-pointer w-full font-bold rounded-[50px] outline-none transition-all">
                     Enviar
                 </button>
             </div>

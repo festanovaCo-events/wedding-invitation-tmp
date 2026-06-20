@@ -4,9 +4,7 @@ import { AnimationItem } from 'lottie-web';
 import { LottieComponent } from 'ngx-lottie';
 import { FEATURE_FLAGS } from '../../../constants/feature-flags';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-import dress from 'assets/animations/dress.json';
-import sounds from 'assets/animations/sounds.json';
-import tips from 'assets/animations/tips.json';
+import { ACTIVE_THEME } from '../../../themes/active-theme';
 import { CircularModalComponent } from '../../common/circular-modal/circular-modal.component';
 import { ContentDressCodeModalComponent } from '../../contents/content-dress-code-modal/content-dress-code-modal.component';
 import { ContentTipsModalComponent } from '../../contents/content-tips-modal/content-tips-modal.component';
@@ -20,7 +18,11 @@ interface CardInfo {
   animationKey: InstructionsAnimationKey;
 }
 
-const INSTRUCTIONS_ANIMATIONS: Record<InstructionsAnimationKey, object> = { dress, sounds, tips };
+const INSTRUCTIONS_ANIMATIONS: Record<InstructionsAnimationKey, object> = {
+  dress: ACTIVE_THEME.animations.dress,
+  sounds: ACTIVE_THEME.animations.sounds,
+  tips: ACTIVE_THEME.animations.tips,
+};
 
 @Component({
   selector: 'app-instructions',
@@ -37,6 +39,7 @@ const INSTRUCTIONS_ANIMATIONS: Record<InstructionsAnimationKey, object> = { dres
 })
 export class InstructionsComponent implements OnInit, OnDestroy {
   weddingInfo = WEDDING_INFO;
+  theme = ACTIVE_THEME;
   
   cards: CardInfo[] = WEDDING_INFO.sections.instructions.cards.map(card => ({
     ...card,

@@ -11,7 +11,7 @@
 }
 
 .parallax-container::before {
-  background-color: rgba(74, 79, 96, 0.60);
+  background-color: var(--theme-overlay);
   content: "";
   position: absolute;
   width: 100%;
@@ -22,7 +22,7 @@
 }
 
 .parallax-container::after {
-  background-image: url(../../../../assets/images/banner-home/img_ondas01.svg);
+  background-image: var(--theme-banner-home-waves);
   position: absolute;
   content: "";
   background-repeat: no-repeat;

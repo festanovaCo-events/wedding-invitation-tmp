@@ -9,10 +9,10 @@
     }
 
     .instagram::before {
-        background-image: url(../../../../assets/images/banner-instagram/img_ondas05.svg);
+        background-image: var(--theme-banner-instagram-top-waves);
         position: absolute;
         content: '';
-        background-color: rgba(74, 79, 96, 0.60);
+        background-color: var(--theme-overlay);
         background-size: contain !important;
         background-repeat: no-repeat;
         background-position: top center;
@@ -23,7 +23,7 @@
     }
 
     .instagram::after {
-        background-image: url(../../../../assets/images/banner-instagram/img_ondas06.svg);
+        background-image: var(--theme-banner-instagram-bottom-waves);
         position: absolute;
         content: '';
         background-size: contain !important;

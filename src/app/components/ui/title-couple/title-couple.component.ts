@@ -11,6 +11,8 @@ import { Component, Input } from '@angular/core';
 export class TitleCoupleComponent {
   @Input() name_wife: string = 'Yina';
   @Input() name_husband: string = 'Jorge';
-  @Input() classHeading1 = 'text-white text-[100px] md:text-[130px] font-bold flex-col md:flex-row gap-3 md:gap-7';
-  @Input() classSpan = 'text-forest text-[40px] w-[50px] h-[50px] md:w-[60px] md:h-[60px] leading-[50px] md:leading-[60px]';
+  @Input() classHeading1 =
+    'text-white text-[100px] md:text-[130px] font-bold flex-col md:flex-row gap-3 md:gap-7';
+  @Input() classSpan =
+    'text-couple-separator text-[40px] w-[50px] h-[50px] md:w-[60px] md:h-[60px] leading-[50px] md:leading-[60px]';
 }

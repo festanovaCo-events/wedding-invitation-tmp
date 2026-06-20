@@ -1,9 +1,9 @@
 <div class="step-content">
-  <h5 class="text-forest font-bold text-[25px] md:text-[28px] text-center mb-6 mt-2">{{ title }}</h5>
+  <h5 class="text-heading font-bold text-[25px] md:text-[28px] text-center mb-6 mt-2">{{ title }}</h5>
 
   <div class="mb-8 text-center" *ngIf="message || secondaryMessage">
-    <p *ngIf="message" class="text-forest text-base md:text-lg mb-2">{{ message }}</p>
-    <p *ngIf="secondaryMessage" class="text-sage text-sm md:text-base font-semibold">
+    <p *ngIf="message" class="text-theme-text text-base md:text-lg mb-2">{{ message }}</p>
+    <p *ngIf="secondaryMessage" class="text-primary-soft text-sm md:text-base font-semibold">
       {{ secondaryMessage }}
     </p>
   </div>
@@ -12,14 +12,14 @@
     <button
       type="button"
       (click)="confirm.emit()"
-      class="bg-forest hover:bg-sage text-white px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs shadow-md">
+      class="bg-primary hover:bg-primary-soft text-white px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs shadow-md">
       {{ confirmLabel }}
     </button>
 
     <button
       type="button"
       (click)="cancel.emit()"
-      class="bg-white hover:bg-forest hover:text-white text-forest px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs border border-forest">
+      class="bg-white hover:bg-primary hover:text-white text-theme-text px-6 py-3 rounded-[50px] font-bold transition-all cursor-pointer w-full max-w-xs border border-primary">
       {{ cancelLabel }}
     </button>
   </div>

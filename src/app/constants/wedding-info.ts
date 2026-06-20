@@ -1,3 +1,5 @@
+import { ACTIVE_THEME } from '../themes/active-theme';
+
 /**
  * Objeto centralizado con toda la información de la boda
  * Este objeto contiene todos los datos necesarios para la página de invitación
@@ -56,17 +58,17 @@ export const WEDDING_INFO = {
 
   // Música
   music: {
-    url: 'assets/music/EdSheeran-Perfect(Lyrics).mp3',
+    url: ACTIVE_THEME.assets.music,
     volume: 0.3,
     loop: true
   },
 
   // Assets de video e imágenes
   assets: {
-    bannerVideo: '',
-    bannerImage: 'assets/images/banner-home/portada-boda.webp',
-    backgroundImage: '/assets/images/event-scheduler/img_lineas01.svg',
-    instagramBackground: 'assets/images/banner-instagram/banner.jpeg',
+    bannerVideo: ACTIVE_THEME.assets.bannerVideo,
+    bannerImage: ACTIVE_THEME.assets.bannerImage,
+    backgroundImage: ACTIVE_THEME.assets.decorations.eventScheduleLines,
+    instagramBackground: ACTIVE_THEME.assets.instagramBackground,
     // publicId: para NgOptimizedImage (srcset automático, q_auto, f_auto) | full: lightbox Fancybox
     portraits: [
       { publicId: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', full: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80' },
@@ -81,17 +83,17 @@ export const WEDDING_INFO = {
 
   // Animaciones Lottie
   animations: {
-    arrowContinue: 'assets/animations/arrow_continue.json',
-    heartPulse: 'assets/animations/heart_pulse.json',
-    camera: 'assets/animations/camera.json',
-    gift: 'assets/animations/gift.json',
-    instagram: 'assets/animations/instagram.json',
-    music: 'assets/animations/music.json',
-    sounds: 'assets/animations/sounds.json',
-    dress: 'assets/animations/dress.json',
-    tips: 'assets/animations/tips.json',
-    rings: 'assets/animations/rings.json',
-    party: 'assets/animations/party.json'
+    arrowContinue: ACTIVE_THEME.animations.arrowContinue,
+    heartPulse: ACTIVE_THEME.animations.heartPulse,
+    camera: ACTIVE_THEME.animations.camera,
+    gift: ACTIVE_THEME.animations.gift,
+    instagram: ACTIVE_THEME.animations.instagram,
+    music: ACTIVE_THEME.animations.music,
+    sounds: ACTIVE_THEME.animations.sounds,
+    dress: ACTIVE_THEME.animations.dress,
+    tips: ACTIVE_THEME.animations.tips,
+    rings: ACTIVE_THEME.animations.rings,
+    party: ACTIVE_THEME.animations.party
   },
 
   // Textos de secciones

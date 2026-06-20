@@ -2,7 +2,7 @@
   .wave::after {
     content: "";
     position: absolute;
-    background-image: url("../../../../assets/images/event-scheduler/img_ondas02.svg");
+    background-image: var(--theme-event-schedule-waves);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: bottom center;

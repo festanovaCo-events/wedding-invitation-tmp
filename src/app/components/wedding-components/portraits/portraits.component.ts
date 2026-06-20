@@ -6,8 +6,8 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { Fancybox } from '@fancyapps/ui';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
-import camera from 'assets/animations/camera.json';
 import { ScriptLoaderService } from '../../../services/script-loader.service';
+import { ACTIVE_THEME } from '../../../themes/active-theme';
 
 @Component({
   selector: 'app-portraits',
@@ -26,7 +26,7 @@ export class PortraitsComponent implements OnInit, OnDestroy, AfterViewInit {
   carouselReady = false;
 
   options: AnimationOptions = {
-    animationData: camera,
+    animationData: ACTIVE_THEME.animations.camera,
     loop: true,
     autoplay: true,
   };

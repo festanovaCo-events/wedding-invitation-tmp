@@ -4,8 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve -o",
-    "prebuild": "node scripts/generate-fonts-inline.js && node scripts/generate-environment.js",
-    "prestart": "node scripts/generate-fonts-inline.js",
+    "theme:navy": "node scripts/select-theme.js hojas-navy",
+    "theme:forest": "node scripts/select-theme.js hojas-forest",
+    "prebuild": "node scripts/select-theme.js && node scripts/generate-fonts-inline.js && node scripts/generate-environment.js",
+    "prestart": "node scripts/select-theme.js && node scripts/generate-fonts-inline.js",
+    "pretest": "node scripts/select-theme.js",
     "predeploy": "npx http-server dist/wedding-invitation-tmp/browser -o -p 8080",
     "build": "ng build --configuration production",
     "optimize-video": "bash scripts/optimize-video.sh",

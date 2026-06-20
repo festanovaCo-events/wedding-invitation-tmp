@@ -1,8 +1,8 @@
 <section class="instructions">
     <div class="flex flex-col items-center justify-center relative z-999">
         <div class="flex flex-col justify-center items-center text-center">
-            <h2 class="text-forest text-[40px] md:text-6xl leading-[60px] mb-0 font-cookie">Fiesta</h2>
-            <p class="text-forest text-base md:text-xl font-normal px-[15px]">Hagamos juntos una fiesta épica. Aquí algunos detalles a tener
+            <h2 class="text-heading text-[40px] md:text-6xl leading-[60px] mb-0 font-cookie">Fiesta</h2>
+            <p class="text-theme-text text-base md:text-xl font-normal px-[15px]">Hagamos juntos una fiesta épica. Aquí algunos detalles a tener
                 en cuenta.</p>
         </div>
 
@@ -10,7 +10,7 @@
             <div class="grow basis-[280px] max-w-[340px] px-4" *ngFor="let card of cards">
                 <div
                     class="w-full py-10 px-[25px] bg-linen rounded-[20px] min-h-[400px] flex flex-col justify-between items-center">
-                    <h3 class="text-gold-dark font-bold text-[1.75rem]">{{ card.title }}</h3>
+                    <h3 class="text-card-heading font-bold text-[1.75rem]">{{ card.title }}</h3>
 
                     <div class="flex justify-center items-center h-20 w-[95px]">
                         <ng-lottie class="w-[90px] h-[80px] max-w-full max-h-full"
@@ -18,10 +18,10 @@
                             (animationCreated)="animationCreated($event)"></ng-lottie>
                     </div>
 
-                    <p class="text-forest mb-0 font-normal text-center" [innerHTML]="card.description"></p>
+                    <p class="text-theme-text mb-0 font-normal text-center" [innerHTML]="card.description"></p>
 
-                    <button (click)="onCardClick(card)" class="w-[85%] bg-white text-center hover:text-white hover:bg-forest
-                         text-forest uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
+                    <button (click)="onCardClick(card)" class="w-[85%] bg-white text-center hover:text-white hover:bg-primary
+                         text-theme-text uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
                          transition-all shadow-md font-bold cursor-pointer outline-none">
                         {{ card.label }}
                     </button>
@@ -34,7 +34,7 @@
     <app-circular-modal [show]="showDressCodeModal" [title]="weddingInfo.sections.modals.dressCode.title"
         (close)="closeDressCodeModal()">
         <div icon class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-            <img src="assets/images/instructions/vestuario.svg" alt="Vestuario" class="w-full h-full object-contain" />
+            <img [src]="theme.assets.instructionIcons.dressCode" alt="Vestuario" class="w-full h-full object-contain" />
         </div>
         <app-content-dress-code-modal></app-content-dress-code-modal>
     </app-circular-modal>
@@ -43,7 +43,7 @@
     <app-circular-modal [show]="showTipsModal" [title]="weddingInfo.sections.modals.tipsAndNotes.title"
         (close)="closeTipsModal()">
         <div icon class="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-            <img src="assets/images/instructions/tips.svg" alt="Tips y Notas" class="w-full h-full object-contain" />
+            <img [src]="theme.assets.instructionIcons.tips" alt="Tips y Notas" class="w-full h-full object-contain" />
         </div>
         <app-content-tips-modal></app-content-tips-modal>
     </app-circular-modal>

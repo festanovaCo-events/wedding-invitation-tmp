@@ -1,5 +1,5 @@
 @layer utilities {
     .box-aros {
-        background: url(../../../../assets/images/event-scheduler/img_circuloContador01.svg) center center no-repeat;
+        background: var(--theme-countdown-circle) center center no-repeat;
     }
 }
