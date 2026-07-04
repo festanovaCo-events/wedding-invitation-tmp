@@ -11,4 +11,18 @@ import { InvitationInfoResponse } from '../../../../interfaces/invitation.interf
 })
 export class ConfirmationStatusComponent {
   @Input() invitationData: InvitationInfoResponse | null = null;
+
+  get confirmedGuestNames(): string[] {
+    if (!this.invitationData) {
+      return [];
+    }
+
+    const { invitation } = this.invitationData.data;
+
+    if (invitation.guests?.length > 0) {
+      return invitation.guests.map((guest) => guest.name);
+    }
+
+    return invitation.name ? [invitation.name] : [];
+  }
 }
