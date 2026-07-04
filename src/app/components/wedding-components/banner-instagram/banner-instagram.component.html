@@ -13,12 +13,12 @@
                 (animationCreated)="animationCreated($event)"></ng-lottie>
         </div>
 
-        <a [href]="'https://www.instagram.com/explore/tags/' + weddingInfo.sections.instagram.hashtag.replace('#', '')"
+        <a [href]="instagramHashtagUrl"
             target="_blank" rel="noopener noreferrer"
             class="text-white lowercase text-[40px] md:text-[55px] font-normal mb-10 drop-shadow-lg">{{
             weddingInfo.sections.instagram.hashtag }}</a>
 
-        <a [href]="weddingInfo.sections.instagram.url" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-primary
+        <a [href]="instagramHashtagUrl" target="_blank" rel="noopener noreferrer" class="w-auto bg-white text-center hover:text-white hover:bg-primary
                      text-theme-text uppercase leading-[15px] text-[15px] rounded-[50px] px-[30px] py-[13px] 
                      transition-all shadow-md font-bold cursor-pointer">{{ weddingInfo.sections.instagram.buttonText
             }}</a>
