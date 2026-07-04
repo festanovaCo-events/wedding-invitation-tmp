@@ -98,8 +98,8 @@ Mantén la forma de los datos igual a la del backend para que los componentes se
 
 ## Consideraciones
 
-- Los mocks actuales son respuestas fijas: aceptar o rechazar no modifica automáticamente el resultado posterior de `getInfo`.
-- Si necesitas una simulación más cercana a end to end, se puede extender este sistema con escenarios o estado temporal.
+- Los mocks actuales simulan una API con estado en memoria durante la sesión: aceptar o rechazar actualiza el resultado posterior de `getInfo` para el mismo token.
+- Al recargar la página se reinicia el estado mock; no persiste en `localStorage`.
 - Los flags de API están separados de `src/app/constants/feature-flags.ts`, que queda reservado para controlar funcionalidades visuales o de UI.
 
 ## Verificación

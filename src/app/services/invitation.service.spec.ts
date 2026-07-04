@@ -5,11 +5,13 @@ import { environment } from '../../environments/environment';
 import { API_MOCK_FLAGS } from '../constants/api-mock-flags';
 import { API_ROUTES } from '../constants/api-routes';
 import { INVITATION_MOCKS } from '../mocks/invitation.mock';
+import { InvitationMockApiService } from '../mocks/invitation-mock-api.service';
 import { InvitationService } from './invitation.service';
 
 describe('InvitationService', () => {
   let service: InvitationService;
   let httpMock: HttpTestingController;
+  let invitationMockApi: InvitationMockApiService;
   let invitationFlags: Record<keyof typeof API_MOCK_FLAGS.invitation, boolean>;
 
   beforeEach(() => {
@@ -28,6 +30,8 @@ describe('InvitationService', () => {
 
     service = TestBed.inject(InvitationService);
     httpMock = TestBed.inject(HttpTestingController);
+    invitationMockApi = TestBed.inject(InvitationMockApiService);
+    invitationMockApi.reset();
   });
 
   afterEach(() => {
@@ -36,8 +40,41 @@ describe('InvitationService', () => {
 
   it('devuelve el mock de información cuando el endpoint getInfo está mockeado', (done) => {
     service.getInvitationInfo('TOKEN_TEST').subscribe(response => {
-      expect(response).toEqual(INVITATION_MOCKS.getInfo);
+      expect(response.data.invitation.status).toBe('PENDING');
+      expect(response.data.invitation.token).toBe('TOKEN_TEST');
       done();
+    });
+  });
+
+  it('actualiza el estado a ACCEPTED después de aceptar y recargar getInfo', (done) => {
+    const token = 'TOKEN_TEST';
+    const guestNames = ['Jorge Mestre', 'Invitado Demo'];
+
+    service.acceptInvitation(token, guestNames).subscribe(() => {
+      service.getInvitationInfo(token).subscribe(response => {
+        expect(response.data.invitation.status).toBe('ACCEPTED');
+        expect(response.data.invitation.guests).toEqual([
+          { id: 'mock-guest-1', name: 'Jorge Mestre' },
+          { id: 'mock-guest-2', name: 'Invitado Demo' }
+        ]);
+        expect(response.data.used_seats).toBe(2);
+        expect(response.data.available_seats).toBe(3);
+        done();
+      });
+    });
+  });
+
+  it('actualiza el estado a DECLINED después de rechazar y recargar getInfo', (done) => {
+    const token = 'TOKEN_TEST';
+
+    service.declineInvitation(token).subscribe(() => {
+      service.getInvitationInfo(token).subscribe(response => {
+        expect(response.data.invitation.status).toBe('DECLINED');
+        expect(response.data.invitation.guests).toEqual([]);
+        expect(response.data.used_seats).toBe(0);
+        expect(response.data.available_seats).toBe(5);
+        done();
+      });
     });
   });
 

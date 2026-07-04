@@ -4,8 +4,8 @@
  */
 export const API_MOCK_FLAGS = {
   invitation: {
-    getInfo: false,
-    accept: false,
-    decline: false,
+    getInfo: true,
+    accept: true,
+    decline: true,
   },
 } as const;

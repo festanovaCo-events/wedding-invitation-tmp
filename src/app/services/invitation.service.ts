@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { API_MOCK_FLAGS } from '../constants/api-mock-flags';
 import { API_ROUTES } from '../constants/api-routes';
-import { INVITATION_MOCKS } from '../mocks/invitation.mock';
+import { InvitationMockApiService } from '../mocks/invitation-mock-api.service';
 import { 
   InvitationInfoResponse, 
   AcceptInvitationRequest, 
@@ -14,7 +14,10 @@ import {
 
 @Injectable({ providedIn: 'root' })
 export class InvitationService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private invitationMockApi: InvitationMockApiService
+  ) {}
 
   /**
    * Obtener información de una invitación usando el token único
@@ -23,7 +26,7 @@ export class InvitationService {
    */
   getInvitationInfo(invitation_token: string): Observable<InvitationInfoResponse> {
     if (API_MOCK_FLAGS.invitation.getInfo) {
-      return of(INVITATION_MOCKS.getInfo);
+      return this.invitationMockApi.getInfo(invitation_token);
     }
 
     const url = `${environment.apiBaseUrl}${API_ROUTES.invitation.getInfo(invitation_token)}`;
@@ -42,7 +45,7 @@ export class InvitationService {
     guestNames: string[]
   ): Observable<AcceptInvitationResponse> {
     if (API_MOCK_FLAGS.invitation.accept) {
-      return of(INVITATION_MOCKS.accept);
+      return this.invitationMockApi.accept(invitation_token, guestNames);
     }
 
     const url = `${environment.apiBaseUrl}${API_ROUTES.invitation.accept(invitation_token)}`;
@@ -62,7 +65,7 @@ export class InvitationService {
     invitation_token: string
   ): Observable<DeclineInvitationResponse> {
     if (API_MOCK_FLAGS.invitation.decline) {
-      return of(INVITATION_MOCKS.decline);
+      return this.invitationMockApi.decline(invitation_token);
     }
 
     const url = `${environment.apiBaseUrl}${API_ROUTES.invitation.decline(invitation_token)}`;
