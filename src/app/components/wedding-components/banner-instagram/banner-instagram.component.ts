@@ -19,6 +19,11 @@ export class BannerInstagramComponent implements OnInit, OnDestroy {
   private observer: IntersectionObserver | null = null;
   weddingInfo = WEDDING_INFO;
   shouldLoadAnimation = false;
+
+  get instagramHashtagUrl(): string {
+    const tag = this.weddingInfo.sections.instagram.hashtag.replace('#', '');
+    return `https://www.instagram.com/explore/tags/${encodeURIComponent(tag)}/`;
+  }
   
   options: AnimationOptions = {
     animationData: instagram,

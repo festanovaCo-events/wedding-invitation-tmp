@@ -24,7 +24,10 @@ import { InvitationStateService } from "../../../services/invitation-state.servi
 export class WeddingPageComponent implements OnInit, OnDestroy {
   showConfirmationGuide = false;
   private readonly STORAGE_KEY = 'confirmation_guide_shown';
+  private welcomeAccepted = false;
+  private invitationLoadPending = false;
   private subscription?: Subscription;
+  private invitationDataSubscription?: Subscription;
   private routeSubscription?: Subscription;
 
   constructor(
@@ -38,11 +41,49 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
     this.loadInvitationData();
 
     this.subscription = this.modalFlowService.welcomeModalAccepted$.subscribe(() => {
-      const guideShown = localStorage.getItem(this.STORAGE_KEY);
-      if (!guideShown) {
-        this.showConfirmationGuide = true;
+      this.welcomeAccepted = true;
+      this.tryShowConfirmationGuide();
+    });
+
+    this.invitationDataSubscription = this.invitationStateService.getInvitationData$().subscribe(() => {
+      this.invitationLoadPending = false;
+
+      if (this.invitationStateService.isConfirmed()) {
+        this.dismissConfirmationGuide();
+        return;
+      }
+
+      if (this.welcomeAccepted) {
+        this.tryShowConfirmationGuide();
       }
     });
+  }
+
+  private shouldShowConfirmationGuide(): boolean {
+    if (localStorage.getItem(this.STORAGE_KEY)) {
+      return false;
+    }
+
+    if (this.invitationStateService.isConfirmed()) {
+      return false;
+    }
+
+    if (this.invitationLoadPending) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private tryShowConfirmationGuide(): void {
+    if (this.shouldShowConfirmationGuide()) {
+      this.showConfirmationGuide = true;
+    }
+  }
+
+  private dismissConfirmationGuide(): void {
+    this.showConfirmationGuide = false;
+    localStorage.setItem(this.STORAGE_KEY, 'true');
   }
 
   private loadInvitationData(): void {
@@ -50,6 +91,7 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
       const invitation_token = params['token'];
 
       if (invitation_token) {
+        this.invitationLoadPending = true;
         this.invitationStateService.setLoading(true);
         this.invitationStateService.setError(null);
 
@@ -62,6 +104,11 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
             console.error('Error al cargar datos de invitación:', error);
             this.invitationStateService.setError('Error al cargar los datos de la invitación');
             this.invitationStateService.setLoading(false);
+            this.invitationLoadPending = false;
+
+            if (this.welcomeAccepted) {
+              this.tryShowConfirmationGuide();
+            }
           }
         });
       }
@@ -70,6 +117,7 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
+    this.invitationDataSubscription?.unsubscribe();
     this.routeSubscription?.unsubscribe();
   }
 
@@ -79,7 +127,6 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
   }
 
   closeGuide(): void {
-    this.showConfirmationGuide = false;
-    localStorage.setItem(this.STORAGE_KEY, 'true');
+    this.dismissConfirmationGuide();
   }
 }

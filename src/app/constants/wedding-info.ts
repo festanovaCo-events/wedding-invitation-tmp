@@ -130,8 +130,8 @@ export const WEDDING_INFO = {
       title: 'Compartimos este día junto a vos',
       description: 'Compartí tus fotos y videos de ese hermoso día',
       buttonText: 'Ver en Instagram',
-      hashtag: '#Jorge&Yina',
-      url: 'https://www.instagram.com', // URL de Instagram - actualizar con la URL real
+      hashtag: '#jorge&yina',
+      url: 'https://www.instagram.com/explore/tags/jorge%26yina/',
     },
     modals: {
       dressCode: {
