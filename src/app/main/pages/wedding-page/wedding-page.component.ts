@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BannerHomeComponent } from "../../../components/wedding-components/banner-home/banner-home.component";
 import { WeddingCountdownComponent } from "../../../components/wedding-components/wedding-countdown/wedding-countdown.component";
@@ -14,6 +14,7 @@ import { ModalComponent } from "../../../components/common/modal/modal.component
 import { ModalFlowService } from "../../../services/modal-flow.service";
 import { InvitationService } from "../../../services/invitation.service";
 import { InvitationStateService } from "../../../services/invitation-state.service";
+import { shouldShowExpiredInvitationPage } from "../../../utils/confirmation-deadline";
 
 @Component({
   selector: 'app-wedding-page',
@@ -26,6 +27,7 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
   private readonly STORAGE_KEY = 'confirmation_guide_shown';
   private welcomeAccepted = false;
   private invitationLoadPending = false;
+  private isPreviewMode = false;
   private subscription?: Subscription;
   private invitationDataSubscription?: Subscription;
   private routeSubscription?: Subscription;
@@ -34,7 +36,8 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
     private modalFlowService: ModalFlowService,
     private invitationService: InvitationService,
     private invitationStateService: InvitationStateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -45,8 +48,17 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
       this.tryShowConfirmationGuide();
     });
 
-    this.invitationDataSubscription = this.invitationStateService.getInvitationData$().subscribe(() => {
+    this.invitationDataSubscription = this.invitationStateService.getInvitationData$().subscribe((data) => {
       this.invitationLoadPending = false;
+
+      const status = data?.data.invitation.status;
+      if (!this.isPreviewMode && shouldShowExpiredInvitationPage(status)) {
+        void this.router.navigate(['/expired'], {
+          queryParamsHandling: 'preserve',
+          replaceUrl: true,
+        });
+        return;
+      }
 
       if (this.invitationStateService.isConfirmed()) {
         this.dismissConfirmationGuide();
@@ -88,6 +100,7 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
 
   private loadInvitationData(): void {
     this.routeSubscription = this.route.queryParams.subscribe(params => {
+      this.isPreviewMode = params['preview'] === '1';
       const invitation_token = params['token'];
 
       if (invitation_token) {
