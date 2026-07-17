@@ -13,6 +13,14 @@ export const WEDDING_INFO = {
     hashtag: '#Jorge&Yina'
   },
 
+  // Confirmación de asistencia
+  confirmation: {
+    /** Fecha límite ISO para comparaciones (fin del día local) */
+    deadline: '2026-07-15T23:59:59',
+    /** Texto legible mostrado al invitado */
+    deadlineLabel: '15 de julio de 2026',
+  },
+
   // Fechas
   dates: {
     bannerDate: '12.09.2026', // Fecha mostrada en el banner
