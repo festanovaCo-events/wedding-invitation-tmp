@@ -1,55 +1,55 @@
-<main class="min-h-screen bg-surface flex flex-col items-center justify-start px-4 py-12 md:py-20">
+<main class="min-h-screen bg-linen flex flex-col items-center justify-start px-4 py-12 md:py-20">
   <div class="w-full max-w-xl flex flex-col gap-8">
     <header class="flex flex-col items-center text-center gap-3">
       <div aria-hidden="true"
-        class="w-16 h-16 rounded-full bg-white border border-accent/40 flex items-center justify-center shadow-sm">
-        <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        class="w-16 h-16 rounded-full bg-white border border-gold/40 flex items-center justify-center shadow-sm">
+        <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />
         </svg>
       </div>
 
-      <p class="text-xs tracking-[0.25em] uppercase text-accent">
+      <p class="text-xs tracking-[0.25em] uppercase text-gold">
         Invitación de boda
       </p>
 
-      <h1 class="font-cookie text-4xl md:text-5xl text-heading leading-snug">
+      <h1 class="font-cookie text-4xl md:text-5xl text-navy leading-snug">
         Hola, {{ inviteeName }}
       </h1>
 
-      <p class="text-sm text-theme-text max-w-sm leading-relaxed">
+      <p class="text-sm text-navy max-w-sm leading-relaxed">
         Tienes una invitación pendiente para la boda de
-        <span class="font-semibold text-heading">{{ coupleName }}</span>.
+        <span class="font-semibold text-navy">{{ coupleName }}</span>.
         Sin embargo, hay algo importante que debes saber.
       </p>
     </header>
 
     <app-expired-banner [deadline]="deadline" />
 
-    <div class="rounded-2xl bg-white border border-theme-border px-6 py-5 flex flex-col gap-3">
-      <h2 class="font-cookie text-2xl text-heading">
+    <div class="rounded-2xl bg-white border border-light-gray px-6 py-5 flex flex-col gap-3">
+      <h2 class="font-cookie text-2xl text-navy">
         ¿Qué significa esto?
       </h2>
-      <ul class="flex flex-col gap-2 text-sm text-theme-text leading-relaxed list-none m-0 p-0">
+      <ul class="flex flex-col gap-2 text-sm text-navy leading-relaxed list-none m-0 p-0">
         <li class="flex items-start gap-2.5">
-          <span aria-hidden="true" class="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+          <span aria-hidden="true" class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gold shrink-0"></span>
           <span>
             Tu lugar en la lista de invitados
-            <strong class="text-heading font-semibold">ya no está reservado</strong>
+            <strong class="text-navy font-semibold">ya no está reservado</strong>
             para esta celebración.
           </span>
         </li>
         <li class="flex items-start gap-2.5">
-          <span aria-hidden="true" class="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+          <span aria-hidden="true" class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gold shrink-0"></span>
           <span>
             Los novios han confirmado los arreglos finales con base en los RSVPs recibidos a tiempo.
           </span>
         </li>
         <li class="flex items-start gap-2.5">
-          <span aria-hidden="true" class="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent shrink-0"></span>
+          <span aria-hidden="true" class="mt-1.5 w-1.5 h-1.5 rounded-full bg-gold shrink-0"></span>
           <span>
             Si crees que hay un error,
-            <strong class="text-heading font-semibold">comunícate directamente</strong>
+            <strong class="text-navy font-semibold">comunícate directamente</strong>
             con los novios.
           </span>
         </li>
@@ -59,7 +59,7 @@
     <app-invitation-card [invitationUrl]="invitationUrl" />
 
     <footer class="text-center">
-      <p class="text-xs text-muted leading-relaxed max-w-md mx-auto">
+      <p class="text-xs text-stone leading-relaxed max-w-md mx-auto">
         Puedes seguir viendo la invitación como recuerdo, pero recuerda que ya no
         estás confirmado para asistir. Si tienes dudas, contacta a los novios.
       </p>
