@@ -14,9 +14,9 @@ export const WEDDING_INFO = {
   // Confirmación de asistencia
   confirmation: {
     /** Fecha límite ISO para comparaciones (fin del día local) */
-    deadline: '2026-08-15T23:59:59',
+    deadline: '2026-08-08T23:59:59',
     /** Texto legible mostrado al invitado */
-    deadlineLabel: '15 de agosto de 2026',
+    deadlineLabel: '8 de agosto de 2026',
   },
 
   // Fechas
