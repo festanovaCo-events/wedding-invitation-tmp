@@ -11,8 +11,15 @@ test('resolveThemeName uses an explicit theme before environment and default', (
 });
 
 test('resolveThemeName falls back to TEMPLATE_THEME and then default theme', () => {
-  assert.equal(resolveThemeName(undefined, { TEMPLATE_THEME: 'hojas-forest' }), 'hojas-forest');
-  assert.equal(resolveThemeName(undefined, {}), 'hojas-navy');
+  const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
+
+  try {
+    mkdirSync(path.join(root, 'src', 'app', 'themes'), { recursive: true });
+    assert.equal(resolveThemeName(undefined, { TEMPLATE_THEME: 'hojas-forest' }, root), 'hojas-forest');
+    assert.equal(resolveThemeName(undefined, {}, root), 'hojas-navy');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('resolveThemeName preserves the generated active theme when no input is provided', () => {
@@ -46,6 +53,55 @@ test('writeActiveThemeFile generates the active theme export', () => {
     assert.match(generated, /AUTO-GENERATED/);
     assert.match(generated, /TEMPLATE_HOJAS_FOREST as ACTIVE_THEME/);
     assert.match(generated, /template-hojas-forest\.theme/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('writeThemeVarsCss writes palette tokens for the selected theme', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
+
+  try {
+    const themesDir = path.join(root, 'src', 'app', 'themes');
+    mkdirSync(themesDir, { recursive: true });
+    writeFileSync(
+      path.join(themesDir, 'template-hojas-forest.theme.ts'),
+      readFileSync(path.join(__dirname, '../src/app/themes/template-hojas-forest.theme.ts'), 'utf8')
+    );
+
+    const { writeThemeVarsCss } = require('./select-theme');
+    const filePath = writeThemeVarsCss('hojas-forest', root);
+    const generated = readFileSync(filePath, 'utf8');
+
+    assert.match(generated, /AUTO-GENERATED/);
+    assert.match(generated, /--theme-primary:\s*#4A6360/);
+    assert.match(generated, /--theme-primary-soft:\s*#81948B/);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('updateSplashFallback writes the theme primarySoft into index.html', () => {
+  const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
+
+  try {
+    const themesDir = path.join(root, 'src', 'app', 'themes');
+    const srcDir = path.join(root, 'src');
+    mkdirSync(themesDir, { recursive: true });
+    writeFileSync(
+      path.join(themesDir, 'template-hojas-forest.theme.ts'),
+      readFileSync(path.join(__dirname, '../src/app/themes/template-hojas-forest.theme.ts'), 'utf8')
+    );
+    writeFileSync(
+      path.join(srcDir, 'index.html'),
+      '<div id="app-splash" style="background:var(--theme-primary-soft, #6c86ab)"></div>\n'
+    );
+
+    const { updateSplashFallback } = require('./select-theme');
+    updateSplashFallback('hojas-forest', root);
+    const html = readFileSync(path.join(srcDir, 'index.html'), 'utf8');
+
+    assert.match(html, /background:var\(--theme-primary-soft, #81948B\)/);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }
