@@ -13,5 +13,8 @@ export function isConfirmationDeadlinePassed(
 export function shouldShowExpiredInvitationPage(
   status: InvitationStatus | undefined,
 ): boolean {
-  return status === 'DECLINED' && isConfirmationDeadlinePassed();
+  return (
+    (status === 'DECLINED' && isConfirmationDeadlinePassed()) ||
+    (status === 'PENDING' && isConfirmationDeadlinePassed())
+  );
 }
