@@ -59,7 +59,7 @@ export class WeddingExpiredPageComponent implements OnInit, OnDestroy {
       const token = params['token'] as string | undefined;
 
       if (token) {
-        this.invitationUrl = `${window.location.origin}/?token=${encodeURIComponent(token)}`;
+        this.invitationUrl = `${window.location.origin}/invitations-wedding?token=${encodeURIComponent(token)}`;
         this.loadInvitation(token);
         return;
       }
@@ -67,7 +67,7 @@ export class WeddingExpiredPageComponent implements OnInit, OnDestroy {
       const existing = this.invitationStateService.getInvitationData();
       const existingToken = existing?.data.invitation.token;
       if (existingToken) {
-        this.invitationUrl = `${window.location.origin}/?token=${encodeURIComponent(existingToken)}`;
+        this.invitationUrl = `${window.location.origin}/invitations-wedding?token=${encodeURIComponent(existingToken)}`;
         if (existing?.data.invitation.name) {
           this.inviteeName = existing.data.invitation.name.split(' ')[0];
         }

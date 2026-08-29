@@ -76,7 +76,7 @@ export const WEDDING_INFO = {
   // Assets de video e imágenes
   assets: {
     bannerVideo: 'assets/images/banner-home/video-boda.mp4',
-    backgroundImage: '/assets/images/event-scheduler/img_lineas01.svg',
+    backgroundImage: 'assets/images/event-scheduler/img_lineas01.svg',
     instagramBackground: 'assets/images/banner-instagram/banner.jpeg',
     // publicId: para NgOptimizedImage (srcset automático, q_auto, f_auto) | full: lightbox Fancybox
     portraits: [
