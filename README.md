@@ -1,6 +1,9 @@
 # Wedding Invitation Template
 
-Proyecto Angular para una invitacion de boda con soporte para temas visuales, variables de entorno generadas, feature flags y mocks de API.
+Proyecto Angular para una invitacion de boda con soporte para temas visuales, variables de entorno generadas, feature flags y mocks de API. Forma parte de la plataforma FestanovaCo: el marketing vive en Next.js (`festanovaco-web`) y esta app se sirve en `festanovaco.com/invitations-wedding`.
+
+- Intención (objetivo, razones, arquitectura, alcance): [docs/arquitectura-festanovaco.md](./docs/arquitectura-festanovaco.md)
+- Spec técnica de rewrites y `baseHref`: [docs/superpowers/specs/2026-08-23-festanovaco-shell-rewrites-design.md](./docs/superpowers/specs/2026-08-23-festanovaco-shell-rewrites-design.md)
 
 ## Documentacion Principal
 
