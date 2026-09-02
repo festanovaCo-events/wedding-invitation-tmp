@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { LoaderHeartComponent } from '../../components/common/loader-heart/loader-heart.component';
 import { SplashMusicComponent } from '../../components/ui/lottie/splash-music/splash-music.component';
-import { FooterComponent } from "../../components/common/footer/footer.component";
+import { FooterComponent } from '../../components/common/footer/footer.component';
 import { WEDDING_INFO } from '../../constants/wedding-info';
 import { ModalFlowService } from '../../services/modal-flow.service';
 
@@ -29,8 +29,8 @@ import { ModalFlowService } from '../../services/modal-flow.service';
     RouterModule,
     LoaderHeartComponent,
     SplashMusicComponent,
-    FooterComponent
-],
+    FooterComponent,
+  ],
 })
 export class LayoutComponent implements OnInit {
   @ViewChild('modalContent', { static: false }) modalContent!: ElementRef;
@@ -50,12 +50,12 @@ export class LayoutComponent implements OnInit {
   constructor(
     private router: Router,
     private renderer: Renderer2,
-    private modalFlowService: ModalFlowService
+    private modalFlowService: ModalFlowService,
   ) {}
 
   ngOnInit(): void {
     this.startTime = Date.now();
-    
+
     const maxLoadTime = 5000;
     setTimeout(() => {
       if (this.isLoading) {

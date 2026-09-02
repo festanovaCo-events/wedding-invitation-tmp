@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { weddingPageRoute } from './app.routes.generated';
 
 export const routes: Routes = [
   {
@@ -11,15 +12,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () => import('./main/layout/layout.component').then((m) => m.LayoutComponent),
-    children: [
-      {
-        path: '',
-        loadComponent: () =>
-          import('./main/pages/wedding-page/wedding-page.component').then(
-            (m) => m.WeddingPageComponent
-          ),
-      },
-    ],
+    children: [weddingPageRoute],
   },
   {
     path: '**',

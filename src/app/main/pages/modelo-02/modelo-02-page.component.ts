@@ -1,41 +1,37 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { BannerHomeComponent } from '../../../components/wedding-components/banner-home/banner-home.component';
-import { WeddingCountdownComponent } from '../../../components/wedding-components/wedding-countdown/wedding-countdown.component';
-import { EventScheduleComponent } from '../../../components/wedding-components/event-schedule/event-schedule.component';
-import { PortraitsWrapperComponent } from '../../../components/wedding-components/portraits/portraits-wrapper.component';
-import { InstructionsComponent } from '../../../components/wedding-components/instructions/instructions.component';
-import { GiftsComponent } from '../../../components/wedding-components/gifts/gifts.component';
-import { BannerInstagramComponent } from '../../../components/wedding-components/banner-instagram/banner-instagram.component';
-import { ConfirmationsComponent } from '../../../components/wedding-components/confirmations/confirmations.component';
+import { WEDDING_INFO } from '../../../constants/wedding-info';
+import { MODELO_02_INFO } from '../../../constants/modelo-02-info';
 import { ModalComponent } from '../../../components/common/modal/modal.component';
 import { ModalFlowService } from '../../../services/modal-flow.service';
 import { InvitationService } from '../../../services/invitation.service';
 import { InvitationStateService } from '../../../services/invitation-state.service';
 import { shouldShowExpiredInvitationPage } from '../../../utils/confirmation-deadline';
+import { ContentConfirmationModalComponent } from '../../../components/contents/content-confirmation-modal/content-confirmation-modal.component';
 
 @Component({
-  selector: 'app-wedding-page',
+  selector: 'app-modelo-02-page',
   standalone: true,
-  imports: [
-    CommonModule,
-    BannerHomeComponent,
-    WeddingCountdownComponent,
-    EventScheduleComponent,
-    PortraitsWrapperComponent,
-    InstructionsComponent,
-    GiftsComponent,
-    BannerInstagramComponent,
-    ConfirmationsComponent,
-    ModalComponent,
-  ],
-  templateUrl: './wedding-page.component.html',
+  imports: [CommonModule, ModalComponent, ContentConfirmationModalComponent],
+  templateUrl: './modelo-02-page.component.html',
 })
-export class WeddingPageComponent implements OnInit, OnDestroy {
+export class Modelo02PageComponent implements OnInit, OnDestroy {
+  readonly weddingInfo = WEDDING_INFO;
+  readonly info = MODELO_02_INFO;
+  readonly assets = {
+    eucalyptusLeft: 'assets/images/modelo-02/eucalyptus-left.svg',
+    eucalyptusRight: 'assets/images/modelo-02/eucalyptus-right.svg',
+    tornEdgeTop: 'assets/images/modelo-02/torn-edge-top.svg',
+    tornEdgeBottom: 'assets/images/modelo-02/torn-edge-bottom.svg',
+  };
+
   showConfirmationGuide = false;
-  private readonly STORAGE_KEY = 'confirmation_guide_shown';
+  isConfirmationModalVisible = false;
+  reservedPasses = 2;
+
+  private readonly storageKey = 'confirmation_guide_shown';
   private welcomeAccepted = false;
   private invitationLoadPending = false;
   private isPreviewMode = false;
@@ -54,17 +50,20 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadInvitationData();
 
-    this.subscription = this.modalFlowService.welcomeModalAccepted$.subscribe(
-      () => {
-        this.welcomeAccepted = true;
-        this.tryShowConfirmationGuide();
-      },
-    );
+    this.subscription = this.modalFlowService.welcomeModalAccepted$.subscribe(() => {
+      this.welcomeAccepted = true;
+      this.tryShowConfirmationGuide();
+    });
 
     this.invitationDataSubscription = this.invitationStateService
       .getInvitationData$()
       .subscribe((data) => {
         this.invitationLoadPending = false;
+
+        const passes = data?.data.invitation.seats_reserved;
+        if (passes != null) {
+          this.reservedPasses = passes;
+        }
 
         const status = data?.data.invitation.status;
         if (!this.isPreviewMode && shouldShowExpiredInvitationPage(status)) {
@@ -86,19 +85,39 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.invitationDataSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+  }
+
+  openLocation(url: string): void {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  openConfirmation(): void {
+    this.closeGuide();
+    this.isConfirmationModalVisible = true;
+  }
+
+  closeGuide(): void {
+    this.dismissConfirmationGuide();
+  }
+
+  closeConfirmationModal(): void {
+    this.isConfirmationModalVisible = false;
+  }
+
   private shouldShowConfirmationGuide(): boolean {
-    if (localStorage.getItem(this.STORAGE_KEY)) {
+    if (localStorage.getItem(this.storageKey)) {
       return false;
     }
-
     if (this.invitationStateService.isConfirmed()) {
       return false;
     }
-
     if (this.invitationLoadPending) {
       return false;
     }
-
     return true;
   }
 
@@ -110,29 +129,27 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
 
   private dismissConfirmationGuide(): void {
     this.showConfirmationGuide = false;
-    localStorage.setItem(this.STORAGE_KEY, 'true');
+    localStorage.setItem(this.storageKey, 'true');
   }
 
   private loadInvitationData(): void {
     this.routeSubscription = this.route.queryParams.subscribe((params) => {
       this.isPreviewMode = params['preview'] === '1';
-      const invitation_token = params['token'];
+      const invitationToken = params['token'];
 
-      if (invitation_token) {
+      if (invitationToken) {
         this.invitationLoadPending = true;
         this.invitationStateService.setLoading(true);
         this.invitationStateService.setError(null);
 
-        this.invitationService.getInvitationInfo(invitation_token).subscribe({
+        this.invitationService.getInvitationInfo(invitationToken).subscribe({
           next: (response) => {
             this.invitationStateService.setInvitationData(response);
             this.invitationStateService.setLoading(false);
           },
           error: (error) => {
             console.error('Error al cargar datos de invitación:', error);
-            this.invitationStateService.setError(
-              'Error al cargar los datos de la invitación',
-            );
+            this.invitationStateService.setError('Error al cargar los datos de la invitación');
             this.invitationStateService.setLoading(false);
             this.invitationLoadPending = false;
 
@@ -143,20 +160,5 @@ export class WeddingPageComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-    this.invitationDataSubscription?.unsubscribe();
-    this.routeSubscription?.unsubscribe();
-  }
-
-  openConfirmation(): void {
-    this.closeGuide();
-    this.modalFlowService.requestOpenConfirmationModal();
-  }
-
-  closeGuide(): void {
-    this.dismissConfirmationGuide();
   }
 }
