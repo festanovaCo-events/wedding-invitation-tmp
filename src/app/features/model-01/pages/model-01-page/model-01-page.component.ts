@@ -1,17 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MODEL_02_INFO } from '../../constants/model-02-info';
-import { M02HeroComponent } from '../../components/hero/m02-hero.component';
-import { M02InvitationComponent } from '../../components/invitation/m02-invitation.component';
-import { M02EventsComponent } from '../../components/events/m02-events.component';
-import { M02TimelineComponent } from '../../components/timeline/m02-timeline.component';
-import { M02PassesComponent } from '../../components/passes/m02-passes.component';
-import { M02GiftsComponent } from '../../components/gifts/m02-gifts.component';
-import { M02RsvpComponent } from '../../components/rsvp/m02-rsvp.component';
-import { M02AdultsOnlyComponent } from '../../components/adults-only/m02-adults-only.component';
-import { M02FooterComponent } from '../../components/footer/m02-footer.component';
+import { M01BannerHomeComponent } from '../../components/banner-home/m01-banner-home.component';
+import { M01WeddingCountdownComponent } from '../../components/wedding-countdown/m01-wedding-countdown.component';
+import { M01EventScheduleComponent } from '../../components/event-schedule/m01-event-schedule.component';
+import { M01PortraitsWrapperComponent } from '../../components/portraits/m01-portraits-wrapper.component';
+import { M01InstructionsComponent } from '../../components/instructions/m01-instructions.component';
+import { M01GiftsComponent } from '../../components/gifts/m01-gifts.component';
+import { M01BannerInstagramComponent } from '../../components/banner-instagram/m01-banner-instagram.component';
+import { M01ConfirmationsComponent } from '../../components/confirmations/m01-confirmations.component';
 import { ModalComponent } from '../../../shared/components/common/modal/modal.component';
 import { ModalFlowService } from '../../../shared/services/modal-flow.service';
 import { InvitationService } from '../../../shared/services/invitation.service';
@@ -19,29 +17,25 @@ import { InvitationStateService } from '../../../shared/services/invitation-stat
 import { shouldShowExpiredInvitationPage } from '../../../shared/utils/confirmation-deadline';
 
 @Component({
-  selector: 'app-model-02-page',
+  selector: 'app-model-01-page',
   standalone: true,
   imports: [
     CommonModule,
-    M02HeroComponent,
-    M02InvitationComponent,
-    M02EventsComponent,
-    M02TimelineComponent,
-    M02PassesComponent,
-    M02GiftsComponent,
-    M02RsvpComponent,
-    M02AdultsOnlyComponent,
-    M02FooterComponent,
+    M01BannerHomeComponent,
+    M01WeddingCountdownComponent,
+    M01EventScheduleComponent,
+    M01PortraitsWrapperComponent,
+    M01InstructionsComponent,
+    M01GiftsComponent,
+    M01BannerInstagramComponent,
+    M01ConfirmationsComponent,
     ModalComponent,
   ],
-  templateUrl: './model-02-page.component.html',
+  templateUrl: './model-01-page.component.html',
 })
-export class Model02PageComponent implements OnInit, OnDestroy {
-  readonly assets = MODEL_02_INFO.assets;
-
+export class Model01PageComponent implements OnInit, OnDestroy {
   showConfirmationGuide = false;
-
-  private readonly storageKey = 'confirmation_guide_shown';
+  private readonly STORAGE_KEY = 'confirmation_guide_shown';
   private welcomeAccepted = false;
   private invitationLoadPending = false;
   private isPreviewMode = false;
@@ -81,8 +75,7 @@ export class Model02PageComponent implements OnInit, OnDestroy {
           return;
         }
 
-        const isDeclined = status === 'DECLINED';
-        if (this.invitationStateService.isConfirmed() || isDeclined) {
+        if (this.invitationStateService.isConfirmed()) {
           this.dismissConfirmationGuide();
           return;
         }
@@ -93,33 +86,12 @@ export class Model02PageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-    this.invitationDataSubscription?.unsubscribe();
-    this.routeSubscription?.unsubscribe();
-  }
-
-  openConfirmation(): void {
-    this.closeGuide();
-    this.modalFlowService.requestOpenConfirmationModal();
-  }
-
-  closeGuide(): void {
-    this.dismissConfirmationGuide();
-  }
-
   private shouldShowConfirmationGuide(): boolean {
-    if (localStorage.getItem(this.storageKey)) {
+    if (localStorage.getItem(this.STORAGE_KEY)) {
       return false;
     }
 
     if (this.invitationStateService.isConfirmed()) {
-      return false;
-    }
-
-    const status =
-      this.invitationStateService.getInvitationData()?.data.invitation.status;
-    if (status === 'DECLINED') {
       return false;
     }
 
@@ -138,20 +110,20 @@ export class Model02PageComponent implements OnInit, OnDestroy {
 
   private dismissConfirmationGuide(): void {
     this.showConfirmationGuide = false;
-    localStorage.setItem(this.storageKey, 'true');
+    localStorage.setItem(this.STORAGE_KEY, 'true');
   }
 
   private loadInvitationData(): void {
     this.routeSubscription = this.route.queryParams.subscribe((params) => {
       this.isPreviewMode = params['preview'] === '1';
-      const invitationToken = params['token'];
+      const invitation_token = params['token'];
 
-      if (invitationToken) {
+      if (invitation_token) {
         this.invitationLoadPending = true;
         this.invitationStateService.setLoading(true);
         this.invitationStateService.setError(null);
 
-        this.invitationService.getInvitationInfo(invitationToken).subscribe({
+        this.invitationService.getInvitationInfo(invitation_token).subscribe({
           next: (response) => {
             this.invitationStateService.setInvitationData(response);
             this.invitationStateService.setLoading(false);
@@ -171,5 +143,20 @@ export class Model02PageComponent implements OnInit, OnDestroy {
         });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+    this.invitationDataSubscription?.unsubscribe();
+    this.routeSubscription?.unsubscribe();
+  }
+
+  openConfirmation(): void {
+    this.closeGuide();
+    this.modalFlowService.requestOpenConfirmationModal();
+  }
+
+  closeGuide(): void {
+    this.dismissConfirmationGuide();
   }
 }

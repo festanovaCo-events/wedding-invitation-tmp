@@ -1,0 +1,28 @@
+<section class="m02-hero">
+  <div class="m02-hero__intro">
+    <img [src]="assets.eucalyptus" alt="" class="m02-botanical m02-botanical--top-right" aria-hidden="true" />
+
+    <p class="m02-quote">
+      @for (line of info.quote.lines; track line) {
+      <span class="m02-quote__line">{{ line }}</span>
+      }
+      <span class="m02-quote__ref">{{ info.quote.reference }}</span>
+    </p>
+
+    <div class="m02-monogram">
+      <span class="m02-monogram__letter">{{ info.monogram.letter1 }}</span>
+      <span class="m02-monogram__divider"></span>
+      <span class="m02-monogram__letter">{{ info.monogram.letter2 }}</span>
+    </div>
+    <p class="m02-monogram__subtitle">{{ info.monogram.subtitle }}</p>
+  </div>
+
+  <div class="m02-photo-frame m02-photo-frame--full">
+    <div class="m02-torn-container m02-torn-container--photo m02-torn-container--top m02-torn-container--bottom">
+      <div class="m02-torn-container__shadow" aria-hidden="true"></div>
+      <div class="m02-torn-container__content">
+        <img [src]="info.images.hero" alt="Foto de la pareja" class="m02-photo" />
+      </div>
+    </div>
+  </div>
+</section>

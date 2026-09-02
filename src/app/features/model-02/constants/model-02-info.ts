@@ -92,6 +92,11 @@ export const MODEL_02_INFO = {
     footer: 'assets/images/model-02/footer.png',
   },
 
+  assets: {
+    eucalyptus: 'assets/images/model-02/eucalyptus.png',
+    eucalyptusInvite: 'assets/images/model-02/eucalyptus-invite.png',
+  },
+
   colors: {
     primary: '#4A5D4E',
     primaryDark: '#3A4A3E',

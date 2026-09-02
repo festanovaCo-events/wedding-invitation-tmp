@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { ExpiredBannerComponent } from '../../../model-01/components/expired-banner/expired-banner.component';
-import { InvitationCardComponent } from '../../../model-01/components/invitation-card/invitation-card.component';
+import { M01ExpiredBannerComponent } from '../../../model-01/components/expired-banner/m01-expired-banner.component';
+import { M01InvitationCardComponent } from '../../../model-01/components/invitation-card/m01-invitation-card.component';
 import { WEDDING_INFO } from '../../constants/wedding-info';
 import { InvitationService } from '../../services/invitation.service';
 import { InvitationStateService } from '../../services/invitation-state.service';
@@ -12,7 +12,7 @@ import { shouldShowExpiredInvitationPage } from '../../utils/confirmation-deadli
 @Component({
   selector: 'app-wedding-expired-page',
   standalone: true,
-  imports: [CommonModule, ExpiredBannerComponent, InvitationCardComponent],
+  imports: [CommonModule, M01ExpiredBannerComponent, M01InvitationCardComponent],
   templateUrl: './wedding-expired-page.component.html',
   styleUrl: './wedding-expired-page.component.css',
 })

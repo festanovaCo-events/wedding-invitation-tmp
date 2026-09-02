@@ -65,8 +65,8 @@ test('writeAppRoutesGenerated points to the correct page component', () => {
     const filePath = writeAppRoutesGenerated('model-01', root);
     const contents = readFileSync(filePath, 'utf8');
 
-    assert.match(contents, /features\/model-01\/pages\/wedding-page/);
-    assert.match(contents, /WeddingPageComponent/);
+    assert.match(contents, /features\/model-01\/pages\/model-01-page/);
+    assert.match(contents, /Model01PageComponent/);
   } finally {
     rmSync(root, { recursive: true, force: true });
   }

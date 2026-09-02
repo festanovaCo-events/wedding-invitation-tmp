@@ -6,8 +6,8 @@ const DEFAULT_MODEL = 'model-01';
 const MODELS = {
   'model-01': {
     displayName: 'Model 01',
-    pageModulePath: './features/model-01/pages/wedding-page/wedding-page.component',
-    exportName: 'WeddingPageComponent',
+    pageModulePath: './features/model-01/pages/model-01-page/model-01-page.component',
+    exportName: 'Model01PageComponent',
     supportsThemes: true,
   },
   'model-02': {
