@@ -2,6 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HugeiconsIconComponent } from '@hugeicons/angular';
+import {
+  CheckmarkCircle02Icon,
+  ChurchIcon,
+  DrinkIcon,
+  FireworksIcon,
+  GiftIcon,
+  Mail01Icon,
+  MusicNote01Icon,
+  SpoonAndForkIcon,
+  TicketsIcon,
+  Time04Icon,
+} from '@hugeicons/core-free-icons';
 import { WEDDING_INFO } from '../../../shared/constants/wedding-info';
 import { MODEL_02_INFO } from '../../constants/model-02-info';
 import { ModalComponent } from '../../../shared/components/common/modal/modal.component';
@@ -14,18 +27,32 @@ import { shouldShowExpiredInvitationPage } from '../../../shared/utils/confirmat
 @Component({
   selector: 'app-model-02-page',
   standalone: true,
-  imports: [CommonModule, ModalComponent, ConfirmationModalHostComponent],
+  imports: [CommonModule, HugeiconsIconComponent, ModalComponent, ConfirmationModalHostComponent],
   templateUrl: './model-02-page.component.html',
 })
 export class Model02PageComponent implements OnInit, OnDestroy {
   readonly weddingInfo = WEDDING_INFO;
   readonly info = MODEL_02_INFO;
   readonly assets = {
-    eucalyptusLeft: 'assets/images/model-02/eucalyptus-left.svg',
-    eucalyptusRight: 'assets/images/model-02/eucalyptus-right.svg',
-    tornEdgeTop: 'assets/images/model-02/torn-edge-top.svg',
-    tornEdgeBottom: 'assets/images/model-02/torn-edge-bottom.svg',
+    eucalyptus: 'assets/images/model-02/eucalyptus.png',
+    eucalyptusInvite: 'assets/images/model-02/eucalyptus-invite.png',
   };
+
+  readonly icons = {
+    passes: TicketsIcon,
+    gift: GiftIcon,
+    envelope: Mail01Icon,
+    rsvp: CheckmarkCircle02Icon,
+  };
+
+  readonly timelineIcons = {
+    church: ChurchIcon,
+    cocktail: DrinkIcon,
+    fireworks: FireworksIcon,
+    dinner: SpoonAndForkIcon,
+    party: MusicNote01Icon,
+    clock: Time04Icon,
+  } as const;
 
   showConfirmationGuide = false;
   isConfirmationModalVisible = false;

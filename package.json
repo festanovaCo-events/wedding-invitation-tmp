@@ -34,6 +34,8 @@
     "@angular/platform-browser-dynamic": "^18.2.14",
     "@angular/router": "^18.2.14",
     "@fancyapps/ui": "^5.0.36",
+    "@hugeicons/angular": "^1.0.11",
+    "@hugeicons/core-free-icons": "^4.3.0",
     "@tailwindcss/postcss": "^4.2.0",
     "@types/jquery": "^3.5.33",
     "@types/slick-carousel": "^1.6.40",

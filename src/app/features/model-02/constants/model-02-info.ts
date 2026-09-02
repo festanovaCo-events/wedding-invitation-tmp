@@ -8,14 +8,20 @@ export const MODEL_02_INFO = {
   },
 
   quote: {
-    text: 'POR ENCIMA DE TODO, VÍSTANSE DE AMOR, QUE ES EL VÍNCULO PERFECTO.',
-    reference: 'COL 3:14-15',
+    lines: [
+      'POR ENCIMA DE TODO,',
+      'VÍSTANSE DE AMOR,',
+      'QUE ES EL VÍNCULO PERFECTO.',
+    ],
+    reference: 'COL. 3:14-15',
   },
 
   invitation: {
-    parentsText:
-      'CON NUESTRO AMOR, LA BENDICIÓN DE DIOS Y LA DE NUESTROS PADRES, TENEMOS EL HONOR DE INVITARTE A NUESTRA BODA',
-    parents: ['Padres del novio', 'Padres de la novia'],
+    intro: 'CON NUESTRO AMOR, LA BENDICIÓN DE DIOS Y LA DE NUESTROS PADRES',
+    groomParents: 'JORGE MESTRE Y CARMEN CASTRO',
+    brideParents: 'LUIS HERRERA Y ANA SOFÍA RUIZ',
+    weLabel: 'NOSOTROS',
+    cta: 'TENEMOS EL HONOR DE INVITARTE A NUESTRA BODA',
   },
 
   date: {
@@ -43,43 +49,47 @@ export const MODEL_02_INFO = {
   },
 
   timeline: [
-    { time: '5:00 PM', label: 'Ceremonia religiosa', icon: 'church' },
-    { time: '7:30 PM', label: 'Coctel de bienvenida', icon: 'cocktail' },
-    { time: '8:30 PM', label: 'Entrada de novios', icon: 'fireworks' },
-    { time: '9:00 PM', label: 'Banquete', icon: 'dinner' },
-    { time: '11:00 PM', label: 'Fiesta', icon: 'party' },
-    { time: '3:00 AM', label: 'Despedida', icon: 'clock' },
+    { time: '5:00 PM', label: 'Iglesia', icon: 'church' },
+    { time: '6:30 PM', label: 'Coctel de bienvenida', icon: 'cocktail' },
+    { time: '7:45 PM', label: 'Entrada de novios', icon: 'fireworks' },
+    { time: '8:00 PM', label: 'Banquete', icon: 'dinner' },
+    { time: '9:00 PM', label: 'Fiesta', icon: 'party' },
+    { time: '3:30 AM', label: 'Despedida', icon: 'clock' },
   ],
 
   passes: {
     label: 'PASES',
-    text: 'TENEMOS RESERVADOS PARA TI',
+    reservedLabel: 'TENEMOS RESERVADOS',
+    forYou: 'PARA TI',
     suffix: 'LUGARES',
   },
 
   gifts: {
     title: 'SUGERENCIA DE REGALO',
     description:
-      'Su presencia es nuestro mayor regalo. Si desean obsequiarnos algo, agradeceríamos su colaboración en nuestra lluvia de sobres para comenzar nuestra nueva vida juntos.',
+      'SI DESEAN HACERNOS UN PRESENTE, PUEDEN AYUDARNOS EN NUESTRO SUEÑO DE COMPRAR UNA CASA. ¡TODO SUMA!',
+    note: 'LLUVIA DE SOBRES',
   },
 
   rsvp: {
-    text: 'POR FAVOR CONFIRMAR ANTES DEL',
-    buttonText: 'ENVIAR MENSAJE',
+    title: 'CONFIRMACIÓN',
+    text: 'AGRADECEMOS QUE CONFIRMES TU ASISTENCIA ANTES DEL',
+    buttonText: 'CONFIRMAR ASISTENCIA',
   },
 
-  adultsOnly:
-    'ADORAMOS A SUS HIJOS, PERO CREEMOS QUE NECESITAN UNA NOCHE LIBRE... SÓLO ADULTOS, POR FAVOR',
+  adultsOnly: {
+    text: 'ADORAMOS A SUS HIJOS, PERO CREEMOS QUE NECESITAN UNA NOCHE LIBRE.',
+    emphasis: 'SÓLO ADULTOS, POR FAVOR',
+  },
 
   closing: {
-    text: 'ESPERAMOS CONTAR CON SU PRESENCIA. MUCHAS GRACIAS.',
+    line1: 'ESPERAMOS CONTAR CON SU PRESENCIA',
+    line2: 'MUCHAS GRACIAS',
   },
 
   images: {
-    hero:
-      'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80',
-    footer:
-      'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=1200&q=80',
+    hero: 'assets/images/model-02/hero.png',
+    footer: 'assets/images/model-02/footer.png',
   },
 
   colors: {

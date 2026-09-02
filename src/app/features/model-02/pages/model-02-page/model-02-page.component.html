@@ -2,38 +2,56 @@
 
   <!-- HERO -->
   <section class="m02-hero">
-    <img [src]="assets.eucalyptusRight" alt="" class="m02-botanical m02-botanical--top-right" aria-hidden="true" />
+    <div class="m02-hero__intro">
+      <img [src]="assets.eucalyptus" alt="" class="m02-botanical m02-botanical--top-right" aria-hidden="true" />
 
-    <p class="m02-quote">
-      {{ info.quote.text }}
-      <span class="m02-quote__ref">{{ info.quote.reference }}</span>
-    </p>
+      <p class="m02-quote">
+        @for (line of info.quote.lines; track line) {
+        <span class="m02-quote__line">{{ line }}</span>
+        }
+        <span class="m02-quote__ref">{{ info.quote.reference }}</span>
+      </p>
 
-    <div class="m02-monogram">
-      <span class="m02-monogram__letter">{{ info.monogram.letter1 }}</span>
-      <span class="m02-monogram__divider"></span>
-      <span class="m02-monogram__letter">{{ info.monogram.letter2 }}</span>
+      <div class="m02-monogram">
+        <span class="m02-monogram__letter">{{ info.monogram.letter1 }}</span>
+        <span class="m02-monogram__divider"></span>
+        <span class="m02-monogram__letter">{{ info.monogram.letter2 }}</span>
+      </div>
+      <p class="m02-monogram__subtitle">{{ info.monogram.subtitle }}</p>
     </div>
-    <p class="m02-monogram__subtitle">{{ info.monogram.subtitle }}</p>
 
-    <div class="m02-photo-frame">
-      <img [src]="assets.tornEdgeTop" alt="" class="m02-torn m02-torn--top" aria-hidden="true" />
-      <img [src]="info.images.hero" alt="Foto de la pareja" class="m02-photo" />
-      <img [src]="assets.tornEdgeBottom" alt="" class="m02-torn m02-torn--bottom" aria-hidden="true" />
+    <div class="m02-photo-frame m02-photo-frame--full">
+      <div class="m02-torn-container m02-torn-container--photo m02-torn-container--top m02-torn-container--bottom">
+        <div class="m02-torn-container__shadow" aria-hidden="true"></div>
+        <div class="m02-torn-container__content">
+          <img [src]="info.images.hero" alt="Foto de la pareja" class="m02-photo" />
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- INVITACIÓN -->
   <section class="m02-invitation">
-    <img [src]="assets.eucalyptusLeft" alt="" class="m02-botanical m02-botanical--mid-left" aria-hidden="true" />
+    <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--invite-right" aria-hidden="true" />
+    <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--invite-left" aria-hidden="true" />
 
-    <p class="m02-parents-text">{{ info.invitation.parentsText }}</p>
+    <p class="m02-invite-intro">{{ info.invitation.intro }}</p>
+
+    <div class="m02-parents">
+      <p class="m02-parents__name">{{ info.invitation.groomParents }}</p>
+      <p class="m02-parents__y">y</p>
+      <p class="m02-parents__name">{{ info.invitation.brideParents }}</p>
+    </div>
+
+    <p class="m02-we-label">{{ info.invitation.weLabel }}</p>
 
     <h1 class="m02-couple-names">
-      {{ weddingInfo.couple.wifeName }} <span class="m02-amp">&</span> {{ weddingInfo.couple.husbandName }}
+      <span class="m02-couple-names__wife">{{ weddingInfo.couple.wifeName }}</span>
+      <span class="m02-amp" aria-hidden="true">&</span>
+      <span class="m02-couple-names__husband">{{ weddingInfo.couple.husbandName }}</span>
     </h1>
 
-    <p class="m02-invite-cta">TENEMOS EL HONOR DE INVITARTE A NUESTRA BODA</p>
+    <p class="m02-invite-cta">{{ info.invitation.cta }}</p>
 
     <div class="m02-date-block">
       <span class="m02-date-block__month">{{ info.date.month }}</span>
@@ -43,120 +61,138 @@
         <span class="m02-date-block__year">{{ info.date.year }}</span>
       </div>
     </div>
-
-    <img [src]="assets.eucalyptusRight" alt="" class="m02-botanical m02-botanical--mid-right" aria-hidden="true" />
   </section>
 
   <!-- EVENTOS -->
   <section class="m02-events">
     @for (event of [info.events.ceremony, info.events.reception]; track event.title) {
-      <div class="m02-event-card">
-        <h2 class="m02-event-card__title">{{ event.title }}</h2>
-        <p class="m02-event-card__time">{{ event.time }}</p>
-        <p class="m02-event-card__place">{{ event.place }}</p>
-        <p class="m02-event-card__address">{{ event.address }}</p>
-        <button type="button" class="m02-btn" (click)="openLocation(event.mapsUrl)">
-          VER UBICACIÓN
-        </button>
-      </div>
+    <div class="m02-event-card">
+      <h2 class="m02-event-card__title">{{ event.title }}</h2>
+      <p class="m02-event-card__time">{{ event.time }}</p>
+      <p class="m02-event-card__place">{{ event.place }}</p>
+      <p class="m02-event-card__address">{{ event.address }}</p>
+      <button type="button" class="m02-btn" (click)="openLocation(event.mapsUrl)">
+        VER UBICACIÓN
+      </button>
+    </div>
     }
   </section>
 
   <!-- TIMELINE -->
-  <section class="m02-timeline">
-    <img [src]="assets.tornEdgeTop" alt="" class="m02-torn m02-torn--top m02-torn--sage" aria-hidden="true" />
-
-    <div class="m02-timeline__inner">
-      <h2 class="m02-timeline__heading">ITINERARIO</h2>
-      <div class="m02-timeline__list">
-        @for (item of info.timeline; track item.label) {
+  <div class="m02-torn-container m02-torn-container--top m02-torn-container--bottom m02-torn-container--sage">
+    <div class="m02-torn-container__shadow" aria-hidden="true"></div>
+    <section class="m02-timeline m02-torn-container__content">
+      <div class="m02-timeline__inner">
+        <h2 class="m02-timeline__heading">ITINERARIO</h2>
+        <div class="m02-timeline__list">
+          <span class="m02-timeline__dot m02-timeline__dot--start" aria-hidden="true"></span>
+          @for (item of info.timeline; track item.label) {
           <div class="m02-timeline__item">
             <div class="m02-timeline__icon" [attr.data-icon]="item.icon">
-              @switch (item.icon) {
-                @case ('church') {
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3L4 9v12h16V9L12 3z"/><path d="M9 21v-6h6v6"/></svg>
-                }
-                @case ('cocktail') {
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2h8l-4 10v8"/><path d="M6 22h12"/><path d="M5 2l7 10"/></svg>
-                }
-                @case ('fireworks') {
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                }
-                @case ('dinner') {
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
-                }
-                @case ('party') {
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
-                }
-                @case ('clock') {
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
-                }
-              }
+              <hugeicons-icon
+                [icon]="timelineIcons[item.icon]"
+                [size]="28"
+                color="currentColor"
+                [strokeWidth]="1.35"
+              ></hugeicons-icon>
             </div>
+            <span class="m02-timeline__tick" aria-hidden="true"></span>
             <div class="m02-timeline__content">
               <span class="m02-timeline__time">{{ item.time }}</span>
               <span class="m02-timeline__label">{{ item.label }}</span>
             </div>
           </div>
-        }
+          }
+          <span class="m02-timeline__dot m02-timeline__dot--end" aria-hidden="true"></span>
+        </div>
       </div>
-    </div>
-
-    <img [src]="assets.tornEdgeBottom" alt="" class="m02-torn m02-torn--bottom m02-torn--sage" aria-hidden="true" />
-  </section>
+    </section>
+  </div>
 
   <!-- LOGÍSTICA -->
   <section class="m02-logistics">
+    <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--logistics-right" aria-hidden="true" />
+
     <div class="m02-passes">
       <div class="m02-passes__icon" aria-hidden="true">
-        <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="2" y="4" width="20" height="24" rx="2"/><rect x="26" y="4" width="20" height="24" rx="2"/>
-          <path d="M8 12h8M8 18h6M32 12h8M32 18h6"/>
-        </svg>
+        <hugeicons-icon
+          [icon]="icons.passes"
+          [size]="40"
+          color="currentColor"
+          [strokeWidth]="1.4"
+        ></hugeicons-icon>
       </div>
-      <p class="m02-passes__text">
-        <strong>{{ info.passes.label }}</strong>
-        {{ info.passes.text }}
-        <span class="m02-passes__count">[ {{ reservedPasses }} ]</span>
-        {{ info.passes.suffix }}
+      <h3 class="m02-passes__label">{{ info.passes.label }}</h3>
+      <p class="m02-passes__reserved">{{ info.passes.reservedLabel }}</p>
+      <p class="m02-passes__row">
+        <span>{{ info.passes.forYou }}</span>
+        <span class="m02-passes__count">{{ reservedPasses }}</span>
+        <span>{{ info.passes.suffix }}</span>
       </p>
     </div>
 
     <div class="m02-gifts">
       <div class="m02-gifts__icon" aria-hidden="true">
-        <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="4" y="16" width="32" height="20" rx="2"/><path d="M20 16V36M4 22h32"/>
-          <path d="M20 16c-4-6-12-4-8 0s8 0 8 0c4-6 12-4 8 0s-8 0-8 0"/>
-        </svg>
+        <hugeicons-icon
+          [icon]="icons.gift"
+          [size]="40"
+          color="currentColor"
+          [strokeWidth]="1.4"
+        ></hugeicons-icon>
       </div>
       <h3 class="m02-gifts__title">{{ info.gifts.title }}</h3>
       <p class="m02-gifts__desc">{{ info.gifts.description }}</p>
+      <p class="m02-gifts__note">{{ info.gifts.note }}</p>
+      <div class="m02-gifts__envelope" aria-hidden="true">
+        <hugeicons-icon
+          [icon]="icons.envelope"
+          [size]="28"
+          color="currentColor"
+          [strokeWidth]="1.4"
+        ></hugeicons-icon>
+      </div>
     </div>
 
     <div class="m02-rsvp">
       <div class="m02-rsvp__icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-        </svg>
+        <hugeicons-icon
+          [icon]="icons.rsvp"
+          [size]="36"
+          color="currentColor"
+          [strokeWidth]="1.4"
+        ></hugeicons-icon>
       </div>
+      <h3 class="m02-rsvp__title">{{ info.rsvp.title }}</h3>
       <p class="m02-rsvp__text">
-        {{ info.rsvp.text }} <strong>{{ weddingInfo.confirmation.deadlineLabel | uppercase }}</strong>
+        {{ info.rsvp.text }}
+        <strong>{{ weddingInfo.confirmation.deadlineLabel | uppercase }}</strong>
       </p>
-      <button type="button" class="m02-btn m02-btn--large" (click)="openConfirmation()">
+      <button type="button" class="m02-btn m02-btn--pill" (click)="openConfirmation()">
         {{ info.rsvp.buttonText }}
       </button>
     </div>
 
-    <p class="m02-adults-only">{{ info.adultsOnly }}</p>
+    <div class="m02-adults-only">
+      <p class="m02-adults-only__text">{{ info.adultsOnly.text }}</p>
+      <p class="m02-adults-only__emphasis">{{ info.adultsOnly.emphasis }}</p>
+    </div>
   </section>
 
   <!-- FOOTER -->
   <section class="m02-footer">
-    <p class="m02-closing">{{ info.closing.text }}</p>
+    <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--footer" aria-hidden="true" />
+    <p class="m02-closing">
+      <span>{{ info.closing.line1 }}</span>
+      <span>{{ info.closing.line2 }}</span>
+    </p>
 
-    <div class="m02-photo-frame m02-photo-frame--footer">
-      <img [src]="assets.tornEdgeTop" alt="" class="m02-torn m02-torn--top" aria-hidden="true" />
-      <img [src]="info.images.footer" alt="Foto de despedida" class="m02-photo" />
+    <div class="m02-photo-frame m02-photo-frame--full">
+      <div class="m02-torn-container m02-torn-container--photo m02-torn-container--top">
+        <div class="m02-torn-container__shadow" aria-hidden="true"></div>
+        <div class="m02-torn-container__content">
+          <img [src]="info.images.footer" alt="Foto de despedida" class="m02-photo" />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -173,7 +209,4 @@
 </app-modal>
 
 <!-- Modal confirmación -->
-<app-confirmation-modal-host
-  [show]="isConfirmationModalVisible"
-  (close)="closeConfirmationModal()"
-/>
+<app-confirmation-modal-host [show]="isConfirmationModalVisible" (close)="closeConfirmationModal()" />
