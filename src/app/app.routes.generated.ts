@@ -4,7 +4,7 @@ import { Routes } from '@angular/router';
 export const weddingPageRoute = {
   path: '',
   loadComponent: () =>
-    import('./main/pages/modelo-02/modelo-02-page.component').then((m) => m.Modelo02PageComponent),
+    import('./features/model-02/pages/model-02-page/model-02-page.component').then((m) => m.Model02PageComponent),
 };
 
 export const generatedRoutes: Routes = [weddingPageRoute];

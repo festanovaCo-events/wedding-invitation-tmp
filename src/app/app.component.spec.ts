@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { ACTIVE_THEME } from './themes/active-theme';
+import { ACTIVE_THEME } from './features/shared/themes/active-theme';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
