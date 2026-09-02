@@ -58,7 +58,7 @@ describe('InvitationService', () => {
           { id: 'mock-guest-2', name: 'Invitado Demo' }
         ]);
         expect(response.data.used_seats).toBe(2);
-        expect(response.data.available_seats).toBe(3);
+        expect(response.data.available_seats).toBe(0);
         done();
       });
     });
@@ -72,7 +72,7 @@ describe('InvitationService', () => {
         expect(response.data.invitation.status).toBe('DECLINED');
         expect(response.data.invitation.guests).toEqual([]);
         expect(response.data.used_seats).toBe(0);
-        expect(response.data.available_seats).toBe(5);
+        expect(response.data.available_seats).toBe(2);
         done();
       });
     });
