@@ -1,0 +1,18 @@
+/* Contenedor tipo Formdate: 100% móvil, tope 1280px en desktop */
+.m01-page {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  overflow-x: clip;
+  background: #fff;
+}
+
+html:has(.m01-page) {
+  background: #ecebe6;
+}
+
+html:has(.m01-page) app-footer > footer {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+}

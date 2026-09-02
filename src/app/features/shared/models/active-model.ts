@@ -2,9 +2,9 @@
 import type { WeddingModel } from './model.types';
 
 export const ACTIVE_MODEL: WeddingModel = {
-  name: 'model-02',
-  displayName: 'Model 02',
-  pageModulePath: './features/model-02/pages/model-02-page/model-02-page.component',
-  exportName: 'Model02PageComponent',
-  supportsThemes: false,
+  name: 'model-01',
+  displayName: 'Model 01',
+  pageModulePath: './features/model-01/pages/wedding-page/wedding-page.component',
+  exportName: 'WeddingPageComponent',
+  supportsThemes: true,
 };
