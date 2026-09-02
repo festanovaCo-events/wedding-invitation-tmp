@@ -745,6 +745,15 @@ html:has(.m02-page) app-footer > footer {
   font-weight: 700;
 }
 
+.m02-rsvp app-confirmation-status,
+.m02-rsvp app-declined-status,
+.m02-rsvp app-error-status {
+  display: block;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
 .m02-adults-only {
   max-width: 300px;
   margin: 0 auto;

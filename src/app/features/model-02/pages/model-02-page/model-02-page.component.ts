@@ -19,15 +19,27 @@ import { WEDDING_INFO } from '../../../shared/constants/wedding-info';
 import { MODEL_02_INFO } from '../../constants/model-02-info';
 import { ModalComponent } from '../../../shared/components/common/modal/modal.component';
 import { ConfirmationModalHostComponent } from '../../../shared/components/confirmations/confirmation-modal-host.component';
+import { ConfirmationStatusComponent } from '../../../model-01/components/confirmations/confirmation-status/confirmation-status.component';
+import { DeclinedStatusComponent } from '../../../model-01/components/confirmations/declined-status/declined-status.component';
+import { ErrorStatusComponent } from '../../../model-01/components/confirmations/error-status/error-status.component';
 import { ModalFlowService } from '../../../shared/services/modal-flow.service';
 import { InvitationService } from '../../../shared/services/invitation.service';
 import { InvitationStateService } from '../../../shared/services/invitation-state.service';
+import { InvitationInfoResponse } from '../../../shared/interfaces/invitation.interface';
 import { shouldShowExpiredInvitationPage } from '../../../shared/utils/confirmation-deadline';
 
 @Component({
   selector: 'app-model-02-page',
   standalone: true,
-  imports: [CommonModule, HugeiconsIconComponent, ModalComponent, ConfirmationModalHostComponent],
+  imports: [
+    CommonModule,
+    HugeiconsIconComponent,
+    ModalComponent,
+    ConfirmationModalHostComponent,
+    ConfirmationStatusComponent,
+    DeclinedStatusComponent,
+    ErrorStatusComponent,
+  ],
   templateUrl: './model-02-page.component.html',
 })
 export class Model02PageComponent implements OnInit, OnDestroy {
@@ -57,6 +69,10 @@ export class Model02PageComponent implements OnInit, OnDestroy {
   showConfirmationGuide = false;
   isConfirmationModalVisible = false;
   reservedPasses = 2;
+  invitationData: InvitationInfoResponse | null = null;
+  isConfirmed = false;
+  isDeclined = false;
+  error: string | null = null;
 
   private readonly storageKey = 'confirmation_guide_shown';
   private welcomeAccepted = false;
@@ -64,6 +80,7 @@ export class Model02PageComponent implements OnInit, OnDestroy {
   private isPreviewMode = false;
   private subscription?: Subscription;
   private invitationDataSubscription?: Subscription;
+  private errorSubscription?: Subscription;
   private routeSubscription?: Subscription;
 
   constructor(
@@ -76,16 +93,28 @@ export class Model02PageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadInvitationData();
+    this.error = this.invitationStateService.getError();
 
     this.subscription = this.modalFlowService.welcomeModalAccepted$.subscribe(() => {
       this.welcomeAccepted = true;
       this.tryShowConfirmationGuide();
     });
 
+    this.errorSubscription = this.invitationStateService.getError$().subscribe((error) => {
+      this.error = error;
+      if (error) {
+        this.isConfirmationModalVisible = false;
+        this.dismissConfirmationGuide();
+      }
+    });
+
     this.invitationDataSubscription = this.invitationStateService
       .getInvitationData$()
       .subscribe((data) => {
         this.invitationLoadPending = false;
+        this.invitationData = data;
+        this.isConfirmed = data?.data.invitation.status === 'ACCEPTED';
+        this.isDeclined = data?.data.invitation.status === 'DECLINED';
 
         const passes = data?.data.invitation.seats_reserved;
         if (passes != null) {
@@ -101,7 +130,7 @@ export class Model02PageComponent implements OnInit, OnDestroy {
           return;
         }
 
-        if (this.invitationStateService.isConfirmed()) {
+        if (this.isConfirmed || this.isDeclined) {
           this.dismissConfirmationGuide();
           return;
         }
@@ -115,7 +144,12 @@ export class Model02PageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
     this.invitationDataSubscription?.unsubscribe();
+    this.errorSubscription?.unsubscribe();
     this.routeSubscription?.unsubscribe();
+  }
+
+  get canConfirm(): boolean {
+    return !this.isConfirmed && !this.isDeclined && !this.error;
   }
 
   openLocation(url: string): void {
@@ -123,6 +157,9 @@ export class Model02PageComponent implements OnInit, OnDestroy {
   }
 
   openConfirmation(): void {
+    if (!this.canConfirm) {
+      return;
+    }
     this.closeGuide();
     this.isConfirmationModalVisible = true;
   }
@@ -139,7 +176,7 @@ export class Model02PageComponent implements OnInit, OnDestroy {
     if (localStorage.getItem(this.storageKey)) {
       return false;
     }
-    if (this.invitationStateService.isConfirmed()) {
+    if (this.isConfirmed || this.isDeclined || this.error) {
       return false;
     }
     if (this.invitationLoadPending) {
@@ -179,10 +216,6 @@ export class Model02PageComponent implements OnInit, OnDestroy {
             this.invitationStateService.setError('Error al cargar los datos de la invitación');
             this.invitationStateService.setLoading(false);
             this.invitationLoadPending = false;
-
-            if (this.welcomeAccepted) {
-              this.tryShowConfirmationGuide();
-            }
           },
         });
       }

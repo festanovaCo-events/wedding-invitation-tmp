@@ -99,11 +99,15 @@ export class InvitationMockApiService {
           token: invitationToken,
           status: 'PENDING',
           responded_at: null,
-          guests: []
+          // Mantener el titular en la lista de acompañantes del mock
+          guests: template.data.invitation.guests?.length
+            ? template.data.invitation.guests
+            : [{ id: 'mock-guest-1', name: template.data.invitation.name }],
         },
-        used_seats: 0,
-        available_seats: template.data.total_seats
-      }
+        used_seats: Math.max(1, template.data.used_seats || 1),
+        available_seats: template.data.total_seats,
+        total_seats: template.data.total_seats,
+      },
     };
   }
 

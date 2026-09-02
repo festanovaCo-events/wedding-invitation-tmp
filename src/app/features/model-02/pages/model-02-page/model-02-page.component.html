@@ -154,22 +154,30 @@
     </div>
 
     <div class="m02-rsvp">
-      <div class="m02-rsvp__icon" aria-hidden="true">
-        <hugeicons-icon
-          [icon]="icons.rsvp"
-          [size]="36"
-          color="currentColor"
-          [strokeWidth]="1.4"
-        ></hugeicons-icon>
-      </div>
-      <h3 class="m02-rsvp__title">{{ info.rsvp.title }}</h3>
-      <p class="m02-rsvp__text">
-        {{ info.rsvp.text }}
-        <strong>{{ weddingInfo.confirmation.deadlineLabel | uppercase }}</strong>
-      </p>
-      <button type="button" class="m02-btn m02-btn--pill" (click)="openConfirmation()">
-        {{ info.rsvp.buttonText }}
-      </button>
+      @if (isConfirmed) {
+        <app-confirmation-status [invitationData]="invitationData"></app-confirmation-status>
+      } @else if (isDeclined) {
+        <app-declined-status></app-declined-status>
+      } @else if (error) {
+        <app-error-status [error]="error"></app-error-status>
+      } @else {
+        <div class="m02-rsvp__icon" aria-hidden="true">
+          <hugeicons-icon
+            [icon]="icons.rsvp"
+            [size]="36"
+            color="currentColor"
+            [strokeWidth]="1.4"
+          ></hugeicons-icon>
+        </div>
+        <h3 class="m02-rsvp__title">{{ info.rsvp.title }}</h3>
+        <p class="m02-rsvp__text">
+          {{ info.rsvp.text }}
+          <strong>{{ weddingInfo.confirmation.deadlineLabel | uppercase }}</strong>
+        </p>
+        <button type="button" class="m02-btn m02-btn--pill" (click)="openConfirmation()">
+          {{ info.rsvp.buttonText }}
+        </button>
+      }
     </div>
 
     <div class="m02-adults-only">
