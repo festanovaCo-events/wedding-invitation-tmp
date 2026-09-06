@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const buildDir = path.join(__dirname, '..', 'dist', 'wedding-invitation-tmp', 'browser');
+const buildDir = path.join(__dirname, '..', 'dist', 'wedding-model-01', 'browser');
 const filesToCopy = [
   { src: '.htaccess', dest: '.htaccess' },
   { src: '_headers', dest: '_headers' }

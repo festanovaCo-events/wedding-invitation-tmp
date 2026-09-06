@@ -11,7 +11,7 @@ import { applyThemeStyleProperties } from './features/shared/themes/theme-utils'
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-  title = 'wedding-invitation-tmp';
+  title = 'wedding-model-01';
 
   ngOnInit(): void {
     applyThemeStyleProperties(ACTIVE_THEME, document.documentElement);

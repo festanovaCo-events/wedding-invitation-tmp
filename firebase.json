@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/wedding-invitation-tmp/browser",
+    "public": "dist/wedding-model-01/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

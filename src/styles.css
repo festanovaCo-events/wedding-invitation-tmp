@@ -2,7 +2,6 @@
 @import "ngx-toastr/toastr";
 @import "./theme-vars.generated.css";
 @import "./styles/model-01.css";
-@import "./styles/model-02.css";
 
 @font-face {
   font-family: 'Open Sans';
