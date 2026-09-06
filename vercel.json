@@ -1,28 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "wedding-invitations-m01.festanovaco.com"
-        }
-      ],
-      "destination": "https://festanovaco.com/invitations-wedding-model-01",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "wedding-invitations-m01.festanovaco.com"
-        }
-      ],
-      "destination": "https://festanovaco.com/invitations-wedding-model-01/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/invitations-wedding-model-01/(.*\\..*)",
@@ -36,5 +12,7 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ]
+  ],
+  "buildCommand": "NODE_OPTIONS=--max-old-space-size=6144 npm run build",
+  "framework": null
 }
