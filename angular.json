@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "baseHref": "/invitations-wedding/",
+            "baseHref": "/invitations-wedding-model-01/",
             "outputPath": "dist/wedding-model-01",
             "index": "src/index.html",
             "browser": "src/main.ts",
