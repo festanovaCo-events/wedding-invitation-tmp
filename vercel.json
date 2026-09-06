@@ -1,11 +1,11 @@
 {
   "rewrites": [
     {
-      "source": "/invitations-wedding/(.*\\..*)",
+      "source": "/invitations-wedding-model-01/(.*\\..*)",
       "destination": "/$1"
     },
     {
-      "source": "/invitations-wedding/(.*)",
+      "source": "/invitations-wedding-model-01/(.*)",
       "destination": "/index.html"
     },
     {
