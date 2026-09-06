@@ -1,28 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/invitations-wedding",
-      "has": [
-        {
-          "type": "host",
-          "value": "wedding-invitations-m01.festanovaco.com"
-        }
-      ],
-      "destination": "https://festanovaco.com/invitations-wedding-model-01",
-      "permanent": true
-    },
-    {
-      "source": "/invitations-wedding/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "wedding-invitations-m01.festanovaco.com"
-        }
-      ],
-      "destination": "https://festanovaco.com/invitations-wedding-model-01/:path*",
-      "permanent": true
-    },
-    {
       "source": "/",
       "has": [
         {
