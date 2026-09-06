@@ -14,7 +14,7 @@ test('resolveThemeName falls back to TEMPLATE_THEME and then default theme', () 
   const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
 
   try {
-    mkdirSync(path.join(root, 'src', 'app', 'themes'), { recursive: true });
+    mkdirSync(path.join(root, 'src', 'app', 'features', 'shared', 'themes'), { recursive: true });
     assert.equal(resolveThemeName(undefined, { TEMPLATE_THEME: 'hojas-forest' }, root), 'hojas-forest');
     assert.equal(resolveThemeName(undefined, {}, root), 'hojas-navy');
   } finally {
@@ -24,7 +24,7 @@ test('resolveThemeName falls back to TEMPLATE_THEME and then default theme', () 
 
 test('resolveThemeName preserves the generated active theme when no input is provided', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
-  const themesDir = path.join(root, 'src', 'app', 'themes');
+  const themesDir = path.join(root, 'src', 'app', 'features', 'shared', 'themes');
 
   try {
     mkdirSync(themesDir, { recursive: true });
@@ -62,11 +62,11 @@ test('writeThemeVarsCss writes palette tokens for the selected theme', () => {
   const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
 
   try {
-    const themesDir = path.join(root, 'src', 'app', 'themes');
+    const themesDir = path.join(root, 'src', 'app', 'features', 'shared', 'themes');
     mkdirSync(themesDir, { recursive: true });
     writeFileSync(
       path.join(themesDir, 'template-hojas-forest.theme.ts'),
-      readFileSync(path.join(__dirname, '../src/app/themes/template-hojas-forest.theme.ts'), 'utf8')
+      readFileSync(path.join(__dirname, '../src/app/features/shared/themes/template-hojas-forest.theme.ts'), 'utf8')
     );
 
     const { writeThemeVarsCss } = require('./select-theme');
@@ -85,12 +85,12 @@ test('updateSplashFallback writes the theme primarySoft into index.html', () => 
   const root = mkdtempSync(path.join(tmpdir(), 'theme-test-'));
 
   try {
-    const themesDir = path.join(root, 'src', 'app', 'themes');
+    const themesDir = path.join(root, 'src', 'app', 'features', 'shared', 'themes');
     const srcDir = path.join(root, 'src');
     mkdirSync(themesDir, { recursive: true });
     writeFileSync(
       path.join(themesDir, 'template-hojas-forest.theme.ts'),
-      readFileSync(path.join(__dirname, '../src/app/themes/template-hojas-forest.theme.ts'), 'utf8')
+      readFileSync(path.join(__dirname, '../src/app/features/shared/themes/template-hojas-forest.theme.ts'), 'utf8')
     );
     writeFileSync(
       path.join(srcDir, 'index.html'),
