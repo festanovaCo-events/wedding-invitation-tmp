@@ -15,10 +15,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'wedding-invitation-tmp' title`, () => {
+  it(`should have the 'wedding-model-01' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('wedding-invitation-tmp');
+    expect(app.title).toEqual('wedding-model-01');
   });
 
   it('should apply the active theme to the document root', () => {
