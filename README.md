@@ -1,6 +1,6 @@
 # WeddingInvitationTmp
 
-Invitación digital de bodas (Angular). Forma parte de la plataforma FestanovaCo: el marketing vive en Next.js (`festanovaco-web`) y esta app se sirve en `festanovaco.com/invitations-wedding`.
+Invitación digital de bodas (Angular). Forma parte de la plataforma FestanovaCo: el marketing vive en Next.js (`festanovaco-web`) y esta app se sirve en `festanovaco.com/invitations-wedding-model-01`.
 
 - Intención (objetivo, razones, arquitectura, alcance): [docs/arquitectura-festanovaco.md](./docs/arquitectura-festanovaco.md)
 - Spec técnica de rewrites y `baseHref`: [docs/superpowers/specs/2026-08-23-festanovaco-shell-rewrites-design.md](./docs/superpowers/specs/2026-08-23-festanovaco-shell-rewrites-design.md)

@@ -34,13 +34,13 @@ Tres proyectos Vercel, repos independientes. El DNS de `festanovaco.com` apunta 
 | Proyecto Vercel | Repo | Rol |
 |-----------------|------|-----|
 | Shell Next | Nuevo | Dueño del dominio. Sirve `/`, `/wedding`, `/birthday`. Reescribe las rutas de invitaciones. |
-| Bodas Angular | Este repo | SPA detrás de `/invitations-wedding`. URL interna `*.vercel.app`, no pública. |
+| Bodas Angular | Este repo | SPA detrás de `/invitations-wedding-model-01`. URL interna `*.vercel.app`, no pública. |
 | Cumpleaños Angular | Futuro | SPA detrás de `/invitations-birthday`. |
 
 Next no ejecuta Angular. En `next.config` reescribe:
 
-- `/invitations-wedding` → `https://<bodas>.vercel.app/`
-- `/invitations-wedding/:path*` → `https://<bodas>.vercel.app/:path*`
+- `/invitations-wedding-model-01` → `https://<bodas>.vercel.app/`
+- `/invitations-wedding-model-01/:path*` → `https://<bodas>.vercel.app/:path*`
 
 La query (`token`, `preview`) se reenvía. En local, el destino es `http://localhost:4200` con el mismo recorte de prefijo.
 
@@ -56,16 +56,16 @@ El mismo patrón aplica a `/invitations-birthday` cuando exista ese deploy.
 | `festanovaco.com/wedding` | Categoría bodas (landing, CTA) |
 | `festanovaco.com/birthday` | Categoría cumpleaños (placeholder hasta el repo futuro) |
 
-Next **no** define páginas React en `/invitations-wedding` ni `/invitations-wedding/*`. Solo rewrite. Así no pisan el SPA Angular.
+Next **no** define páginas React en `/invitations-wedding-model-01` ni `/invitations-wedding-model-01/*`. Solo rewrite. Así no pisan el SPA Angular.
 
 ### Angular bodas (este repo)
 
 | URL pública | Ruta Angular actual |
 |-------------|---------------------|
-| `festanovaco.com/invitations-wedding?token=…` | `path: ''` (invitación) |
-| `festanovaco.com/invitations-wedding/expired?token=…` | `path: 'expired'` |
+| `festanovaco.com/invitations-wedding-model-01?token=…` | `path: ''` (invitación) |
+| `festanovaco.com/invitations-wedding-model-01/expired?token=…` | `path: 'expired'` |
 
-JS, CSS, vendor y assets de esta app se piden bajo `/invitations-wedding/…` y también se reescriben al proyecto Vercel de bodas.
+JS, CSS, vendor y assets de esta app se piden bajo `/invitations-wedding-model-01/…` y también se reescriben al proyecto Vercel de bodas.
 
 ### Angular cumpleaños (futuro)
 
@@ -76,15 +76,15 @@ JS, CSS, vendor y assets de esta app se piden bajo `/invitations-wedding/…` y 
 
 ### CTA
 
-El botón de ir a la invitación **navega** a `/invitations-wedding?token=…`. No incrusta Angular en la landing. Next no genera tokens; el enlace ya los trae (backend, WhatsApp, etc.).
+El botón de ir a la invitación **navega** a `/invitations-wedding-model-01?token=…`. No incrusta Angular en la landing. Next no genera tokens; el enlace ya los trae (backend, WhatsApp, etc.).
 
 ## Flujo de datos
 
 1. El usuario está en `/wedding` (Next).
-2. Pulsa ir a la invitación → `GET festanovaco.com/invitations-wedding?token=…`.
-3. Vercel/Next reescribe al deploy Angular. Angular arranca con base `/invitations-wedding/`.
+2. Pulsa ir a la invitación → `GET festanovaco.com/invitations-wedding-model-01?token=…`.
+3. Vercel/Next reescribe al deploy Angular. Angular arranca con base `/invitations-wedding-model-01/`.
 4. `WeddingPageComponent` lee `queryParams.token` (ya implementado) y llama `GET {apiBaseUrl}/v1/invitation/info/:token`.
-5. Si el estado exige página expirada, `router.navigate(['/expired'], { queryParamsHandling: 'preserve' })` produce la URL pública `/invitations-wedding/expired?token=…` porque `APP_BASE_HREF` es `/invitations-wedding/`.
+5. Si el estado exige página expirada, `router.navigate(['/expired'], { queryParamsHandling: 'preserve' })` produce la URL pública `/invitations-wedding-model-01/expired?token=…` porque `APP_BASE_HREF` es `/invitations-wedding-model-01/`.
 6. Accept/decline siguen contra el mismo API y el mismo token. El shell no intermedia.
 
 `environment.apiBaseUrl` no cambia. No hay CORS nuevo para el HTML/JS (mismo dominio público). El API sigue en su origen actual.
@@ -93,11 +93,11 @@ El botón de ir a la invitación **navega** a `/invitations-wedding?token=…`. 
 
 ### Prefijo público
 
-Constante única, por ejemplo `INVITATION_PUBLIC_BASE = '/invitations-wedding'`, usada para armar URLs absolutas de la invitación.
+Constante única, por ejemplo `INVITATION_PUBLIC_BASE = '/invitations-wedding-model-01'`, usada para armar URLs absolutas de la invitación.
 
-- Build de producción: `baseHref` `/invitations-wedding/`.
-- Runtime: `APP_BASE_HREF` = `/invitations-wedding/`.
-- `ng serve` de desarrollo: `--base-href /invitations-wedding/ --serve-path /invitations-wedding/` para que `http://localhost:4200/invitations-wedding?token=…` coincida con el rewrite del shell.
+- Build de producción: `baseHref` `/invitations-wedding-model-01/`.
+- Runtime: `APP_BASE_HREF` = `/invitations-wedding-model-01/`.
+- `ng serve` de desarrollo: `--base-href /invitations-wedding-model-01/ --serve-path /invitations-wedding-model-01/` para que `http://localhost:4200/invitations-wedding-model-01?token=…` coincida con el rewrite del shell.
 
 `router.navigate(['/'])` y `['/expired']` **no** se cambian: el router es relativo al base href.
 
@@ -112,7 +112,7 @@ En `wedding-expired-page.component.ts` hoy:
 Debe pasar a:
 
 ```text
-`${window.location.origin}/invitations-wedding?token=…`
+`${window.location.origin}/invitations-wedding-model-01?token=…`
 ```
 
 Esa URL alimenta el iframe de preview en `invitation-card`. Con el path correcto, `preview=1` sigue funcionando.
@@ -121,11 +121,11 @@ Esa URL alimenta el iframe de preview en `invitation-card`. Con el path correcto
 
 `src/index.html` tiene `<base href="/">` (lo sustituye el build) y enlaces que **empiezan por `/`** (`/favicon.ico`, `/assets/animations/music.json`, etc.). Esas rutas ignoran el `<base href>` y pedirían `festanovaco.com/favicon.ico` (Next), no la app de bodas.
 
-Hay que pasarlas a rutas relativas (`favicon.ico`, `assets/animations/music.json`) o prefijadas (`/invitations-wedding/...`). Revisar el mismo patrón en plantillas y CSS.
+Hay que pasarlas a rutas relativas (`favicon.ico`, `assets/animations/music.json`) o prefijadas (`/invitations-wedding-model-01/...`). Revisar el mismo patrón en plantillas y CSS.
 
 ### Vercel SPA
 
-Añadir `vercel.json` en este repo: fallback a `index.html` para que `/expired` en el deploy Angular no dé 404. El público llega como `festanovaco.com/invitations-wedding/expired` → rewrite → `https://<bodas>.vercel.app/expired`.
+Añadir `vercel.json` en este repo: fallback a `index.html` para que `/expired` en el deploy Angular no dé 404. El público llega como `festanovaco.com/invitations-wedding-model-01/expired` → rewrite → `https://<bodas>.vercel.app/expired`.
 
 ### Qué no se toca
 
@@ -133,11 +133,11 @@ Servicios de invitación, feature flags, estilos, Lottie, RSVP, ni el contrato d
 
 ## Repo Next (nuevo, fuera de este árbol)
 
-- Next.js App Router. Las rutas `/` y `/wedding` son páginas Next; `/invitations-wedding` no.
+- Next.js App Router. Las rutas `/` y `/wedding` son páginas Next; `/invitations-wedding-model-01` no.
 - `rewrites` de producción hacia `https://<bodas>.vercel.app` (variable de entorno `WEDDING_APP_URL`).
 - `rewrites` de desarrollo hacia `http://localhost:4200`.
 - `/birthday`: página placeholder hasta el tercer proyecto.
-- Landing `/wedding` con CTA a `/invitations-wedding?token=…` (token de ejemplo o de entorno para demos).
+- Landing `/wedding` con CTA a `/invitations-wedding-model-01?token=…` (token de ejemplo o de entorno para demos).
 - El dominio custom se configura **solo** en el proyecto Vercel del shell.
 
 ## Errores
@@ -146,21 +146,21 @@ Servicios de invitación, feature flags, estilos, Lottie, RSVP, ni el contrato d
 |------|----------------|
 | Sin `token` | Igual que hoy: Angular no carga invitación real. Next no redirige ni inventa token. |
 | Token inválido / API error | Estado de error actual en Angular. Next no sustituye esa ruta por una página React. |
-| Invitación expirada | `/invitations-wedding/expired?token=…`. |
-| Deploy Angular caído | Solo fallan las rutas `/invitations-wedding*`. `/` y `/wedding` siguen. |
+| Invitación expirada | `/invitations-wedding-model-01/expired?token=…`. |
+| Deploy Angular caído | Solo fallan las rutas `/invitations-wedding-model-01*`. `/` y `/wedding` siguen. |
 | `baseHref` o assets mal | Invitación en blanco / 404 de JS. Se corrige en este repo. |
 | CORS | No aplica al estático del mismo dominio. |
 
 ## Pruebas
 
-- Local: Next `:3000` + `ng serve` con serve-path. Abrir `/invitations-wedding?token=…` y comprobar invitación, RSVP y `/expired`.
-- Assets: en DevTools, JS/CSS/favicon/Lottie salen de `/invitations-wedding/…`, no de la raíz de Next.
+- Local: Next `:3000` + `ng serve` con serve-path. Abrir `/invitations-wedding-model-01?token=…` y comprobar invitación, RSVP y `/expired`.
+- Assets: en DevTools, JS/CSS/favicon/Lottie salen de `/invitations-wedding-model-01/…`, no de la raíz de Next.
 - Producción: mismo flujo en `festanovaco.com`; `/wedding` no captura las rutas Angular.
 - Humo: home Next, `/wedding`, token válido, token inválido, expirada.
 
 ## Orden de implementación
 
-1. Este repo: prefijo, URLs, assets relativos, `vercel.json`, comprobar `ng serve` bajo `/invitations-wedding`.
+1. Este repo: prefijo, URLs, assets relativos, `vercel.json`, comprobar `ng serve` bajo `/invitations-wedding-model-01`.
 2. Repo Next nuevo: home, `/wedding`, rewrites local y producción.
 3. Vercel: dominio en el shell, `WEDDING_APP_URL` al deploy de bodas, prueba con token real.
 4. Después: repo Angular de cumpleaños con el mismo patrón (`/invitations-birthday`).
