@@ -1,0 +1,31 @@
+<section class="m02-invitation">
+  <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--invite-right" aria-hidden="true" />
+  <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--invite-left" aria-hidden="true" />
+
+  <p class="m02-invite-intro">{{ info.invitation.intro }}</p>
+
+  <div class="m02-parents">
+    <p class="m02-parents__name">{{ info.invitation.groomParents }}</p>
+    <p class="m02-parents__y">y</p>
+    <p class="m02-parents__name">{{ info.invitation.brideParents }}</p>
+  </div>
+
+  <p class="m02-we-label">{{ info.invitation.weLabel }}</p>
+
+  <h1 class="m02-couple-names">
+    <span class="m02-couple-names__wife">{{ weddingInfo.couple.wifeName }}</span>
+    <span class="m02-amp" aria-hidden="true">&</span>
+    <span class="m02-couple-names__husband">{{ weddingInfo.couple.husbandName }}</span>
+  </h1>
+
+  <p class="m02-invite-cta">{{ info.invitation.cta }}</p>
+
+  <div class="m02-date-block">
+    <span class="m02-date-block__month">{{ info.date.month }}</span>
+    <div class="m02-date-block__row">
+      <span class="m02-date-block__dow">{{ info.date.dayOfWeek }}</span>
+      <span class="m02-date-block__day">{{ info.date.day }}</span>
+      <span class="m02-date-block__year">{{ info.date.year }}</span>
+    </div>
+  </div>
+</section>

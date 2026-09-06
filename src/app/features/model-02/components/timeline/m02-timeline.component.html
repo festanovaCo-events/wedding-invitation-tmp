@@ -1,0 +1,29 @@
+<div class="m02-torn-container m02-torn-container--top m02-torn-container--bottom m02-torn-container--sage">
+  <div class="m02-torn-container__shadow" aria-hidden="true"></div>
+  <section class="m02-timeline m02-torn-container__content">
+    <div class="m02-timeline__inner">
+      <h2 class="m02-timeline__heading">ITINERARIO</h2>
+      <div class="m02-timeline__list">
+        <span class="m02-timeline__dot m02-timeline__dot--start" aria-hidden="true"></span>
+        @for (item of info.timeline; track item.label) {
+        <div class="m02-timeline__item">
+          <div class="m02-timeline__icon" [attr.data-icon]="item.icon">
+            <hugeicons-icon
+              [icon]="timelineIcons[item.icon]"
+              [size]="28"
+              color="currentColor"
+              [strokeWidth]="1.35"
+            ></hugeicons-icon>
+          </div>
+          <span class="m02-timeline__tick" aria-hidden="true"></span>
+          <div class="m02-timeline__content">
+            <span class="m02-timeline__time">{{ item.time }}</span>
+            <span class="m02-timeline__label">{{ item.label }}</span>
+          </div>
+        </div>
+        }
+        <span class="m02-timeline__dot m02-timeline__dot--end" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+</div>

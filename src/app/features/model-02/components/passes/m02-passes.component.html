@@ -1,0 +1,17 @@
+<div class="m02-passes">
+  <div class="m02-passes__icon" aria-hidden="true">
+    <hugeicons-icon
+      [icon]="icon"
+      [size]="40"
+      color="currentColor"
+      [strokeWidth]="1.4"
+    ></hugeicons-icon>
+  </div>
+  <h3 class="m02-passes__label">{{ info.passes.label }}</h3>
+  <p class="m02-passes__reserved">{{ info.passes.reservedLabel }}</p>
+  <p class="m02-passes__row">
+    <span>{{ info.passes.forYou }}</span>
+    <span class="m02-passes__count">{{ reservedPasses }}</span>
+    <span>{{ info.passes.suffix }}</span>
+  </p>
+</div>

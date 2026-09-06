@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ACTIVE_THEME } from './themes/active-theme';
-import { applyThemeStyleProperties } from './themes/theme-utils';
+import { ACTIVE_THEME } from './features/shared/themes/active-theme';
+import { applyThemeStyleProperties } from './features/shared/themes/theme-utils';
 
 @Component({
   selector: 'app-root',

@@ -1,0 +1,13 @@
+<section class="m02-events">
+  @for (event of events; track event.title) {
+  <div class="m02-event-card">
+    <h2 class="m02-event-card__title">{{ event.title }}</h2>
+    <p class="m02-event-card__time">{{ event.time }}</p>
+    <p class="m02-event-card__place">{{ event.place }}</p>
+    <p class="m02-event-card__address">{{ event.address }}</p>
+    <button type="button" class="m02-btn" (click)="openLocation(event.mapsUrl)">
+      VER UBICACIÓN
+    </button>
+  </div>
+  }
+</section>

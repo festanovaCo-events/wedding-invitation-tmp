@@ -1,0 +1,28 @@
+<div class="m02-rsvp">
+  @if (isConfirmed) {
+    <app-m01-confirmation-status [invitationData]="invitationData"></app-m01-confirmation-status>
+  } @else if (isDeclined) {
+    <app-m01-declined-status></app-m01-declined-status>
+  } @else if (error) {
+    <app-m01-error-status [error]="error"></app-m01-error-status>
+  } @else {
+    <div class="m02-rsvp__icon" aria-hidden="true">
+      <hugeicons-icon
+        [icon]="icon"
+        [size]="36"
+        color="currentColor"
+        [strokeWidth]="1.4"
+      ></hugeicons-icon>
+    </div>
+    <h3 class="m02-rsvp__title">{{ info.rsvp.title }}</h3>
+    <p class="m02-rsvp__text">
+      {{ info.rsvp.text }}
+      <strong>{{ weddingInfo.confirmation.deadlineLabel | uppercase }}</strong>
+    </p>
+    <button type="button" class="m02-btn m02-btn--pill" (click)="openConfirmation()">
+      {{ info.rsvp.buttonText }}
+    </button>
+  }
+</div>
+
+<app-confirmation-modal-host [show]="isConfirmationModalVisible" (close)="closeConfirmationModal()" />

@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "ngx-toastr/toastr";
 @import "./theme-vars.generated.css";
+@import "./styles/model-01.css";
+@import "./styles/model-02.css";
 
 @font-face {
   font-family: 'Open Sans';
@@ -23,9 +25,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Great Vibes';
+  src: url('./assets/fonts/GreatVibes-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-light: 'Open Sans Light', sans-serif;
   --font-cookie: 'Cookie', cursive;
+  --font-script: 'Great Vibes', cursive;
 
   /* forest: #4A6360 */
   --color-forest: #4A6360;

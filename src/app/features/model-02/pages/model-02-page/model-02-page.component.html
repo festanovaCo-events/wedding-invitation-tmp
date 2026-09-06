@@ -1,0 +1,27 @@
+<div class="m02-page">
+  <app-m02-hero />
+  <app-m02-invitation />
+  <app-m02-events />
+  <app-m02-timeline />
+
+  <section class="m02-logistics">
+    <img [src]="assets.eucalyptusInvite" alt="" class="m02-botanical m02-botanical--logistics-right"
+      aria-hidden="true" />
+    <app-m02-passes />
+    <app-m02-gifts />
+    <app-m02-rsvp />
+    <app-m02-adults-only />
+  </section>
+
+  <app-m02-footer />
+</div>
+
+<!-- Modal de guía para confirmación -->
+<app-modal [show]="showConfirmationGuide" (close)="closeGuide()">
+  <div class="m02-modal">
+    <h2>¡No olvides confirmar tu asistencia!</h2>
+    <p>Tu confirmación nos ayuda a organizar todo. Solo te tomará un momento.</p>
+    <button type="button" class="m02-btn" (click)="openConfirmation()">Confírmanos tu presencia</button>
+    <button type="button" class="m02-modal__later" (click)="closeGuide()">Más tarde</button>
+  </div>
+</app-modal>
