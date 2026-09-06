@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ExpiredBannerComponent } from '../../../components/wedding-components/expired-banner/expired-banner.component';
 import { InvitationCardComponent } from '../../../components/wedding-components/invitation-card/invitation-card.component';
+import { buildInvitationPublicUrl } from '../../../constants/invitation-public-base';
 import { WEDDING_INFO } from '../../../constants/wedding-info';
 import { InvitationService } from '../../../services/invitation.service';
 import { InvitationStateService } from '../../../services/invitation-state.service';
@@ -59,7 +60,7 @@ export class WeddingExpiredPageComponent implements OnInit, OnDestroy {
       const token = params['token'] as string | undefined;
 
       if (token) {
-        this.invitationUrl = `${window.location.origin}/invitations-wedding-model-01?token=${encodeURIComponent(token)}`;
+        this.invitationUrl = buildInvitationPublicUrl(token);
         this.loadInvitation(token);
         return;
       }
@@ -67,7 +68,7 @@ export class WeddingExpiredPageComponent implements OnInit, OnDestroy {
       const existing = this.invitationStateService.getInvitationData();
       const existingToken = existing?.data.invitation.token;
       if (existingToken) {
-        this.invitationUrl = `${window.location.origin}/invitations-wedding-model-01?token=${encodeURIComponent(existingToken)}`;
+        this.invitationUrl = buildInvitationPublicUrl(existingToken);
         if (existing?.data.invitation.name) {
           this.inviteeName = existing.data.invitation.name.split(' ')[0];
         }

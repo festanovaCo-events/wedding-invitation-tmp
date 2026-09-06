@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
+    "start": "ng serve --serve-path /invitations-wedding-model-01/",
     "prebuild": "node scripts/generate-fonts-inline.js && node scripts/generate-environment.js",
     "prestart": "node scripts/generate-fonts-inline.js",
     "predeploy": "npx http-server dist/wedding-invitation-tmp/browser -o -p 8080",

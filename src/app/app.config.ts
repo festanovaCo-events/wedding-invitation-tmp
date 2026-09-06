@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideCloudinaryLoader } from '@angular/common';
+import { APP_BASE_HREF, provideCloudinaryLoader } from '@angular/common';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   provideCacheableAnimationLoader,
@@ -10,11 +10,13 @@ import {
 import { provideToastr } from 'ngx-toastr';
 
 import { routes } from './app.routes';
+import { INVITATION_PUBLIC_BASE } from './constants/invitation-public-base';
 
 const CLOUDINARY_CLOUD = 'dwx09pwkr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    { provide: APP_BASE_HREF, useValue: `${INVITATION_PUBLIC_BASE}/` },
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideAnimations(),
     provideHttpClient(withFetch()),
